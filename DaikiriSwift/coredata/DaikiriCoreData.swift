@@ -20,6 +20,8 @@ public class DaikiriCoreData{
     public lazy var persistentContainer: NSPersistentContainer = {
        let container = NSPersistentContainer(name: "DaikiriSwift")
        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+           storeDescription.shouldMigrateStoreAutomatically      = true
+           //storeDescription.shouldInferMappingModelAutomatically = true
            if let error = error as NSError? {
                fatalError("Unresolved error \(error), \(error.userInfo)")
            }
@@ -39,6 +41,25 @@ public class DaikiriCoreData{
            }
        }
    }
+    
+    public func clearDatabase(){
+       // It leaves it not recoverable
+       let coordinator = persistentContainer.persistentStoreCoordinator
+        for store in coordinator.persistentStores where store.url != nil {
+            try? coordinator.remove(store)
+            try? FileManager.default.removeItem(atPath: store.url!.path)
+        }
+    }
+    
+    public func whereIsTheDatabase(){
+        print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
+    }
+    
+    public func showEntities(){
+        let objectModel = context.persistentStoreCoordinator?.managedObjectModel
+        let entities    = objectModel?.entitiesByName
+        print (entities)
+    }
     
     // MARK: - Transactions
     public func beginTransaction(){

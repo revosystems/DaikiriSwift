@@ -58,7 +58,13 @@ public extension DaikiriIdentifiable where Self:NSManagedObject{
     }
     
     // MARK: Relationships
+    func hasMany<T:DaikiriIdentifiable>(_ type:T.Type, _ foreignKey:String) -> [T] where T:NSManagedObject{
+        type.query.whereKey(foreignKey, Int(self.id)).get()
+    }
     
+    func belongsTo<T:DaikiriIdentifiable, T2:CVarArg>(_ type:T.Type, _ foreignKeyId:T2) -> T? where T:NSManagedObject{
+        type.query.whereKey("id", foreignKeyId).first()
+    }
     
 }
 

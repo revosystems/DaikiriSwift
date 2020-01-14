@@ -33,16 +33,14 @@ public class QueryBuilder<T:NSManagedObject>{
         fetchRequest.fetchOffset = howMany
         return self
     }
-    
-    @discardableResult
-    public func whereKey(_ key:String, _ value:Int) -> Self {
-        andPredicates.append(NSPredicate(format:"%K=%d", key, value))
-        return self
-    }
-    
+        
     @discardableResult
     public func whereKey<T:CVarArg>(_ key:String, _ value:T) -> Self{
-        andPredicates.append(NSPredicate(format:"%K=%@", key, value))
+        if value is Int || value is Int32 || value is Int16 {
+            andPredicates.append(NSPredicate(format:"%K=%d", key, value))
+        } else {
+            andPredicates.append(NSPredicate(format:"%K=%@", key, value))
+        }
         return self
     }
     

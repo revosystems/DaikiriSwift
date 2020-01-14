@@ -139,4 +139,35 @@ class DaikiriSwiftTests: XCTestCase {
         XCTAssertEqual(4, results[2].id)
         XCTAssertEqual(2, results[3].id)
     }
+    
+    func test_has_many_relationship_works(){
+        let spiderman = Hero(name:"Spiderman", age:16, id:1)
+        let batman    = Hero(name:"Batman",    age:54, id:2)
+        
+        let _ = Friend(name:"Flash",      hero:spiderman, id:1)
+        let _ = Friend(name:"Mj",         hero:spiderman, id:2)
+        
+        let _ = Friend(name:"Robin",      hero:batman, id:3)
+        let _ = Friend(name:"Nightwing",  hero:batman, id:4)
+        let _ = Friend(name:"Batgirl",    hero:batman, id:5)
+        
+        XCTAssertEqual(2, spiderman.friends().count)
+        XCTAssertEqual(3, batman.friends().count)
+    }
+    
+    func test_belongs_to_relationship_works(){
+        
+        let batcave     = Headquarter(name: "Batcave", id: 1)
+        let starkTower  = Headquarter(name: "Stark Tower", id: 2)
+        
+        let spiderman = Hero(name:"Spiderman", age:16, id:1)
+        let batman    = Hero(name:"Batman",    age:54, id:2, headquarter: batcave)
+        let ironman   = Hero(name:"Ironman",    age:54, id:2, headquarter: starkTower)
+        
+        XCTAssertNil(spiderman.headquarter())
+        XCTAssertEqual("Batcave",     batman.headquarter()?.name)
+        XCTAssertEqual("Stark Tower", ironman.headquarter()?.name)
+        
+        XCTAssertEqual("Batman", batcave.heroes().first?.name)
+    }
 }

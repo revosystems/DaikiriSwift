@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D9AC87E23CE207200B61952 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9AC87A23CE207200B61952 /* Friend.swift */; };
+		8D9AC88023CE207200B61952 /* Headquarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9AC87C23CE207200B61952 /* Headquarter.swift */; };
 		BBFA645623CC8D3C00084620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA645523CC8D3C00084620 /* AppDelegate.swift */; };
 		BBFA645823CC8D3C00084620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA645723CC8D3C00084620 /* SceneDelegate.swift */; };
 		BBFA645A23CC8D3C00084620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA645923CC8D3C00084620 /* ViewController.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D9AC87A23CE207200B61952 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		8D9AC87C23CE207200B61952 /* Headquarter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headquarter.swift; sourceTree = "<group>"; };
 		BBFA645223CC8D3C00084620 /* DaikiriSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaikiriSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBFA645523CC8D3C00084620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBFA645723CC8D3C00084620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D9AC87523CE06C400B61952 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				BBFA645E23CC8D3C00084620 /* DaikiriSwift.xcdatamodeld */,
+				BBFA647D23CC8D5F00084620 /* Hero.swift */,
+				8D9AC87A23CE207200B61952 /* Friend.swift */,
+				8D9AC87C23CE207200B61952 /* Headquarter.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		BBFA644923CC8D3C00084620 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +106,7 @@
 		BBFA645423CC8D3C00084620 /* DaikiriSwift */ = {
 			isa = PBXGroup;
 			children = (
+				8D9AC87523CE06C400B61952 /* models */,
 				BBFA647A23CC8D4400084620 /* coredata */,
 				BBFA645523CC8D3C00084620 /* AppDelegate.swift */,
 				BBFA645723CC8D3C00084620 /* SceneDelegate.swift */,
@@ -116,10 +132,8 @@
 		BBFA647A23CC8D4400084620 /* coredata */ = {
 			isa = PBXGroup;
 			children = (
-				BBFA645E23CC8D3C00084620 /* DaikiriSwift.xcdatamodeld */,
 				BBFA647B23CC8D4D00084620 /* Daikiri.swift */,
 				BBFA647F23CC920600084620 /* DaikiriCoreData.swift */,
-				BBFA647D23CC8D5F00084620 /* Hero.swift */,
 				BBFA648123CC98FB00084620 /* QueryBuilder.swift */,
 			);
 			path = coredata;
@@ -228,9 +242,11 @@
 			files = (
 				BBFA645A23CC8D3C00084620 /* ViewController.swift in Sources */,
 				BBFA647C23CC8D4D00084620 /* Daikiri.swift in Sources */,
+				8D9AC87E23CE207200B61952 /* Friend.swift in Sources */,
 				BBFA648023CC920600084620 /* DaikiriCoreData.swift in Sources */,
 				BBFA645623CC8D3C00084620 /* AppDelegate.swift in Sources */,
 				BBFA645823CC8D3C00084620 /* SceneDelegate.swift in Sources */,
+				8D9AC88023CE207200B61952 /* Headquarter.swift in Sources */,
 				BBFA646023CC8D3C00084620 /* DaikiriSwift.xcdatamodeld in Sources */,
 				BBFA648223CC98FB00084620 /* QueryBuilder.swift in Sources */,
 				BBFA647E23CC8D5F00084620 /* Hero.swift in Sources */,
