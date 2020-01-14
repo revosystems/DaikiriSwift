@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "Hero.create():Hero.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DaikiriCoreData.manager.context">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static DaikiriIdentifiable&lt;&gt;.find(_:):Daikiri.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DaikiriSwiftTests.test_create_and_retrieve():DaikiriSwiftTests.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "results.first.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
