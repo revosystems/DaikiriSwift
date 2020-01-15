@@ -15,8 +15,11 @@ public extension DaikiriIdentifiable where Self:NSManagedObject{
         QueryBuilder(Self.fetchRequest())
     }
     
+    static var entityName:String{
+        String(describing: Self.self)
+    }
     static func fetchRequest() -> NSFetchRequest<Self> {
-        return NSFetchRequest<Self>(entityName: String(describing: Self.self))
+        return NSFetchRequest<Self>(entityName: self.entityName)
     }
     
     /**
@@ -49,6 +52,11 @@ public extension DaikiriIdentifiable where Self:NSManagedObject{
     /** Fetches the count of records of the class*/
     static func count() -> Int {
         self.query.count()
+    }
+    
+    /** Deletes all the records of the object */
+    static func truncate() {
+        DaikiriCoreData.manager.truncate(entityName)
     }
     
     // MARK: Object's
