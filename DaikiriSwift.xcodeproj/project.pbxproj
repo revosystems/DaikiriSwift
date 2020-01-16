@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8D9AC87E23CE207200B61952 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9AC87A23CE207200B61952 /* Friend.swift */; };
 		8D9AC88023CE207200B61952 /* Headquarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9AC87C23CE207200B61952 /* Headquarter.swift */; };
+		BBF2D1D723CF843B009AA164 /* DaikiriCoreData+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF2D1D623CF843B009AA164 /* DaikiriCoreData+Test.swift */; };
 		BBFA645623CC8D3C00084620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA645523CC8D3C00084620 /* AppDelegate.swift */; };
 		BBFA645823CC8D3C00084620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA645723CC8D3C00084620 /* SceneDelegate.swift */; };
 		BBFA645A23CC8D3C00084620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA645923CC8D3C00084620 /* ViewController.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		8D9AC87A23CE207200B61952 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		8D9AC87C23CE207200B61952 /* Headquarter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headquarter.swift; sourceTree = "<group>"; };
+		BBF2D1D623CF843B009AA164 /* DaikiriCoreData+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DaikiriCoreData+Test.swift"; sourceTree = "<group>"; };
 		BBFA645223CC8D3C00084620 /* DaikiriSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaikiriSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBFA645523CC8D3C00084620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBFA645723CC8D3C00084620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				BBFA647B23CC8D4D00084620 /* Daikiri.swift */,
 				BBFA647F23CC920600084620 /* DaikiriCoreData.swift */,
+				BBF2D1D623CF843B009AA164 /* DaikiriCoreData+Test.swift */,
 				BBFA648123CC98FB00084620 /* QueryBuilder.swift */,
 			);
 			path = src;
@@ -249,6 +252,7 @@
 				8D9AC88023CE207200B61952 /* Headquarter.swift in Sources */,
 				BBFA646023CC8D3C00084620 /* DaikiriSwift.xcdatamodeld in Sources */,
 				BBFA648223CC98FB00084620 /* QueryBuilder.swift in Sources */,
+				BBF2D1D723CF843B009AA164 /* DaikiriCoreData+Test.swift in Sources */,
 				BBFA647E23CC8D5F00084620 /* Hero.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

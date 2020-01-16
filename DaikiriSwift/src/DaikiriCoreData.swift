@@ -6,11 +6,12 @@ import CoreData
 public class DaikiriCoreData {
     public static var manager:DaikiriCoreData = DaikiriCoreData()
     
-    //var testContext:NSManagedObjectContext? = nil
+    /** See DaikiriCoreData+Test*/
+    var testContext:NSManagedObjectContext? = nil
     
     public var context:NSManagedObjectContext {
-        persistentContainer.viewContext
-        //testContext ?? persistentContainer.viewContext
+        //persistentContainer.viewContext
+        testContext ?? persistentContainer.viewContext
     }
     
     var undoManager:UndoManager{
@@ -23,33 +24,6 @@ public class DaikiriCoreData {
     var containerName:String{
         Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
     }
-    
-    /*public func useTestDatabase(){
-        testContext = buildTestContext()
-    }*/
-    
-    //https://medium.com/joshtastic-blog/coredata-testing-263d55ce6553
-    /*func buildTestContext() -> NSManagedObjectContext? {
-        let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])
-        guard let model = managedObjectModel else {
-            assertionFailure("Failted to create ManagedObjectModel")
-            return nil
-        }
-        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-        do {
-            try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
-        } catch {
-            assertionFailure("Failed to add InMemory Persistent Store: \(error)")
-            return nil
-        }
-        
-        let concurrentType = NSManagedObjectContextConcurrencyType.mainQueueConcurrencyType
-        
-        let managedObjectContext = NSManagedObjectContext(concurrencyType: concurrentType)
-        managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
-        
-        return managedObjectContext
-    }*/
     
     public lazy var persistentContainer: NSPersistentContainer = {
        let container = NSPersistentContainer(name: containerName)
@@ -132,3 +106,5 @@ public class DaikiriCoreData {
         }
     }
 }
+
+

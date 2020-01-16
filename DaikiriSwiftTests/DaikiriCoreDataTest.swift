@@ -30,6 +30,19 @@ class DaikiriCoreDataTest: XCTestCase {
         results = Hero.all()
         XCTAssertEqual(0, results.count)
     }
+    
+    func test_tast_test_databaseWorks(){
+        
+        DaikiriCoreData.manager.useTestDatabase()
+        DaikiriCoreData.manager.beginTransaction()
+        let _ = Hero(name:"Spiderman", age:16, id:1)
+        var results = Hero.all()
+        XCTAssertEqual(1, results.count)
+        DaikiriCoreData.manager.rollback()
+        
+        results = Hero.all()
+        XCTAssertEqual(0, results.count)
+    }
 
 
 }
