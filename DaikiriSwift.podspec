@@ -134,6 +134,6 @@ Pod::Spec.new do |spec|
   # spec.requires_arc = true
 
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  # spec.dependency "RevoFoundation", "~> 0.0.8"
+  #spec.dependency "Fakery", "~> 4.1.1"
 
 end

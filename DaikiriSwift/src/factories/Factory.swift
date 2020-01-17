@@ -1,5 +1,10 @@
 import Foundation
 
+
+/**
+ Laravel's like Factory classes
+ With a faker https://github.com/vadymmarkov/Fakery
+ */
 public class Factory {
     
     static var factories = [String: ()->NSDictionary]()

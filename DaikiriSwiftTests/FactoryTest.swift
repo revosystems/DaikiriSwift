@@ -1,5 +1,6 @@
 import XCTest
 import DaikiriSwift
+import Fakery
 
 class FactoryTest: XCTestCase {
 
@@ -56,5 +57,17 @@ class FactoryTest: XCTestCase {
         XCTAssertEqual("Mr Potatoe", hero.name)
         XCTAssertEqual(44,        hero.age)
     }
-
+    
+    func test_can_use_fakery(){
+        let faker = Faker(locale: "es-ES")
+        Factory.register(Hero.self) {[
+            "name" : faker.name.firstName(),
+            "age"  : 44
+        ]}
+        
+        let hero  = Factory.make(Hero.self)!
+        let hero2 = Factory.make(Hero.self)!
+        
+        XCTAssertNotEqual(hero.name, hero2.name)
+    }
 }
