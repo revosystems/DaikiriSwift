@@ -12,6 +12,7 @@ import XCTest
 class DaikiriSwiftTests: XCTestCase {
 
     override func setUp() {
+        DaikiriCoreData.manager.useTestDatabase()
         DaikiriCoreData.manager.beginTransaction()
     }
 

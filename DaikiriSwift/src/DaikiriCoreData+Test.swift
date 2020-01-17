@@ -5,7 +5,7 @@ import CoreData
  Extension to be able to use an InMemory database so database won't afect the simulator one
  */
 public extension DaikiriCoreData {
-    public func useTestDatabase(){
+    func useTestDatabase(){
         testContext = buildTestContext()
     }
     
