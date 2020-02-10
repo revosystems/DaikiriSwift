@@ -30,6 +30,6 @@ public class Friend: NSManagedObject, DaikiriIdentifiable, Decodable {
     }
     
     public func hero() -> Hero {
-        belongsTo(Hero.self, "hero_id")!
+        belongsTo(Hero.self, self.hero_id)!
     }
 }

@@ -27,12 +27,16 @@ public class Factory {
             })
         }
         
-        /*finalDict.allKeys.forEach { key in
-            if let className = finalDict[key] as? AnyObject.Type {
-                print(className)
-                finalDict[key] = Factory.make(className.self)
+        finalDict.allKeys.forEach { key in
+            let value = finalDict[key]
+            if let clousure = value as? (()->Int32) {
+                finalDict[key] = clousure()
             }
-        }*/
+            //if let className = finalDict[key] as? AnyObject.Type {
+            //    print(className)
+            //    finalDict[key] = Factory.make(className.self)
+            //}
+        }
         
         
         guard let data = toJson(finalDict) else { return nil }

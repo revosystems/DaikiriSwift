@@ -73,6 +73,7 @@ class FactoryTest: XCTestCase {
     
     
     func test_can_have_relationships(){
+               
         let faker = Faker(locale: "es-ES")
         Factory.register(Hero.self) {[
             "name" : faker.name.firstName(),
@@ -81,7 +82,9 @@ class FactoryTest: XCTestCase {
         
         Factory.register(Friend.self) {[
             "name" : faker.name.firstName(),
-            "hero_id" : Hero.self
+            "hero_id" : {
+                Factory.make(Hero.self)!.id
+            }
         ]}
         
         let friend = Factory.make(Friend.self)!
