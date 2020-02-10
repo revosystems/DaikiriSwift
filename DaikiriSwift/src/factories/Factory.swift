@@ -27,6 +27,14 @@ public class Factory {
             })
         }
         
+        /*finalDict.allKeys.forEach { key in
+            if let className = finalDict[key] as? AnyObject.Type {
+                print(className)
+                finalDict[key] = Factory.make(className.self)
+            }
+        }*/
+        
+        
         guard let data = toJson(finalDict) else { return nil }
         return try? JSONDecoder().decode(type, from:data)
     }

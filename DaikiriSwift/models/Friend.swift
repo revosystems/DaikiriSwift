@@ -28,4 +28,8 @@ public class Friend: NSManagedObject, DaikiriIdentifiable, Decodable {
         self.name     = try container.decode(String.self, forKey: .name)
         self.hero_id  = try container.decode(Int32.self,  forKey: .hero_id)
     }
+    
+    public func hero() -> Hero {
+        belongsTo(Hero.self, "hero_id")!
+    }
 }

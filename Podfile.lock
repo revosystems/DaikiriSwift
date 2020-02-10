@@ -1,0 +1,16 @@
+PODS:
+  - Fakery (4.1.1)
+
+DEPENDENCIES:
+  - Fakery
+
+SPEC REPOS:
+  trunk:
+    - Fakery
+
+SPEC CHECKSUMS:
+  Fakery: d3380c4aa1efe7631c0831d7e26aa9db4491f014
+
+PODFILE CHECKSUM: 59ebbafe3976de3f65b0d1685765164aff3f5ae2
+
+COCOAPODS: 1.8.4

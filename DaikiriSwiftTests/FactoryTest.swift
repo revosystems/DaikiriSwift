@@ -70,4 +70,24 @@ class FactoryTest: XCTestCase {
         
         XCTAssertNotEqual(hero.name, hero2.name)
     }
+    
+    
+    func test_can_have_relationships(){
+        let faker = Faker(locale: "es-ES")
+        Factory.register(Hero.self) {[
+            "name" : faker.name.firstName(),
+            "age"  : 44
+        ]}
+        
+        Factory.register(Friend.self) {[
+            "name" : faker.name.firstName(),
+            "hero_id" : Hero.self
+        ]}
+        
+        let friend = Factory.make(Friend.self)!
+        
+        XCTAssertEqual(1, Hero.count())
+        XCTAssertNotNil(friend.hero_id)
+        XCTAssertNotNil(friend.hero())
+    }
 }
