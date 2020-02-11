@@ -15,7 +15,8 @@ public class Factory {
     
     public static func make<T:Decodable>(_ type:T.Type, _ overload:NSDictionary? = nil) -> T?{
         guard let dictClousure  = factories[String(describing: type)] else { return nil }
-        guard let finalDict     = dictClousure().mutableCopy() as? NSMutableDictionary else { return nil }
+        //guard let finalDict     = dictClousure().mutableCopy() as? NSMutableDictionary else { return nil }
+        let finalDict     = dictClousure().mutableCopy() as? NSMutableDictionary ?? NSMutableDictionary()
         
         if finalDict["id"] == nil {
             finalDict["id"] = Int.random(in: 1 ..< 9999)
@@ -32,18 +33,17 @@ public class Factory {
             if let clousure = value as? (()->Int32) {
                 finalDict[key] = clousure()
             }
-            //if let className = finalDict[key] as? AnyObject.Type {
-            //    print(className)
-            //    finalDict[key] = Factory.make(className.self)
-            //}
         }
         
-        
         guard let data = toJson(finalDict) else { return nil }
-        return try? JSONDecoder().decode(type, from:data)
+        do {
+            return try JSONDecoder().decode(type, from:data)
+        } catch {
+            print("Error decoding: \(error)")
+            return nil
+        }
     }
-    
-    
+        
     
     // MARK: Helpers
     static func toJson(_ dict:NSDictionary) -> Data? {
