@@ -81,8 +81,7 @@ public extension DaikiriIdentifiable where Self:NSManagedObject{
     func belongsToMany<T:DaikiriWithPivot, Z:DaikiriIdentifiable>(_ type:T.Type, _ pivotType:Z.Type, _ localKey:String, _ foreignKey:KeyPath<Z, Int32>, order:String? = nil) -> [T] where T:NSManagedObject, Z:NSManagedObject{
         let pivots      = pivotType.query.whereKey(localKey, self.id).orderBy(order).get()
         return pivots.compactMap {
-            let foreingId:Int32 = $0[keyPath: foreignKey]
-            guard var final:T = type.find(foreingId) else { return nil }
+            guard var final:T = type.find($0[keyPath: foreignKey]) else { return nil }
             final.pivot = $0
             return final
         }
