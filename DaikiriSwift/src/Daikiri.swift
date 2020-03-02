@@ -5,6 +5,10 @@ public protocol DaikiriIdentifiable {
     var id:Int32 { get }
 }
 
+public protocol DaikiriWithPivot: DaikiriIdentifiable {
+    var pivot:DaikiriIdentifiable? { get set }
+}
+
 enum DaikiriError: Error {
     case objectAlreadyInDatabase
 }
@@ -74,17 +78,14 @@ public extension DaikiriIdentifiable where Self:NSManagedObject{
         type.query.whereKey("id", foreignKeyId).first()
     }
     
-    func belongsToMany<T:DaikiriIdentifiable, Z:DaikiriIdentifiable>(_ type:T.Type, _ pivotType:Z.Type, _ localKey:String, _ foreignKey:KeyPath<Z, Int32>) -> [T] where T:NSManagedObject, Z:NSManagedObject{
-        let pivots      = pivotType.query.whereKey(localKey, self.id).get()
-        var results:[T] = []
-        pivots.forEach {
+    func belongsToMany<T:DaikiriWithPivot, Z:DaikiriIdentifiable>(_ type:T.Type, _ pivotType:Z.Type, _ localKey:String, _ foreignKey:KeyPath<Z, Int32>, order:String? = nil) -> [T] where T:NSManagedObject, Z:NSManagedObject{
+        let pivots      = pivotType.query.whereKey(localKey, self.id).orderBy(order).get()
+        return pivots.compactMap {
             let foreingId:Int32 = $0[keyPath: foreignKey]
-            if let final:T      = type.find(foreingId) {
-                //final.setPivot($0)
-                results.append(final)
-            }
+            guard var final:T = type.find(foreingId) else { return nil }
+            final.pivot = $0
+            return final
         }
-        return results
     }
     
 }

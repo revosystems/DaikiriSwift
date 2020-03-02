@@ -7,6 +7,7 @@
 //
 
 import XCTest
+
 @testable import DaikiriSwift
 
 class DaikiriSwiftTests: XCTestCase {
@@ -163,12 +164,31 @@ class DaikiriSwiftTests: XCTestCase {
         
         let spiderman = Hero(name:"Spiderman", age:16, id:1)
         let batman    = Hero(name:"Batman",    age:54, id:2, headquarter: batcave)
-        let ironman   = Hero(name:"Ironman",    age:54, id:2, headquarter: starkTower)
+        let ironman   = Hero(name:"Ironman",   age:54, id:2, headquarter: starkTower)
         
         XCTAssertNil(spiderman.headquarter())
         XCTAssertEqual("Batcave",     batman.headquarter()?.name)
         XCTAssertEqual("Stark Tower", ironman.headquarter()?.name)
         
         XCTAssertEqual("Batman", batcave.heroes().first?.name)
+    }
+    
+    func test_belongs_to_many_relationship_works(){
+        
+        let batcave     = Headquarter(name: "Batcave", id: 1)
+        
+        let batman      = Hero(name:"Batman",    age:16, id:1)
+        let robin       = Hero(name:"Robin",     age:16, id:2)
+        let nightWing   = Hero(name:"NightWing", age:16, id:3)
+        
+        let _ = HeroHeadquarterPivot(id:1, hero:batman,    headquarter:batcave, level:100)
+        let _ = HeroHeadquarterPivot(id:2, hero:robin,     headquarter:batcave, level:45)
+        let _ = HeroHeadquarterPivot(id:3, hero:nightWing, headquarter:batcave, level:56)
+                
+        let heroes = batcave.heroesWithPivot()
+        
+        XCTAssertEqual(3, heroes.count)
+        let firstHero = heroes.first!
+        XCTAssertEqual(45, (firstHero.pivot as! HeroHeadquarterPivot).level)
     }
 }

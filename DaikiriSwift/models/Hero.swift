@@ -2,11 +2,14 @@ import Foundation
 import CoreData
 
 @objc(Hero)
-public class Hero: NSManagedObject, DaikiriIdentifiable, Decodable {
+public class Hero: NSManagedObject, DaikiriWithPivot, Decodable {
+    
     @NSManaged public var id:   Int32
     @NSManaged public var name: String?
     @NSManaged public var age:  Int16
     @NSManaged public var headquarter_id:  Int32
+    
+    public var pivot: DaikiriIdentifiable?
     
     enum CodingKeys: String, CodingKey {
        case id, name, age, headquarter_id

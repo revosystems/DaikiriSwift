@@ -2,9 +2,11 @@ import Foundation
 import CoreData
 
 @objc(Headquarter)
-public class Headquarter: NSManagedObject, DaikiriIdentifiable {
+public class Headquarter: NSManagedObject, DaikiriWithPivot {
     @NSManaged public var id: Int32
     @NSManaged public var name: String?
+    
+    public var pivot: DaikiriIdentifiable?
     
     enum CodingKeys: String, CodingKey {
           case id, name
@@ -28,5 +30,9 @@ public class Headquarter: NSManagedObject, DaikiriIdentifiable {
     
     func heroes() -> [Hero] {
         hasMany(Hero.self, "headquarter_id")
+    }
+    
+    func heroesWithPivot() -> [Hero] {
+        belongsToMany(Hero.self, HeroHeadquarterPivot.self, "headquarter_id", \.hero_id, order: "level")
     }
 }
