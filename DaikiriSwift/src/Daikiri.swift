@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-public protocol DaikiriIdentifiable {
+public protocol DaikiriIdentifiable: NSManagedObject {
     var id:Int32 { get }
 }
 
@@ -13,7 +13,7 @@ enum DaikiriError: Error {
     case objectAlreadyInDatabase
 }
 
-public extension DaikiriIdentifiable where Self:NSManagedObject{
+public extension DaikiriIdentifiable{
     
     static var query:QueryBuilder<Self>{
         QueryBuilder(Self.fetchRequest())
@@ -70,18 +70,18 @@ public extension DaikiriIdentifiable where Self:NSManagedObject{
     }
     
     // MARK: Relationships
-    func hasMany<T:DaikiriIdentifiable>(_ type:T.Type, _ foreignKey:String) -> [T] where T:NSManagedObject{
+    func hasMany<T:DaikiriIdentifiable>(_ type:T.Type, _ foreignKey:String) -> [T]{
         type.query.whereKey(foreignKey, Int(self.id)).get()
     }
     
-    func belongsTo<T:DaikiriIdentifiable, T2:CVarArg>(_ type:T.Type, _ foreignKeyId:T2) -> T? where T:NSManagedObject{
+    func belongsTo<T:DaikiriIdentifiable, T2:CVarArg>(_ type:T.Type, _ foreignKeyId:T2) -> T?{
         type.query.whereKey("id", foreignKeyId).first()
     }
     
-    func belongsToMany<T:DaikiriWithPivot, Z:DaikiriIdentifiable>(_ type:T.Type, _ pivotType:Z.Type, _ localKey:String, _ foreignKey:KeyPath<Z, Int32>, order:String? = nil) -> [T] where T:NSManagedObject, Z:NSManagedObject{
+    func belongsToMany<T:DaikiriWithPivot, Z:DaikiriIdentifiable>(_ type:T.Type, _ pivotType:Z.Type, _ localKey:String, _ foreignKey:KeyPath<Z, Int32>, order:String? = nil) -> [T]{
         let pivots      = pivotType.query.whereKey(localKey, self.id).orderBy(order).get()
         return pivots.compactMap {
-            guard var final:T = type.find($0[keyPath: foreignKey]) else { return nil }
+            guard let final:T = type.find($0[keyPath: foreignKey]) else { return nil }
             final.pivot = $0
             return final
         }
