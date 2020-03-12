@@ -85,4 +85,8 @@ public class QueryBuilder<T:NSManagedObject>{
         orderBy(key, ascendig: false).first()
     }
     
+    public func min(_ key:String) -> T? {
+        orderBy(key, ascendig: true).first()
+    }
+    
 }
