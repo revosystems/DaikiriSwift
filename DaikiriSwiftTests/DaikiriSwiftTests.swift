@@ -142,6 +142,17 @@ class DaikiriSwiftTests: XCTestCase {
         XCTAssertEqual(2, results[3].id)
     }
     
+    func test_can_get_max(){
+        let _ = Hero(name:"Spiderman", age:16, id:1)
+        let _ = Hero(name:"Batman",    age:54, id:2)
+        let _ = Hero(name:"Ironman",   age:44, id:3)
+        let _ = Hero(name:"Hulk",      age:49, id:4)
+        
+        let result = Hero.query.max("age")
+        
+        XCTAssertEqual(2, result!.id)
+    }
+    
     func test_has_many_relationship_works(){
         let spiderman = Hero(name:"Spiderman", age:16, id:1)
         let batman    = Hero(name:"Batman",    age:54, id:2)

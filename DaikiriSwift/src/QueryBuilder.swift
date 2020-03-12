@@ -81,4 +81,8 @@ public class QueryBuilder<T:NSManagedObject>{
         }
     }
     
+    public func max(_ key:String) -> T? {
+        orderBy(key, ascendig: false).first()
+    }
+    
 }
