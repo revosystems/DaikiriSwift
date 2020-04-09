@@ -57,6 +57,12 @@ public class QueryBuilder<T:NSManagedObject>{
         return self
     }
     
+    @discardableResult
+    public func addAndPredicate(_ predicate:NSPredicate) -> Self {
+        andPredicates.append(predicate)
+        return self
+    }
+    
     public func get() -> [T]{
         doQuery()
     }
