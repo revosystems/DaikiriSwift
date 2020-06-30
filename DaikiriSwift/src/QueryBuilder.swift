@@ -5,7 +5,7 @@ public class QueryBuilder<T:NSManagedObject>{
     
     let fetchRequest:NSFetchRequest<T>
     
-    var andPredicates   = [NSPredicate]()
+    public var andPredicates   = [NSPredicate]()
     var sortPredicates  = [NSSortDescriptor]()
     
     public init(_ fetchRequest:NSFetchRequest<T>){

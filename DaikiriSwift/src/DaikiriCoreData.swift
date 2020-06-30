@@ -59,7 +59,7 @@ public class DaikiriCoreData {
     }
     
     public func whereIsTheDatabase(){
-        print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
+        print("DatabaseDirectory: ", NSPersistentContainer.defaultDirectoryURL())
     }
     
     public func showEntities(){

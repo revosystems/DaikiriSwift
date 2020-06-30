@@ -129,6 +129,18 @@ class DaikiriSwiftTests: XCTestCase {
         XCTAssertEqual(0, Hero.count())
     }
     
+    func test_can_append_custom_predicate(){
+        let a = Hero(name:"Spiderman", age:16, id:1)
+        let _ = Hero(name:"Batman",    age:54, id:2)
+        let _ = Hero(name:"Ironman",   age:44, id:3)
+        let _ = Hero(name:"Hulk",      age:49, id:4)
+        
+        let predicate = NSPredicate(format:"name = %@", "Spiderman")
+        let results = Hero.query.addAndPredicate(predicate).get()
+        
+        XCTAssertEqual([a], results)
+    }
+    
     func test_can_sort(){
         let _ = Hero(name:"Spiderman", age:16, id:1)
         let _ = Hero(name:"Batman",    age:54, id:2)
