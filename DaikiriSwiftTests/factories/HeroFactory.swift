@@ -1,7 +1,7 @@
 import Foundation
 import DaikiriSwift
 
-public class HeroFactory : Factory2<Hero> {
+public class HeroFactory : Factory<Hero> {
     
     override public func definition() -> NSMutableDictionary {
         [

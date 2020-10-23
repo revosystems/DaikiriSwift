@@ -1,12 +1,14 @@
 import Foundation
 import DaikiriSwift
 
-public class FriendFactory : Factory2<Friend> {
+public class FriendFactory : Factory<Friend> {
     
     override public func definition() -> NSMutableDictionary {
         [
             "name"  : "Robin",
-            "hero_id" : Hero.factory(),
+            "hero_id" : {
+                Hero.factory().make().id
+            },
         ]
     }
     

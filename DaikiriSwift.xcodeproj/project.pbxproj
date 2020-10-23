@@ -11,13 +11,11 @@
 		8D9AC88023CE207200B61952 /* Headquarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9AC87C23CE207200B61952 /* Headquarter.swift */; };
 		A9D221BCBCFBF35CE605294F /* Pods_DaikiriSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443358BE5CE54DEA9EF2CE50 /* Pods_DaikiriSwift.framework */; };
 		BB03E48C240D20C5003BBB59 /* Pivot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB03E48B240D20C5003BBB59 /* Pivot.swift */; };
-		BB103B5523D1A97C00066EE8 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB103B5423D1A97C00066EE8 /* Factory.swift */; };
-		BB103B5723D1ACC300066EE8 /* FactoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB103B5623D1ACC300066EE8 /* FactoryTest.swift */; };
-		BB502C652543290B00BF4D75 /* NewFactoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB502C642543290B00BF4D75 /* NewFactoryTest.swift */; };
-		BB502C692543294200BF4D75 /* Factory2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB502C682543294200BF4D75 /* Factory2.swift */; };
+		BB502C652543290B00BF4D75 /* FactoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB502C642543290B00BF4D75 /* FactoryTest.swift */; };
+		BB502C692543294200BF4D75 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB502C682543294200BF4D75 /* Factory.swift */; };
 		BB502C7825432D8200BF4D75 /* HeroFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB502C6D25432B2800BF4D75 /* HeroFactory.swift */; };
 		BB502C7E25433CDE00BF4D75 /* Factoriable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB502C7D25433CDE00BF4D75 /* Factoriable.swift */; };
-		BB502C822543418F00BF4D75 /* HeadquarterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB502C812543418F00BF4D75 /* HeadquarterFactory.swift */; };
+		BB502C822543418F00BF4D75 /* FriendFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB502C812543418F00BF4D75 /* FriendFactory.swift */; };
 		BBF2D1D723CF843B009AA164 /* DaikiriCoreData+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF2D1D623CF843B009AA164 /* DaikiriCoreData+Test.swift */; };
 		BBFA645623CC8D3C00084620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA645523CC8D3C00084620 /* AppDelegate.swift */; };
 		BBFA645823CC8D3C00084620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA645723CC8D3C00084620 /* SceneDelegate.swift */; };
@@ -54,13 +52,11 @@
 		A76A49C4B12031C8F2113193 /* Pods-DaikiriSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaikiriSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-DaikiriSwiftTests/Pods-DaikiriSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		BAC66FEA6B7B0EA1CA8E1BE2 /* Pods_DaikiriSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DaikiriSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB03E48B240D20C5003BBB59 /* Pivot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pivot.swift; sourceTree = "<group>"; };
-		BB103B5423D1A97C00066EE8 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
-		BB103B5623D1ACC300066EE8 /* FactoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTest.swift; sourceTree = "<group>"; };
-		BB502C642543290B00BF4D75 /* NewFactoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFactoryTest.swift; sourceTree = "<group>"; };
-		BB502C682543294200BF4D75 /* Factory2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory2.swift; sourceTree = "<group>"; };
+		BB502C642543290B00BF4D75 /* FactoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTest.swift; sourceTree = "<group>"; };
+		BB502C682543294200BF4D75 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		BB502C6D25432B2800BF4D75 /* HeroFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroFactory.swift; sourceTree = "<group>"; };
 		BB502C7D25433CDE00BF4D75 /* Factoriable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factoriable.swift; sourceTree = "<group>"; };
-		BB502C812543418F00BF4D75 /* HeadquarterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadquarterFactory.swift; sourceTree = "<group>"; };
+		BB502C812543418F00BF4D75 /* FriendFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFactory.swift; sourceTree = "<group>"; };
 		BBF2D1D623CF843B009AA164 /* DaikiriCoreData+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DaikiriCoreData+Test.swift"; sourceTree = "<group>"; };
 		BBFA645223CC8D3C00084620 /* DaikiriSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaikiriSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBFA645523CC8D3C00084620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,8 +124,7 @@
 		BB103B5323D1A8E400066EE8 /* factories */ = {
 			isa = PBXGroup;
 			children = (
-				BB103B5423D1A97C00066EE8 /* Factory.swift */,
-				BB502C682543294200BF4D75 /* Factory2.swift */,
+				BB502C682543294200BF4D75 /* Factory.swift */,
 				BB502C7D25433CDE00BF4D75 /* Factoriable.swift */,
 			);
 			path = factories;
@@ -139,7 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				BB502C6D25432B2800BF4D75 /* HeroFactory.swift */,
-				BB502C812543418F00BF4D75 /* HeadquarterFactory.swift */,
+				BB502C812543418F00BF4D75 /* FriendFactory.swift */,
 			);
 			path = factories;
 			sourceTree = "<group>";
@@ -187,8 +182,7 @@
 				BBFA646F23CC8D3E00084620 /* DaikiriSwiftTests.swift */,
 				BBFA648323CDCBAB00084620 /* DaikiriCoreDataTest.swift */,
 				BBFA647123CC8D3E00084620 /* Info.plist */,
-				BB103B5623D1ACC300066EE8 /* FactoryTest.swift */,
-				BB502C642543290B00BF4D75 /* NewFactoryTest.swift */,
+				BB502C642543290B00BF4D75 /* FactoryTest.swift */,
 			);
 			path = DaikiriSwiftTests;
 			sourceTree = "<group>";
@@ -392,8 +386,7 @@
 				BBFA645823CC8D3C00084620 /* SceneDelegate.swift in Sources */,
 				8D9AC88023CE207200B61952 /* Headquarter.swift in Sources */,
 				BBFA646023CC8D3C00084620 /* DaikiriSwift.xcdatamodeld in Sources */,
-				BB502C692543294200BF4D75 /* Factory2.swift in Sources */,
-				BB103B5523D1A97C00066EE8 /* Factory.swift in Sources */,
+				BB502C692543294200BF4D75 /* Factory.swift in Sources */,
 				BBFA648223CC98FB00084620 /* QueryBuilder.swift in Sources */,
 				BBF2D1D723CF843B009AA164 /* DaikiriCoreData+Test.swift in Sources */,
 				BBFA647E23CC8D5F00084620 /* Hero.swift in Sources */,
@@ -404,10 +397,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB103B5723D1ACC300066EE8 /* FactoryTest.swift in Sources */,
-				BB502C652543290B00BF4D75 /* NewFactoryTest.swift in Sources */,
+				BB502C652543290B00BF4D75 /* FactoryTest.swift in Sources */,
 				BBFA648423CDCBAB00084620 /* DaikiriCoreDataTest.swift in Sources */,
-				BB502C822543418F00BF4D75 /* HeadquarterFactory.swift in Sources */,
+				BB502C822543418F00BF4D75 /* FriendFactory.swift in Sources */,
 				BB502C7825432D8200BF4D75 /* HeroFactory.swift in Sources */,
 				BBFA647023CC8D3E00084620 /* DaikiriSwiftTests.swift in Sources */,
 			);

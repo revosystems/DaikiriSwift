@@ -15,7 +15,7 @@ public extension Factoriable {
      *
      * Check HeroFactory.swift for an example
      */
-    static func factory() -> Factory2<Self>? {
+    static func factory() -> Factory<Self>? {
         makeFactory()
     }
     
@@ -23,14 +23,14 @@ public extension Factoriable {
     /**
      * The real one that checks if factory exists, add more candidates if needed
      */
-    static func makeFactory() -> Factory2<Self>? {
+    static func makeFactory() -> Factory<Self>? {
         
         let baseModel = (String(reflecting: self) + "Factory").components(separatedBy: ".")
         guard let namespace = baseModel.first, let factoryName = baseModel.last else {
             return nil
         }
         
-        var factory:Factory2<Self>? = nil
+        var factory:Factory<Self>? = nil
         
         candidatesFor(namespace:namespace, factoryName:factoryName).forEach {
             if factory != nil { return }
@@ -51,8 +51,8 @@ public extension Factoriable {
     }
     
     
-    private static func initalizeFactory(_ candidate:String) -> Factory2<Self>? {
-        guard let factory:Factory2<Self>.Type = NSClassFromString(candidate) as? Factory2<Self>.Type else {
+    private static func initalizeFactory(_ candidate:String) -> Factory<Self>? {
+        guard let factory:Factory<Self>.Type = NSClassFromString(candidate) as? Factory<Self>.Type else {
             return nil
         }
         return factory.init()
