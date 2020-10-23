@@ -2,7 +2,7 @@ import Foundation
 import CoreData
 
 @objc(Friend)
-public class Friend: NSManagedObject, DaikiriIdentifiable, Decodable {
+public class Friend: NSManagedObject, Factoriable {
     @NSManaged public var id: Int32
     @NSManaged public var hero_id: Int32
     @NSManaged public var name: String?

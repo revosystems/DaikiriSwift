@@ -1,45 +1,13 @@
 import Foundation
 
-public protocol Factoriable: DaikiriIdentifiable, Decodable{
-    
-}
-
-
-//extension DaikiriIdentifiable {
-public extension Factoriable {
-    
-    static func factory() -> Factory2<Self>? {
-        
-        let baseModel = (String(reflecting: self) + "Factory").components(separatedBy: ".")
-        guard let namespace = baseModel.first, let factoryName = baseModel.last else {
-            return nil
-        }
-
-        let factoryCandidate1 = namespace + "." + factoryName
-        let factoryCandidate2 = namespace + "Tests." + factoryName
-        
-        if let factory = initalizeFactory(factoryCandidate1) {
-            return factory
-        }
-        if let factory = initalizeFactory(factoryCandidate2) {
-            return factory
-        }
-        return nil
-    }
-    
-    private static func initalizeFactory(_ candidate:String) -> Factory2<Self>? {
-        guard let factory:Factory2<Self>.Type = NSClassFromString(candidate) as? Factory2<Self>.Type else {
-            return nil
-        }
-        return factory.init()
-    }
-}
 
 open class Factory2<T:DaikiriIdentifiable & Decodable> {
        
     public required init(){}
     
-
+    var states:NSMutableDictionary = [:]
+        
+    // MARK:- To be overrided
     /**
      * Define here the main attributes of the model to be created by the factory
      */
@@ -49,18 +17,33 @@ open class Factory2<T:DaikiriIdentifiable & Decodable> {
     
     
     /**
-     * Use this function to define a state that will be applied to the factory
+     * Additional configuration can be done overriding this method in your factory, it will be called for each model created
      */
-    public func state() -> Self {
-        return self
+    open func afterMaking(_ model:T){
+        
     }
     
+    
+    // MARK:- To be used
+    /**
+     * Use this function to define a state that will be applied to the factory
+     */
+    public func state(_ state:NSDictionary, overrides:NSDictionary) -> Self {
+        state.forEach { states[$0] = $1 }
+        overrides.forEach { states[$0] = $1 }
+        return self
+    }
+        
     /**
      * Generates the instance with all the previous states
      */
     public func make(_ overrides:NSDictionary = [:]) -> T {
         let finalDict = definition()
                 
+        states.allKeys.forEach{
+            finalDict[$0] = states[$0]
+        }
+        
         overrides.allKeys.forEach{
             finalDict[$0] = overrides[$0]
         }
@@ -72,18 +55,30 @@ open class Factory2<T:DaikiriIdentifiable & Decodable> {
         return make(final: finalDict)
     }
     
+    public func make(count:Int, _ overrides:NSDictionary = [:]) -> [T]{
+        (0..<count).map {_ in
+            make(overrides)
+        }
+    }
+    
+    
+    // MARK:- Private
     private func make(final:NSDictionary) -> T{
         guard let data = Self.toJson(final) else { return T.init() }
         do {
-            return try JSONDecoder().decode(T.self, from:data)
+            let model:T = try JSONDecoder().decode(T.self, from:data)
+            afterMaking(model)
+            return model
         } catch {
             print("Error decoding: \(error)")
             return T.init()
         }
     }
     
+    //---------------------------------------------------------------
     // MARK: Helpers
-    static func toJson(_ dict:NSDictionary) -> Data? {
+    //---------------------------------------------------------------
+    private static func toJson(_ dict:NSDictionary) -> Data? {
         do {
             return try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
         } catch {
