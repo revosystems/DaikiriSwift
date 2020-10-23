@@ -2,7 +2,7 @@ import Foundation
 import CoreData
 
 @objc(Hero)
-public class Hero: NSManagedObject, DaikiriWithPivot, Decodable {
+public class Hero: NSManagedObject, Factoriable, DaikiriWithPivot {
     
     @NSManaged public var id:   Int32
     @NSManaged public var name: String?
