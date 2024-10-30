@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		8D9AC88023CE207200B61952 /* Headquarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9AC87C23CE207200B61952 /* Headquarter.swift */; };
 		A9D221BCBCFBF35CE605294F /* Pods_DaikiriSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443358BE5CE54DEA9EF2CE50 /* Pods_DaikiriSwift.framework */; };
 		BB03E48C240D20C5003BBB59 /* Pivot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB03E48B240D20C5003BBB59 /* Pivot.swift */; };
+		BB34429E2CD2A28700040BA0 /* Villain.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34429D2CD2A28600040BA0 /* Villain.swift */; };
 		BB502C652543290B00BF4D75 /* FactoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB502C642543290B00BF4D75 /* FactoryTest.swift */; };
 		BB502C692543294200BF4D75 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB502C682543294200BF4D75 /* Factory.swift */; };
 		BB502C7825432D8200BF4D75 /* HeroFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB502C6D25432B2800BF4D75 /* HeroFactory.swift */; };
@@ -52,6 +53,7 @@
 		A76A49C4B12031C8F2113193 /* Pods-DaikiriSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaikiriSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-DaikiriSwiftTests/Pods-DaikiriSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		BAC66FEA6B7B0EA1CA8E1BE2 /* Pods_DaikiriSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DaikiriSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB03E48B240D20C5003BBB59 /* Pivot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pivot.swift; sourceTree = "<group>"; };
+		BB34429D2CD2A28600040BA0 /* Villain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Villain.swift; sourceTree = "<group>"; };
 		BB502C642543290B00BF4D75 /* FactoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTest.swift; sourceTree = "<group>"; };
 		BB502C682543294200BF4D75 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		BB502C6D25432B2800BF4D75 /* HeroFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroFactory.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				BBFA645E23CC8D3C00084620 /* DaikiriSwift.xcdatamodeld */,
 				BBFA647D23CC8D5F00084620 /* Hero.swift */,
+				BB34429D2CD2A28600040BA0 /* Villain.swift */,
 				8D9AC87A23CE207200B61952 /* Friend.swift */,
 				8D9AC87C23CE207200B61952 /* Headquarter.swift */,
 				BB03E48B240D20C5003BBB59 /* Pivot.swift */,
@@ -255,8 +258,9 @@
 		BBFA644A23CC8D3C00084620 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1610;
 				ORGANIZATIONNAME = "Jordi Puigdellívol";
 				TargetAttributes = {
 					BBFA645123CC8D3C00084620 = {
@@ -382,6 +386,7 @@
 				8D9AC87E23CE207200B61952 /* Friend.swift in Sources */,
 				BBFA648023CC920600084620 /* DaikiriCoreData.swift in Sources */,
 				BBFA645623CC8D3C00084620 /* AppDelegate.swift in Sources */,
+				BB34429E2CD2A28700040BA0 /* Villain.swift in Sources */,
 				BB502C7E25433CDE00BF4D75 /* Factoriable.swift in Sources */,
 				BBFA645823CC8D3C00084620 /* SceneDelegate.swift in Sources */,
 				8D9AC88023CE207200B61952 /* Headquarter.swift in Sources */,
@@ -461,6 +466,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -471,6 +477,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -521,6 +528,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -531,6 +539,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -591,7 +600,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3DA051FBBE3C4E769C5A1EB9 /* Pods-DaikiriSwiftTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F2VSE3YKKD;
@@ -614,7 +622,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A76A49C4B12031C8F2113193 /* Pods-DaikiriSwiftTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F2VSE3YKKD;

@@ -3,6 +3,7 @@ import CoreData
 
 public protocol DaikiriIdentifiable: NSManagedObject {
     var id:Int32 { get }
+    static var entityName:String { get }    //So it can be overrided in final class
 }
 
 public protocol DaikiriWithPivot: DaikiriIdentifiable {
@@ -13,17 +14,18 @@ enum DaikiriError: Error {
     case objectAlreadyInDatabase
 }
 
-public extension DaikiriIdentifiable{
+public extension DaikiriIdentifiable {
     
     static var query:QueryBuilder<Self>{
         QueryBuilder(Self.fetchRequest())
     }
     
-    static var entityName:String{
+    static var entityName:String {
         String(describing: Self.self)
     }
+    
     static func fetchRequest() -> NSFetchRequest<Self> {
-        return NSFetchRequest<Self>(entityName: self.entityName)
+        NSFetchRequest<Self>(entityName: self.entityName)
     }
     
     /**

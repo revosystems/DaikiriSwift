@@ -35,7 +35,7 @@ public class QueryBuilder<T:NSManagedObject>{
     }
         
     @discardableResult
-    public func whereKey<T:CVarArg>(_ key:String, _ value:T) -> Self{
+    public func whereKey<Z:CVarArg>(_ key:String, _ value:Z) -> Self{
         if value is Int || value is Int32 || value is Int16 {
             andPredicates.append(NSPredicate(format:"%K=%d", key, value))
         } else {
@@ -45,7 +45,7 @@ public class QueryBuilder<T:NSManagedObject>{
     }
     
     @discardableResult
-    public func whereIn<T>(_ key:String, _ values:[T]) -> Self{
+    public func whereIn<Z>(_ key:String, _ values:[Z]) -> Self{
         andPredicates.append(NSPredicate(format:"%K IN %@", key, values))
         return self
     }

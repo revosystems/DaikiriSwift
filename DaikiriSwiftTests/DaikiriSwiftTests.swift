@@ -225,4 +225,16 @@ class DaikiriSwiftTests: XCTestCase {
         let firstHero = heroes.first!
         XCTAssertEqual(45, (firstHero.pivot as! HeroHeadquarterPivot).level)
     }
+    
+    func test_villain_works() throws {
+        
+        let _ = Hero(name:"Joker", age:16, id:1)
+        
+        let fetched = try Villain.fetch()
+        
+        //XCTAssertNotNil(fetched)
+        //XCTAssertEqual("Joker", fetched.name)
+        //XCTAssertNil(fetched.headquarter_id)
+        
+    }
 }
