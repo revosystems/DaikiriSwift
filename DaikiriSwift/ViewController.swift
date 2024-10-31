@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         let _ = Hero(name:"Joker", age:16, id:1)
         
         do {
-            let fetched = try Villain.fetch()
+            //let fetched = try Villain.query.first<Villain>()
             print(fetched)
         }catch {
             print(error)

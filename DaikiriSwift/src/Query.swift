@@ -1,26 +1,20 @@
-import Foundation
 import CoreData
 
-@available(*, deprecated, renamed: "Query", message: "Use the new query class")
-public class QueryBuilder<T:NSManagedObject>{
+public class Query {
     
-    let fetchRequest:NSFetchRequest<T>
+    let fetchRequest:NSFetchRequest<NSManagedObject>
+    let context:NSManagedObjectContext
     
     public var andPredicates   = [NSPredicate]()
     var sortPredicates  = [NSSortDescriptor]()
     
-    public init(_ fetchRequest:NSFetchRequest<T>){
-        self.fetchRequest = fetchRequest
+    init(entityName:String, context:NSManagedObjectContext = DaikiriCoreData.manager.context) {
+        fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        self.context = context
     }
-        
-    func doQuery() -> [T]{
-        preparePredicates()
-        do {
-            return try DaikiriCoreData.manager.context.fetch(fetchRequest)
-        } catch let error as NSError {
-            print("Couldn't load \(error), \(error.userInfo)")
-            return []
-        }
+    
+    public func doQuery() throws -> [NSManagedObject] {
+        try context.fetch(fetchRequest)
     }
     
     @discardableResult
@@ -64,13 +58,15 @@ public class QueryBuilder<T:NSManagedObject>{
         return self
     }
     
-    public func get() -> [T]{
-        doQuery()
+    public func get<T:DaikiriObject & Codable>() throws -> [T] {
+        try doQuery().map {
+            try T.from(managed: $0)
+        }
     }
     
-    public func first() -> T? {
+    public func first<T:DaikiriObject & Codable>() throws -> T? {
         take(1)
-        return doQuery().first
+        return try get().first
     }
     
     private func preparePredicates(){
@@ -88,12 +84,12 @@ public class QueryBuilder<T:NSManagedObject>{
         }
     }
     
-    public func max(_ key:String) -> T? {
-        orderBy(key, ascendig: false).first()
+    public func max<T:DaikiriObject & Codable>(_ key:String) throws -> T? {
+        try orderBy(key, ascendig: false).first()
     }
     
-    public func min(_ key:String) -> T? {
-        orderBy(key, ascendig: true).first()
+    public func min<T:DaikiriObject & Codable>(_ key:String) throws -> T? {
+        try orderBy(key, ascendig: true).first()
     }
     
 }
