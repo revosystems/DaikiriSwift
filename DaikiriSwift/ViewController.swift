@@ -14,10 +14,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let _ = Hero(name:"Joker", age:16, id:1)
+        //let _ = Hero(name:"Joker", age:16, id:1)
+        
+        let villain = Villain(id: 1, name:"Joker", age:45)
+        villain.create()
         
         do {
-            //let fetched = try Villain.query.first<Villain>()
+            let fetched = try Villain.first()
             print(fetched)
         }catch {
             print(error)
