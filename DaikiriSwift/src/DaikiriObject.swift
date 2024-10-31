@@ -59,6 +59,7 @@ public extension Daikiriable where Self: Codable {
 
 public extension Daikiriable where Self: Codable & DaikiriObject {
     //MARK: - CRUD
+    @discardableResult
     func create() -> Self {
         context.performAndWait {
             if let identifiable = self as? DaikiriId {
@@ -129,7 +130,7 @@ public extension Daikiriable where Self: Codable & DaikiriObject {
 
 // MARK: Relationships
 public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
-    func hasMany<T:Codable & DaikiriObject & Identifiable>(_ type:T.Type, _ foreignKey:String) throws -> [T]{
+    func hasMany<T:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, _ foreignKey:String) throws -> [T]{
         try type.query.whereKey(foreignKey, id).get()
     }
     

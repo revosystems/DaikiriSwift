@@ -14,6 +14,10 @@ public class Villain : DaikiriObject, DaikiriId, Codable   {
         self.age = age
     }
     
+    public func friends() throws -> [VillainFriend] {
+        try hasMany(VillainFriend.self, "villain_id")
+    }
+    
 }
 
 public class VillainFriend : DaikiriObject, DaikiriId, Codable {
@@ -25,6 +29,10 @@ public class VillainFriend : DaikiriObject, DaikiriId, Codable {
         self.id = id
         self.name = name
         self.villain_id = villain_id
+    }
+    
+    convenience init(id:Int, name:String, age:Int, villain:Villain){
+        self.init(id: id, name: name, age: age, villain_id: villain.id)
     }
     
 }
