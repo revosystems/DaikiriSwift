@@ -13,6 +13,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        let _ = Hero(name:"Joker", age:16, id:1)
+        
+        do {
+            let fetched = try Villain.fetch()
+            print(fetched)
+        }catch {
+            print(error)
+        }
     }
 
 

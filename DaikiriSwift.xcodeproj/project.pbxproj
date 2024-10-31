@@ -32,6 +32,9 @@
 		BBFA648223CC98FB00084620 /* QueryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA648123CC98FB00084620 /* QueryBuilder.swift */; };
 		BBFA648423CDCBAB00084620 /* DaikiriCoreDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA648323CDCBAB00084620 /* DaikiriCoreDataTest.swift */; };
 		D280EDF22243781E708501C9 /* Pods_DaikiriSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC66FEA6B7B0EA1CA8E1BE2 /* Pods_DaikiriSwiftTests.framework */; };
+		EA05D42A2CD3769A00B52C88 /* NSManaged+daikiri.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4292CD3769900B52C88 /* NSManaged+daikiri.swift */; };
+		EA05D42E2CD3776200B52C88 /* NonCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D42C2CD3776200B52C88 /* NonCodable.swift */; };
+		EA05D4302CD3790000B52C88 /* DaikiriObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D42F2CD378F700B52C88 /* DaikiriObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +81,9 @@
 		BBFA648123CC98FB00084620 /* QueryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryBuilder.swift; sourceTree = "<group>"; };
 		BBFA648323CDCBAB00084620 /* DaikiriCoreDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaikiriCoreDataTest.swift; sourceTree = "<group>"; };
 		DD634C722D8C3F40FD706B2E /* Pods-DaikiriSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaikiriSwift.debug.xcconfig"; path = "Target Support Files/Pods-DaikiriSwift/Pods-DaikiriSwift.debug.xcconfig"; sourceTree = "<group>"; };
+		EA05D4292CD3769900B52C88 /* NSManaged+daikiri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManaged+daikiri.swift"; sourceTree = "<group>"; };
+		EA05D42C2CD3776200B52C88 /* NonCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonCodable.swift; sourceTree = "<group>"; };
+		EA05D42F2CD378F700B52C88 /* DaikiriObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaikiriObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,8 +199,11 @@
 		BBFA647A23CC8D4400084620 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				EA05D42D2CD3776200B52C88 /* propertyWrappers */,
+				EA05D4282CD3768D00B52C88 /* extensions */,
 				BB103B5323D1A8E400066EE8 /* factories */,
 				BBFA647B23CC8D4D00084620 /* Daikiri.swift */,
+				EA05D42F2CD378F700B52C88 /* DaikiriObject.swift */,
 				BBFA647F23CC920600084620 /* DaikiriCoreData.swift */,
 				BBF2D1D623CF843B009AA164 /* DaikiriCoreData+Test.swift */,
 				BBFA648123CC98FB00084620 /* QueryBuilder.swift */,
@@ -209,6 +218,22 @@
 				BAC66FEA6B7B0EA1CA8E1BE2 /* Pods_DaikiriSwiftTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA05D4282CD3768D00B52C88 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EA05D4292CD3769900B52C88 /* NSManaged+daikiri.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		EA05D42D2CD3776200B52C88 /* propertyWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				EA05D42C2CD3776200B52C88 /* NonCodable.swift */,
+			);
+			path = propertyWrappers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,6 +407,8 @@
 			files = (
 				BBFA645A23CC8D3C00084620 /* ViewController.swift in Sources */,
 				BB03E48C240D20C5003BBB59 /* Pivot.swift in Sources */,
+				EA05D42E2CD3776200B52C88 /* NonCodable.swift in Sources */,
+				EA05D42A2CD3769A00B52C88 /* NSManaged+daikiri.swift in Sources */,
 				BBFA647C23CC8D4D00084620 /* Daikiri.swift in Sources */,
 				8D9AC87E23CE207200B61952 /* Friend.swift in Sources */,
 				BBFA648023CC920600084620 /* DaikiriCoreData.swift in Sources */,
@@ -392,6 +419,7 @@
 				8D9AC88023CE207200B61952 /* Headquarter.swift in Sources */,
 				BBFA646023CC8D3C00084620 /* DaikiriSwift.xcdatamodeld in Sources */,
 				BB502C692543294200BF4D75 /* Factory.swift in Sources */,
+				EA05D4302CD3790000B52C88 /* DaikiriObject.swift in Sources */,
 				BBFA648223CC98FB00084620 /* QueryBuilder.swift in Sources */,
 				BBF2D1D723CF843B009AA164 /* DaikiriCoreData+Test.swift in Sources */,
 				BBFA647E23CC8D5F00084620 /* Hero.swift in Sources */,
