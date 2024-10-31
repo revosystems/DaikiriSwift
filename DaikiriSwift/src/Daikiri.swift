@@ -1,6 +1,7 @@
 import Foundation
 import CoreData
 
+
 public protocol DaikiriIdentifiable: NSManagedObject {
     var id:Int32 { get }
     static var entityName:String { get }    //So it can be overrided in final class

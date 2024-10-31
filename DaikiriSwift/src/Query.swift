@@ -1,6 +1,6 @@
 import CoreData
 
-public class Query {
+public class Query<T:DaikiriObject & Codable> {
     
     let fetchRequest:NSFetchRequest<NSManagedObject>
     let context:NSManagedObjectContext
@@ -14,7 +14,8 @@ public class Query {
     }
     
     public func doQuery() throws -> [NSManagedObject] {
-        try context.fetch(fetchRequest)
+        preparePredicates()
+        return try context.fetch(fetchRequest)
     }
     
     @discardableResult
@@ -58,13 +59,13 @@ public class Query {
         return self
     }
     
-    public func get<T:DaikiriObject & Codable>() throws -> [T] {
+    public func get() throws -> [T] {
         try doQuery().map {
             try T.from(managed: $0)
         }
     }
     
-    public func first<T:DaikiriObject & Codable>() throws -> T? {
+    public func first() throws -> T? {
         take(1)
         return try get().first
     }
@@ -79,11 +80,11 @@ public class Query {
         return try DaikiriCoreData.manager.context.count(for: fetchRequest)
     }
     
-    public func max<T:DaikiriObject & Codable>(_ key:String) throws -> T? {
+    public func max(_ key:String) throws -> T? {
         try orderBy(key, ascendig: false).first()
     }
     
-    public func min<T:DaikiriObject & Codable>(_ key:String) throws -> T? {
+    public func min(_ key:String) throws -> T? {
         try orderBy(key, ascendig: true).first()
     }
     

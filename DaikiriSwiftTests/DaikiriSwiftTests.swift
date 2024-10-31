@@ -228,13 +228,12 @@ class DaikiriSwiftTests: XCTestCase {
     
     func test_villain_works() throws {
         
-        let _ = Hero(name:"Joker", age:16, id:1)
+        let _ = Villain(id:1, name:"Joker", age:16).create()
         
-        let fetched = try Villain.fetch()
+        let fetched = try Villain.first()!
         
-        //XCTAssertNotNil(fetched)
-        //XCTAssertEqual("Joker", fetched.name)
-        //XCTAssertNil(fetched.headquarter_id)
-        
+        XCTAssertNotNil(fetched)
+        XCTAssertEqual("Joker", fetched.name)
+        XCTAssertNil(fetched.headquarter_id)
     }
 }

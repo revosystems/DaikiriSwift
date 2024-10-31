@@ -36,6 +36,7 @@
 		EA05D42E2CD3776200B52C88 /* NonCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D42C2CD3776200B52C88 /* NonCodable.swift */; };
 		EA05D4302CD3790000B52C88 /* DaikiriObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D42F2CD378F700B52C88 /* DaikiriObject.swift */; };
 		EA05D4322CD3844F00B52C88 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4312CD3844800B52C88 /* Query.swift */; };
+		EA05D4342CD3D36700B52C88 /* DaikiriSwiftTestV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4332CD3D36000B52C88 /* DaikiriSwiftTestV2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		EA05D42C2CD3776200B52C88 /* NonCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonCodable.swift; sourceTree = "<group>"; };
 		EA05D42F2CD378F700B52C88 /* DaikiriObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaikiriObject.swift; sourceTree = "<group>"; };
 		EA05D4312CD3844800B52C88 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		EA05D4332CD3D36000B52C88 /* DaikiriSwiftTestV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaikiriSwiftTestV2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 			children = (
 				BB502C6C25432B1400BF4D75 /* factories */,
 				BBFA646F23CC8D3E00084620 /* DaikiriSwiftTests.swift */,
+				EA05D4332CD3D36000B52C88 /* DaikiriSwiftTestV2.swift */,
 				BBFA648323CDCBAB00084620 /* DaikiriCoreDataTest.swift */,
 				BBFA647123CC8D3E00084620 /* Info.plist */,
 				BB502C642543290B00BF4D75 /* FactoryTest.swift */,
@@ -288,7 +291,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 1600;
 				ORGANIZATIONNAME = "Jordi Puigdellívol";
 				TargetAttributes = {
 					BBFA645123CC8D3C00084620 = {
@@ -437,6 +440,7 @@
 				BB502C652543290B00BF4D75 /* FactoryTest.swift in Sources */,
 				BBFA648423CDCBAB00084620 /* DaikiriCoreDataTest.swift in Sources */,
 				BB502C822543418F00BF4D75 /* FriendFactory.swift in Sources */,
+				EA05D4342CD3D36700B52C88 /* DaikiriSwiftTestV2.swift in Sources */,
 				BB502C7825432D8200BF4D75 /* HeroFactory.swift in Sources */,
 				BBFA647023CC8D3E00084620 /* DaikiriSwiftTests.swift in Sources */,
 			);
@@ -635,6 +639,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F2VSE3YKKD;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = DaikiriSwiftTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -657,6 +662,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F2VSE3YKKD;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = DaikiriSwiftTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
