@@ -191,12 +191,12 @@ class DaikiriSwiftTestsV2: XCTestCase {
         let spiderman = Villain(id:1, name:"Spiderman", age:16).create()
         let batman    = Villain(id:2, name:"Batman",    age:54).create()
         
-        let _ = VillainFriend(id:1, name:"Flash",      age:10, villain:spiderman)
-        let _ = VillainFriend(id:2, name:"Mj",         age:10, villain:spiderman)
+        let _ = VillainFriend(id:1, name:"Flash",      age:10, villain:spiderman).create()
+        let _ = VillainFriend(id:2, name:"Mj",         age:10, villain:spiderman).create()
         
-        let _ = VillainFriend(id:3, name:"Robin",      age:10, villain:batman)
-        let _ = VillainFriend(id:4, name:"Nightwing",  age:10, villain:batman)
-        let _ = VillainFriend(id:5, name:"Batgirl",    age:10, villain:batman)
+        let _ = VillainFriend(id:3, name:"Robin",      age:10, villain:batman).create()
+        let _ = VillainFriend(id:4, name:"Nightwing",  age:10, villain:batman).create()
+        let _ = VillainFriend(id:5, name:"Batgirl",    age:10, villain:batman).create()
         
         XCTAssertEqual(2, try spiderman.friends().count)
         XCTAssertEqual(3, try batman.friends().count)
