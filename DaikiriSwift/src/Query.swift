@@ -74,14 +74,9 @@ public class Query {
         fetchRequest.sortDescriptors = sortPredicates
     }
     
-    func count() -> Int {
+    func count() throws -> Int {
         preparePredicates()
-        do {
-            return try DaikiriCoreData.manager.context.count(for: fetchRequest)
-        } catch let error as NSError {
-            print("Couldn't load \(error), \(error.userInfo)")
-            return 0
-        }
+        return try DaikiriCoreData.manager.context.count(for: fetchRequest)
     }
     
     public func max<T:DaikiriObject & Codable>(_ key:String) throws -> T? {
