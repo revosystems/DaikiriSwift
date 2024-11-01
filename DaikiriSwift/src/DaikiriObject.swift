@@ -133,21 +133,44 @@ public extension Daikiriable where Self: Codable & DaikiriObject {
 
 // MARK: Relationships
 public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
-    func hasMany<T:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, _ foreignKey:String) throws -> [T]{
+    /*func hasMany<T:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, _ foreignKey:String) throws -> [T]{
         try type.query.whereKey(foreignKey, id).get()
+    }*/
+
+    func hasMany<T:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, _ foreignKey:KeyPath<T, Int?>) throws -> [T] {
+        let foreignKeyName = String(describing: foreignKey).components(separatedBy: ".").last!
+        return try type.query.whereKey(foreignKeyName, id).get()
     }
     
-    func belongsTo<T:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, _ foreignKeyId:Int?) throws -> T?{
-        guard let foreignKeyId else { return nil }
-        return try type.query.whereKey("id", foreignKeyId).first()
+    func hasMany<T:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, _ foreignKey:KeyPath<T, Int>) throws -> [T] {
+        let foreignKeyName = String(describing: foreignKey).components(separatedBy: ".").last!
+        return try type.query.whereKey(foreignKeyName, id).get()
     }
     
-    func belongsToMany<T:Codable & DaikiriObject & DaikiriId, Z:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, pivot:Z.Type, _ localKey:String, _ foreignKey:KeyPath<Z, Int>, order:String? = nil) throws -> [T] {
+    func belongsTo<T:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, _ foreignKey:KeyPath<Self, Int?>) throws -> T?{
+        guard let foreingId = self[keyPath: foreignKey] else { return nil }
+        return try type.find(foreingId)
+    }
+    
+    /*func belongsToMany<T:Codable & DaikiriObject & DaikiriId, Z:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, pivot:Z.Type, _ localKey:String, _ foreignKey:KeyPath<Z, Int>, order:String? = nil) throws -> [T] {
         let pivots      = try pivot.query.whereKey(localKey, self.id).orderBy(order).get()
         return try pivots.compactMap {
             guard let final:T = try type.find($0[keyPath: foreignKey]) else { return nil }
             final.pivot = $0
             return final
         }
+    }*/
+    
+    func belongsToMany<T:Codable & DaikiriObject & DaikiriId, Z:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, pivot:Z.Type, _ localKey:KeyPath<Z,Int>, _ foreignKey:KeyPath<Z, Int>, order:String? = nil) throws -> [T] {
+        let localKeyName = String(describing: localKey).components(separatedBy: ".").last!
+        let pivots       = try pivot.query.whereKey(localKeyName, self.id).orderBy(order).get()
+        
+        return try pivots.compactMap {
+            guard let final:T = try type.find($0[keyPath: foreignKey]) else { return nil }
+            final.pivot = $0
+            return final
+        }
     }
+    
+    
 }
