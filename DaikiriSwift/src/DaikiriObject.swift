@@ -152,14 +152,6 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
         return try type.find(foreingId)
     }
     
-    /*func belongsToMany<T:Codable & DaikiriObject & DaikiriId, Z:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, pivot:Z.Type, _ localKey:String, _ foreignKey:KeyPath<Z, Int>, order:String? = nil) throws -> [T] {
-        let pivots      = try pivot.query.whereKey(localKey, self.id).orderBy(order).get()
-        return try pivots.compactMap {
-            guard let final:T = try type.find($0[keyPath: foreignKey]) else { return nil }
-            final.pivot = $0
-            return final
-        }
-    }*/
     
     func belongsToMany<T:Codable & DaikiriObject & DaikiriId, Z:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, pivot:Z.Type, _ localKey:KeyPath<Z,Int>, _ foreignKey:KeyPath<Z, Int>, order:String? = nil) throws -> [T] {
         let localKeyName = String(describing: localKey).components(separatedBy: ".").last!
@@ -170,6 +162,17 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
             final.pivot = $0
             return final
         }
+    }
+    
+    //https://laravel.com/docs/11.x/eloquent-relationships#polymorphic-relationships
+    func morphTo(id:Int, type:String) throws -> (Codable & DaikiriObject & DaikiriId)? {
+        let moduleName = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? ""
+        let className = "\(moduleName).\(type)"
+        guard let type = Bundle.main.classNamed(className) as? (Codable & DaikiriObject & DaikiriId).Type else {
+            throw DaikiriError.morphClassNotFound(className: className)
+        }
+
+        return try type.find(id)
     }
     
     

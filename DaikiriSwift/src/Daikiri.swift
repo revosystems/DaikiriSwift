@@ -14,6 +14,7 @@ public protocol DaikiriWithPivot: DaikiriIdentifiable {
 
 enum DaikiriError: Error {
     case objectAlreadyInDatabase
+    case morphClassNotFound(className:String)
 }
 
 @available(*, deprecated, renamed: "DaikiriId", message: "Use the new class")
