@@ -207,9 +207,9 @@ class DaikiriSwiftTestsV2: XCTestCase {
         let batcave     = Hideout(id: 1, name: "Batcave").create()
         let starkTower  = Hideout(id: 2, name: "Stark Tower").create()
         
-        let spiderman = Villain(id:1, name:"Spiderman", age:16, hideout: nil)
-        let batman    = Villain(id:2, name:"Batman",    age:54, hideout: batcave)
-        let ironman   = Villain(id:2, name:"Ironman",   age:54, hideout: starkTower)
+        let spiderman = Villain(id:1, name:"Spiderman", age:16, hideout: nil).create()
+        let batman    = Villain(id:2, name:"Batman",    age:54, hideout: batcave).create()
+        let ironman   = Villain(id:3, name:"Ironman",   age:54, hideout: starkTower).create()
         
         XCTAssertNil(try spiderman.hideout())
         XCTAssertEqual("Batcave",     try batman.hideout()?.name)
@@ -218,22 +218,22 @@ class DaikiriSwiftTestsV2: XCTestCase {
         XCTAssertEqual("Batman", try batcave.villains().first?.name)
     }
     
-    func test_belongs_to_many_relationship_works(){
+    func test_belongs_to_many_relationship_works() throws {
         
-        let batcave     = Headquarter(name: "Batcave", id: 1)
+        let batcave     = Hideout(id: 1, name: "Batcave").create()
         
-        let batman      = Hero(name:"Batman",    age:16, id:1)
-        let robin       = Hero(name:"Robin",     age:16, id:2)
-        let nightWing   = Hero(name:"NightWing", age:16, id:3)
+        let batman      = Villain(id:1, name:"Batman",    age:16).create()
+        let robin       = Villain(id:2, name:"Robin",     age:16).create()
+        let nightWing   = Villain(id:3, name:"NightWing", age:16).create()
         
-        let _ = HeroHeadquarterPivot(id:1, hero:batman,    headquarter:batcave, level:100)
-        let _ = HeroHeadquarterPivot(id:2, hero:robin,     headquarter:batcave, level:45)
-        let _ = HeroHeadquarterPivot(id:3, hero:nightWing, headquarter:batcave, level:56)
+        let _ = HideoutVillain(id:1, hideout:batcave, villain:batman, level:100).create()
+        let _ = HideoutVillain(id:2, hideout:batcave, villain:robin, level:45).create()
+        let _ = HideoutVillain(id:3, hideout:batcave, villain:nightWing, level:56).create()
                 
-        let heroes = batcave.heroesWithPivot()
+        let villains = try batcave.villainsWithPivot()
         
-        XCTAssertEqual(3, heroes.count)
-        let firstHero = heroes.first!
-        XCTAssertEqual(45, (firstHero.pivot as! HeroHeadquarterPivot).level)
+        XCTAssertEqual(3, villains.count)
+        let firstVillain = villains.first!
+        XCTAssertEqual(45, (firstVillain.pivot as! HideoutVillain).level)
     }
 }

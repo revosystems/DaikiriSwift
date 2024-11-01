@@ -234,6 +234,6 @@ class DaikiriSwiftTests: XCTestCase {
         
         XCTAssertNotNil(fetched)
         XCTAssertEqual("Joker", fetched.name)
-        XCTAssertNil(fetched.headquarter_id)
+        XCTAssertNil(fetched.hideout_id)
     }
 }

@@ -14,6 +14,9 @@ public class DaikiriObject: Daikiriable {
     @NonCodable
     public var managed:NSManagedObject?
     
+    @NonCodable
+    var pivot:DaikiriId?
+    
     var context:NSManagedObjectContext {
         DaikiriCoreData.manager.context
     }
@@ -134,16 +137,17 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
         try type.query.whereKey(foreignKey, id).get()
     }
     
-    func belongsTo<T:Codable & DaikiriObject & DaikiriId, T2:CVarArg>(_ type:T.Type, _ foreignKeyId:T2) throws -> T?{
-        try type.query.whereKey("id", foreignKeyId).first()
+    func belongsTo<T:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, _ foreignKeyId:Int?) throws -> T?{
+        guard let foreignKeyId else { return nil }
+        return try type.query.whereKey("id", foreignKeyId).first()
     }
     
-    /*func belongsToMany<T:DaikiriWithPivot, Z:DaikiriId>(_ type:T.Type, _ pivotType:Z.Type, _ localKey:String, _ foreignKey:KeyPath<Z, Int32>, order:String? = nil) -> [T]{
-        let pivots      = pivotType.query.whereKey(localKey, self.id).orderBy(order).get()
-        return pivots.compactMap {
-            guard let final:T = type.find($0[keyPath: foreignKey]) else { return nil }
+    func belongsToMany<T:Codable & DaikiriObject & DaikiriId, Z:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, pivot:Z.Type, _ localKey:String, _ foreignKey:KeyPath<Z, Int>, order:String? = nil) throws -> [T] {
+        let pivots      = try pivot.query.whereKey(localKey, self.id).orderBy(order).get()
+        return try pivots.compactMap {
+            guard let final:T = try type.find($0[keyPath: foreignKey]) else { return nil }
             final.pivot = $0
             return final
         }
-    }*/
+    }
 }

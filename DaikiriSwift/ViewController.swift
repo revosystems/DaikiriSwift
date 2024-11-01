@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         villain.create()
         
         do {
-            let fetched = try Villain.first()
+            let fetched = try Villain.first()!
             print(fetched)
         } catch {
             print(error)
