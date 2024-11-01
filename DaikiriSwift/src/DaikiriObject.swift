@@ -134,8 +134,8 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
         try type.query.whereKey(foreignKey, id).get()
     }
     
-    func belongsTo<T:DaikiriIdentifiable, T2:CVarArg>(_ type:T.Type, _ foreignKeyId:T2) -> T?{
-        type.query.whereKey("id", foreignKeyId).first()
+    func belongsTo<T:Codable & DaikiriObject & DaikiriId, T2:CVarArg>(_ type:T.Type, _ foreignKeyId:T2) throws -> T?{
+        try type.query.whereKey("id", foreignKeyId).first()
     }
     
     /*func belongsToMany<T:DaikiriWithPivot, Z:DaikiriId>(_ type:T.Type, _ pivotType:Z.Type, _ localKey:String, _ foreignKey:KeyPath<Z, Int32>, order:String? = nil) -> [T]{

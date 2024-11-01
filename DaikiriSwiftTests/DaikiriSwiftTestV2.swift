@@ -204,18 +204,18 @@ class DaikiriSwiftTestsV2: XCTestCase {
     
     func test_belongs_to_relationship_works(){
         
-        let batcave     = Headquarter(name: "Batcave", id: 1)
-        let starkTower  = Headquarter(name: "Stark Tower", id: 2)
+        let batcave     = Hideout(id: 1, name: "Batcave").create()
+        let starkTower  = Hideout(id: 2, name: "Stark Tower").create()
         
-        let spiderman = Hero(name:"Spiderman", age:16, id:1)
-        let batman    = Hero(name:"Batman",    age:54, id:2, headquarter: batcave)
-        let ironman   = Hero(name:"Ironman",   age:54, id:2, headquarter: starkTower)
+        let spiderman = Villain(id:1, name:"Spiderman", age:16, hideout: nil)
+        let batman    = Villain(id:2, name:"Batman",    age:54, hideout: batcave)
+        let ironman   = Villain(id:2, name:"Ironman",   age:54, hideout: starkTower)
         
-        XCTAssertNil(spiderman.headquarter())
-        XCTAssertEqual("Batcave",     batman.headquarter()?.name)
-        XCTAssertEqual("Stark Tower", ironman.headquarter()?.name)
+        XCTAssertNil(try spiderman.hideout())
+        XCTAssertEqual("Batcave",     try batman.hideout()?.name)
+        XCTAssertEqual("Stark Tower", try ironman.hideout()?.name)
         
-        XCTAssertEqual("Batman", batcave.heroes().first?.name)
+        XCTAssertEqual("Batman", try batcave.villains().first?.name)
     }
     
     func test_belongs_to_many_relationship_works(){
