@@ -236,4 +236,13 @@ class DaikiriSwiftTestsV2: XCTestCase {
         let firstVillain = villains.first!
         XCTAssertEqual(45, (firstVillain.pivot as! HideoutVillain).level)
     }
+    
+    func test_can_morph_to() throws {
+        let batman      = Villain(id:1, name:"Batman",    age:16).create()
+        let image = Image(id: 1, url: "http://image.com", imageable_id: 1, imageable_type: "Villain")
+        
+        let imageable = try image.imageable()
+        
+        XCTAssertEqual("Batman", (imageable as! Villain).name)
+    }
 }

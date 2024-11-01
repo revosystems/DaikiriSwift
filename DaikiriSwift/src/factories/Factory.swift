@@ -1,6 +1,7 @@
 import Foundation
 
 
+@available(*, deprecated, renamed: "DaikiriId", message: "Use the new class")
 open class Factory<T:DaikiriIdentifiable & Decodable> {
        
     public required init(){}
@@ -11,7 +12,7 @@ open class Factory<T:DaikiriIdentifiable & Decodable> {
     /**
      * Define here the main attributes of the model to be created by the factory
      */
-    open func definition() -> NSMutableDictionary{
+    open func definition() -> NSMutableDictionary {
         return [:]
     }
     

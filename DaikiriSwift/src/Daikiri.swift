@@ -1,12 +1,13 @@
 import Foundation
 import CoreData
 
-
+@available(*, deprecated, renamed: "DaikiriId", message: "Use the new class")
 public protocol DaikiriIdentifiable: NSManagedObject {
     var id:Int32 { get }
     static var entityName:String { get }    //So it can be overrided in final class
 }
 
+@available(*, deprecated, renamed: "DaikiriId", message: "Use the new class")
 public protocol DaikiriWithPivot: DaikiriIdentifiable {
     var pivot:DaikiriIdentifiable? { get set }
 }
@@ -15,6 +16,7 @@ enum DaikiriError: Error {
     case objectAlreadyInDatabase
 }
 
+@available(*, deprecated, renamed: "DaikiriId", message: "Use the new class")
 public extension DaikiriIdentifiable {
     
     static var query:QueryBuilder<Self>{

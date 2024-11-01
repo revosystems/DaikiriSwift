@@ -26,7 +26,6 @@ public class Villain : DaikiriObject, DaikiriId, Codable   {
     public func hideout() throws -> Hideout? {
         try belongsTo(Hideout.self, \.hideout_id)
     }
-    
 }
 
 public class VillainFriend : DaikiriObject, DaikiriId, Codable {

@@ -37,6 +37,7 @@
 		EA05D4302CD3790000B52C88 /* DaikiriObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D42F2CD378F700B52C88 /* DaikiriObject.swift */; };
 		EA05D4322CD3844F00B52C88 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4312CD3844800B52C88 /* Query.swift */; };
 		EA05D4342CD3D36700B52C88 /* DaikiriSwiftTestV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4332CD3D36000B52C88 /* DaikiriSwiftTestV2.swift */; };
+		EA05D4362CD56E1800B52C88 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4352CD56E1600B52C88 /* Image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		EA05D42F2CD378F700B52C88 /* DaikiriObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaikiriObject.swift; sourceTree = "<group>"; };
 		EA05D4312CD3844800B52C88 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		EA05D4332CD3D36000B52C88 /* DaikiriSwiftTestV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaikiriSwiftTestV2.swift; sourceTree = "<group>"; };
+		EA05D4352CD56E1600B52C88 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 		8D9AC87523CE06C400B61952 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				EA05D4352CD56E1600B52C88 /* Image.swift */,
 				BBFA645E23CC8D3C00084620 /* DaikiriSwift.xcdatamodeld */,
 				BBFA647D23CC8D5F00084620 /* Hero.swift */,
 				BB34429D2CD2A28600040BA0 /* Villain.swift */,
@@ -420,6 +423,7 @@
 				BBFA648023CC920600084620 /* DaikiriCoreData.swift in Sources */,
 				BBFA645623CC8D3C00084620 /* AppDelegate.swift in Sources */,
 				EA05D4322CD3844F00B52C88 /* Query.swift in Sources */,
+				EA05D4362CD56E1800B52C88 /* Image.swift in Sources */,
 				BB34429E2CD2A28700040BA0 /* Villain.swift in Sources */,
 				BB502C7E25433CDE00BF4D75 /* Factoriable.swift in Sources */,
 				BBFA645823CC8D3C00084620 /* SceneDelegate.swift in Sources */,
