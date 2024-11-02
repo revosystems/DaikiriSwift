@@ -38,6 +38,7 @@
 		EA05D4322CD3844F00B52C88 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4312CD3844800B52C88 /* Query.swift */; };
 		EA05D4342CD3D36700B52C88 /* DaikiriSwiftTestV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4332CD3D36000B52C88 /* DaikiriSwiftTestV2.swift */; };
 		EA05D4362CD56E1800B52C88 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4352CD56E1600B52C88 /* Image.swift */; };
+		EAD791D72CD6142100C2FA96 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD791D62CD6142000C2FA96 /* Tag.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		EA05D4312CD3844800B52C88 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		EA05D4332CD3D36000B52C88 /* DaikiriSwiftTestV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaikiriSwiftTestV2.swift; sourceTree = "<group>"; };
 		EA05D4352CD56E1600B52C88 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		EAD791D62CD6142000C2FA96 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,8 +128,9 @@
 		8D9AC87523CE06C400B61952 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				EA05D4352CD56E1600B52C88 /* Image.swift */,
 				BBFA645E23CC8D3C00084620 /* DaikiriSwift.xcdatamodeld */,
+				EA05D4352CD56E1600B52C88 /* Image.swift */,
+				EAD791D62CD6142000C2FA96 /* Tag.swift */,
 				BBFA647D23CC8D5F00084620 /* Hero.swift */,
 				BB34429D2CD2A28600040BA0 /* Villain.swift */,
 				8D9AC87A23CE207200B61952 /* Friend.swift */,
@@ -423,6 +426,7 @@
 				BBFA648023CC920600084620 /* DaikiriCoreData.swift in Sources */,
 				BBFA645623CC8D3C00084620 /* AppDelegate.swift in Sources */,
 				EA05D4322CD3844F00B52C88 /* Query.swift in Sources */,
+				EAD791D72CD6142100C2FA96 /* Tag.swift in Sources */,
 				EA05D4362CD56E1800B52C88 /* Image.swift in Sources */,
 				BB34429E2CD2A28700040BA0 /* Villain.swift in Sources */,
 				BB502C7E25433CDE00BF4D75 /* Factoriable.swift in Sources */,

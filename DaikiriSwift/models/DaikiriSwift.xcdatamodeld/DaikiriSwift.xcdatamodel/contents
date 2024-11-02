@@ -37,9 +37,14 @@
         <attribute name="imageable_type" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
+    <entity name="Tag" representedClassName="Tag" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Taggable" representedClassName="Taggable" syncable="YES">
+        <attribute name="tag_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="taggable_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="taggable_type" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Villain" representedClassName="Villain" syncable="YES">
         <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

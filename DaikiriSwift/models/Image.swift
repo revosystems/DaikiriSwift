@@ -13,6 +13,15 @@ public class Image : DaikiriObject, Codable, DaikiriId {
         self.imageable_type = imageable_type
     }
     
+    
+    convenience public init(id:Int, url:String, imageable:DaikiriId){
+        self.init(
+            id: id, url: url,
+            imageable_id: imageable.id,
+            imageable_type: String(describing: imageable).components(separatedBy: ".").last!
+        )
+    }
+    
     public func imageable() throws -> (Codable & DaikiriObject & DaikiriId)? {
         try morphTo(id: imageable_id, type: imageable_type)        
     }

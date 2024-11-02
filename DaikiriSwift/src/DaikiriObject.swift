@@ -172,13 +172,24 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
         return try type.find(id)
     }
     
-    func morphBy<T:Codable & DaikiriObject & DaikiriId>(_ typeKey:KeyPath<T,String>, _ foreingKey:KeyPath<T,Int>) throws -> T? {
+    func morphOne<T:Codable & DaikiriObject & DaikiriId>(_ typeKey:KeyPath<T,String>, _ foreingKey:KeyPath<T,Int>) throws -> T? {
         let typeString          = String(describing: Self.self).components(separatedBy: ".").last!
         let typeKeyString       = String(describing: typeKey).components(separatedBy: ".").last!
         let foreingKeyString    = String(describing: foreingKey).components(separatedBy: ".").last!
+        
         return try T.query.whereKey(typeKeyString, typeString)
-                          .whereKey(foreingKeyString, self.id).first()
+                          .whereKey(foreingKeyString, self.id)
+                          .first()
     }
     
+    func morphMany<T:Codable & DaikiriObject & DaikiriId>(_ typeKey:KeyPath<T,String>, _ foreingKey:KeyPath<T,Int>) throws -> [T] {
+        let typeString          = String(describing: Self.self).components(separatedBy: ".").last!
+        let typeKeyString       = String(describing: typeKey).components(separatedBy: ".").last!
+        let foreingKeyString    = String(describing: foreingKey).components(separatedBy: ".").last!
+        
+        return try T.query.whereKey(typeKeyString, typeString)
+                          .whereKey(foreingKeyString, self.id)
+                          .get()
+    }
     
 }

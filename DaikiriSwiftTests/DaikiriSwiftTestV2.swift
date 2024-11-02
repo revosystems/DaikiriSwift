@@ -248,4 +248,36 @@ class DaikiriSwiftTestsV2: XCTestCase {
         let fetchedImage = try batman.image()
         XCTAssertEqual("http://image.com", fetchedImage!.url)
     }
+    
+    func test_can_morph_to_many() throws {
+        let batman = Villain(id:1, name:"Batman",    age:16).create()
+        let _ = Image(id: 1, url: "http://image1.com", imageable: batman).create()
+        let _ = Image(id: 2, url: "http://image2.com", imageable: batman).create()
+        let _ = Image(id: 3, url: "http://image3.com", imageable: batman).create()
+        
+                
+        let fetchedImages = try batman.images().sorted { $0.id < $1.id }
+        XCTAssertEqual(3, fetchedImages.count)
+        XCTAssertEqual("http://image1.com", fetchedImages[0].url)
+        XCTAssertEqual("http://image2.com", fetchedImages[1].url)
+        XCTAssertEqual("http://image3.com", fetchedImages[2].url)
+    }
+    
+    func test_can_morph_to_many_with_pivot() throws {
+        let batman = Villain(id:1, name:"Batman",    age:16).create()
+        let robin = VillainFriend(id: 1, name: "Robin", age: 15, villain: batman)
+        
+        let tag1 = Tag(id: 1, name: "Black").create()
+        let tag2 = Tag(id: 2, name: "Cape").create()
+        let tag3 = Tag(id: 3, name: "Batmobile").create()
+        
+        Taggable(id: 1, tag: tag1, taggable: batman).create()
+        Taggable(id: 2, tag: tag1, taggable: robin).create()
+        Taggable(id: 3, tag: tag2, taggable: batman).create()
+        Taggable(id: 4, tag: tag3, taggable: robin).create()
+        
+        XCTFail("TODO")
+        
+        
+    }
 }

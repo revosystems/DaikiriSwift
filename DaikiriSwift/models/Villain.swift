@@ -28,7 +28,11 @@ public class Villain : DaikiriObject, DaikiriId, Codable   {
     }
     
     public func image() throws -> Image? {
-        try morphBy(\.imageable_type, \.imageable_id)        
+        try morphOne(\.imageable_type, \.imageable_id)
+    }
+    
+    public func images() throws -> [Image] {
+        try morphMany(\.imageable_type, \.imageable_id)
     }
 }
 
