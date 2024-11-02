@@ -212,9 +212,11 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
             .whereKey(relatedTypeString, typeString)
             .get()
 
-        return try T.find(
-            pivots.map { $0[keyPath: foreingKey] }
-        )
+        return try pivots.compactMap {
+            let r = try T.find($0[keyPath: foreingKey])
+            r?.pivot = $0
+            return r
+        }
     }
     
     func morphedByMany<T:Codable & DaikiriObject & DaikiriId, PIVOT:Codable & DaikiriObject & DaikiriId>(
@@ -223,18 +225,20 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
         relatedKey:KeyPath<PIVOT, Int>,
         relatedType:KeyPath<PIVOT, String>
     ) throws -> [T] {
-        let typeString  = String(describing: T.self).components(separatedBy: ".").last!
-        let foreingKeyString       = String(describing: foreingKey).components(separatedBy: ".").last!
-        let relatedTypeString    = String(describing: relatedType).components(separatedBy: ".").last!
+        let typeString         = String(describing: T.self).components(separatedBy: ".").last!
+        let foreingKeyString   = String(describing: foreingKey).components(separatedBy: ".").last!
+        let relatedTypeString  = String(describing: relatedType).components(separatedBy: ".").last!
         
         let pivots = try pivotType.query
             .whereKey(foreingKeyString, self.id)
             .whereKey(relatedTypeString, typeString)
             .get()
 
-        return try T.find(
-            pivots.map { $0[keyPath: relatedKey] }
-        )
+        return try pivots.compactMap {
+            let r = try T.find($0[keyPath: relatedKey])
+            r?.pivot = $0
+            return r
+        }
     }
     
 }
