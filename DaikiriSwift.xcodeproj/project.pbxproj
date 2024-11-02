@@ -26,15 +26,13 @@
 		BBFA646223CC8D3E00084620 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBFA646123CC8D3E00084620 /* Assets.xcassets */; };
 		BBFA646523CC8D3E00084620 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBFA646323CC8D3E00084620 /* LaunchScreen.storyboard */; };
 		BBFA647023CC8D3E00084620 /* DaikiriSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA646F23CC8D3E00084620 /* DaikiriSwiftTests.swift */; };
-		BBFA647C23CC8D4D00084620 /* Daikiri.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA647B23CC8D4D00084620 /* Daikiri.swift */; };
 		BBFA647E23CC8D5F00084620 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA647D23CC8D5F00084620 /* Hero.swift */; };
 		BBFA648023CC920600084620 /* DaikiriCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA647F23CC920600084620 /* DaikiriCoreData.swift */; };
-		BBFA648223CC98FB00084620 /* QueryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA648123CC98FB00084620 /* QueryBuilder.swift */; };
 		BBFA648423CDCBAB00084620 /* DaikiriCoreDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA648323CDCBAB00084620 /* DaikiriCoreDataTest.swift */; };
 		D280EDF22243781E708501C9 /* Pods_DaikiriSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC66FEA6B7B0EA1CA8E1BE2 /* Pods_DaikiriSwiftTests.framework */; };
 		EA05D42A2CD3769A00B52C88 /* NSManaged+daikiri.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4292CD3769900B52C88 /* NSManaged+daikiri.swift */; };
 		EA05D42E2CD3776200B52C88 /* NonCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D42C2CD3776200B52C88 /* NonCodable.swift */; };
-		EA05D4302CD3790000B52C88 /* DaikiriObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D42F2CD378F700B52C88 /* DaikiriObject.swift */; };
+		EA05D4302CD3790000B52C88 /* Daikiri.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D42F2CD378F700B52C88 /* Daikiri.swift */; };
 		EA05D4322CD3844F00B52C88 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4312CD3844800B52C88 /* Query.swift */; };
 		EA05D4342CD3D36700B52C88 /* DaikiriSwiftTestV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4332CD3D36000B52C88 /* DaikiriSwiftTestV2.swift */; };
 		EA05D4362CD56E1800B52C88 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4352CD56E1600B52C88 /* Image.swift */; };
@@ -79,15 +77,13 @@
 		BBFA646B23CC8D3E00084620 /* DaikiriSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DaikiriSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBFA646F23CC8D3E00084620 /* DaikiriSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaikiriSwiftTests.swift; sourceTree = "<group>"; };
 		BBFA647123CC8D3E00084620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BBFA647B23CC8D4D00084620 /* Daikiri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daikiri.swift; sourceTree = "<group>"; };
 		BBFA647D23CC8D5F00084620 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
 		BBFA647F23CC920600084620 /* DaikiriCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaikiriCoreData.swift; sourceTree = "<group>"; };
-		BBFA648123CC98FB00084620 /* QueryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryBuilder.swift; sourceTree = "<group>"; };
 		BBFA648323CDCBAB00084620 /* DaikiriCoreDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaikiriCoreDataTest.swift; sourceTree = "<group>"; };
 		DD634C722D8C3F40FD706B2E /* Pods-DaikiriSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaikiriSwift.debug.xcconfig"; path = "Target Support Files/Pods-DaikiriSwift/Pods-DaikiriSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		EA05D4292CD3769900B52C88 /* NSManaged+daikiri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManaged+daikiri.swift"; sourceTree = "<group>"; };
 		EA05D42C2CD3776200B52C88 /* NonCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonCodable.swift; sourceTree = "<group>"; };
-		EA05D42F2CD378F700B52C88 /* DaikiriObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaikiriObject.swift; sourceTree = "<group>"; };
+		EA05D42F2CD378F700B52C88 /* Daikiri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daikiri.swift; sourceTree = "<group>"; };
 		EA05D4312CD3844800B52C88 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		EA05D4332CD3D36000B52C88 /* DaikiriSwiftTestV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaikiriSwiftTestV2.swift; sourceTree = "<group>"; };
 		EA05D4352CD56E1600B52C88 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -210,15 +206,13 @@
 		BBFA647A23CC8D4400084620 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				EA05D4312CD3844800B52C88 /* Query.swift */,
 				EA05D42D2CD3776200B52C88 /* propertyWrappers */,
 				EA05D4282CD3768D00B52C88 /* extensions */,
 				BB103B5323D1A8E400066EE8 /* factories */,
-				BBFA647B23CC8D4D00084620 /* Daikiri.swift */,
-				EA05D42F2CD378F700B52C88 /* DaikiriObject.swift */,
+				EA05D42F2CD378F700B52C88 /* Daikiri.swift */,
+				EA05D4312CD3844800B52C88 /* Query.swift */,
 				BBFA647F23CC920600084620 /* DaikiriCoreData.swift */,
 				BBF2D1D623CF843B009AA164 /* DaikiriCoreData+Test.swift */,
-				BBFA648123CC98FB00084620 /* QueryBuilder.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -421,7 +415,6 @@
 				BB03E48C240D20C5003BBB59 /* Pivot.swift in Sources */,
 				EA05D42E2CD3776200B52C88 /* NonCodable.swift in Sources */,
 				EA05D42A2CD3769A00B52C88 /* NSManaged+daikiri.swift in Sources */,
-				BBFA647C23CC8D4D00084620 /* Daikiri.swift in Sources */,
 				8D9AC87E23CE207200B61952 /* Friend.swift in Sources */,
 				BBFA648023CC920600084620 /* DaikiriCoreData.swift in Sources */,
 				BBFA645623CC8D3C00084620 /* AppDelegate.swift in Sources */,
@@ -434,8 +427,7 @@
 				8D9AC88023CE207200B61952 /* Headquarter.swift in Sources */,
 				BBFA646023CC8D3C00084620 /* DaikiriSwift.xcdatamodeld in Sources */,
 				BB502C692543294200BF4D75 /* Factory.swift in Sources */,
-				EA05D4302CD3790000B52C88 /* DaikiriObject.swift in Sources */,
-				BBFA648223CC98FB00084620 /* QueryBuilder.swift in Sources */,
+				EA05D4302CD3790000B52C88 /* Daikiri.swift in Sources */,
 				BBF2D1D723CF843B009AA164 /* DaikiriCoreData+Test.swift in Sources */,
 				BBFA647E23CC8D5F00084620 /* Hero.swift in Sources */,
 			);

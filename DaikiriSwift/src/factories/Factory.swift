@@ -1,8 +1,7 @@
 import Foundation
 
 
-@available(*, deprecated, renamed: "DaikiriId", message: "Use the new class")
-open class Factory<T:DaikiriIdentifiable & Decodable> {
+open class Factory<T:Daikiri & Codable & DaikiriId> {
        
     public required init(){}
     
@@ -38,7 +37,7 @@ open class Factory<T:DaikiriIdentifiable & Decodable> {
     /**
      * Generates the instance with all the previous states
      */
-    public func make(_ overrides:NSDictionary = [:]) -> T {
+    public func make(_ overrides:NSDictionary = [:]) throws -> T {
         let finalDict = definition()
                 
         states.allKeys.forEach{
@@ -67,39 +66,29 @@ open class Factory<T:DaikiriIdentifiable & Decodable> {
             }
         }
         
-        return make(final: finalDict)
+        return try make(final: finalDict)
     }
     
-    public func make(count:Int, _ overrides:NSDictionary = [:]) -> [T]{
-        (0..<count).map {_ in
-            make(overrides)
+    public func make(count:Int, _ overrides:NSDictionary = [:]) throws -> [T]{
+        try (0..<count).map {_ in
+            try make(overrides)
         }
     }
     
     
     // MARK:- Private
-    private func make(final:NSDictionary) -> T{
-        guard let data = Self.toJson(final) else { return T.init() }
-        do {
-            let model:T = try JSONDecoder().decode(T.self, from:data)
-            afterMaking(model)
-            return model
-        } catch {
-            print("Error decoding: \(error)")
-            return T.init()
-        }
+    private func make(final:NSDictionary) throws -> T {
+        let data = try Self.toJson(final)
+        let model:T = try JSONDecoder().decode(T.self, from:data)
+        afterMaking(model)
+        return model
     }
     
     //---------------------------------------------------------------
     // MARK: Helpers
     //---------------------------------------------------------------
-    private static func toJson(_ dict:NSDictionary) -> Data? {
-        do {
-            return try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
+    private static func toJson(_ dict:NSDictionary) throws -> Data {
+        try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
     }
     
     

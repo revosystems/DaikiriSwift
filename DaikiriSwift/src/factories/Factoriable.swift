@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol Factoriable: DaikiriIdentifiable, Decodable{
+public protocol Factoriable: Daikiri, Codable, DaikiriId{
     
 }
 

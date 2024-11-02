@@ -20,11 +20,11 @@ public class Villain : Daikiri, DaikiriId, Codable   {
     }
     
     public func friends() throws -> [VillainFriend] {
-        try hasMany(VillainFriend.self, \.villain_id)
+        try hasMany(\.villain_id)
     }
     
     public func hideout() throws -> Hideout? {
-        try belongsTo(Hideout.self, \.hideout_id)
+        try belongsTo(\.hideout_id)
     }
     
     public func image() throws -> Image? {
@@ -81,11 +81,11 @@ public class Hideout : Daikiri, DaikiriId, Codable {
     }
     
     public func villains() throws -> [Villain] {
-        try hasMany(Villain.self, \.hideout_id)
+        try hasMany(\.hideout_id)
     }
     
     public func villainsWithPivot() throws -> [Villain] {
-        try belongsToMany(Villain.self, pivot:HideoutVillain.self, \.hideout_id, \.villain_id)
+        try belongsToMany(pivot:HideoutVillain.self, \.hideout_id, \.villain_id)
     }
 }
 

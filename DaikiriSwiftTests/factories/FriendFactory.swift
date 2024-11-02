@@ -7,7 +7,7 @@ public class FriendFactory : Factory<Friend> {
         [
             "name"  : "Robin",
             "hero_id" : {
-                Hero.factory().make().id
+                try! Hero.factory().make().id
             },
         ]
     }
