@@ -276,7 +276,13 @@ class DaikiriSwiftTestsV2: XCTestCase {
         Taggable(id: 3, tag: tag2, taggable: batman).create()
         Taggable(id: 4, tag: tag3, taggable: robin).create()
         
-        XCTFail("TODO")
+        let batmanTags = try batman.tags()
+        let robinTags = try robin.tags()
+        
+        XCTAssertEqual(2, batmanTags.count)
+        XCTAssertEqual(2, robinTags.count)
+        XCTAssertEqual(["Black", "Cape"], batmanTags.map {$0.name} )
+        XCTAssertEqual(["Black", "Batmobile"], robinTags.map {$0.name} )
         
         
     }

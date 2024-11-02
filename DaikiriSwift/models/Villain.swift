@@ -34,6 +34,15 @@ public class Villain : DaikiriObject, DaikiriId, Codable   {
     public func images() throws -> [Image] {
         try morphMany(\.imageable_type, \.imageable_id)
     }
+    
+    public func tags() throws -> [Tag] {
+        try morphToMany(
+            Taggable.self,
+            foreingKey: \.tag_id,
+            morphableKey: \.taggable_id,
+            morphableType: \.taggable_type
+        )
+    }
 }
 
 public class VillainFriend : DaikiriObject, DaikiriId, Codable {
@@ -49,6 +58,15 @@ public class VillainFriend : DaikiriObject, DaikiriId, Codable {
     
     convenience init(id:Int, name:String, age:Int, villain:Villain){
         self.init(id: id, name: name, age: age, villain_id: villain.id)
+    }
+    
+    public func tags() throws -> [Tag] {
+        try morphToMany(
+            Taggable.self,
+            foreingKey: \.tag_id,
+            morphableKey: \.taggable_id,
+            morphableType: \.taggable_type
+        )
     }
     
 }

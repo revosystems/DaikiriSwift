@@ -4,6 +4,9 @@ import CoreData
  [] Rename create to insert?
  [] Add upsert method?
  [] Treure els throws del query builder?
+ [] Add the sort key on relationships
+ [] Should relationships return an object so it can have things done on it?
+ 
  */
 
 public protocol DaikiriId {
@@ -190,6 +193,28 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
         return try T.query.whereKey(typeKeyString, typeString)
                           .whereKey(foreingKeyString, self.id)
                           .get()
+    }
+    
+    func morphToMany<T:Codable & DaikiriObject & DaikiriId, Z:Codable & DaikiriObject & DaikiriId>(
+        _ pivotType:Z.Type,
+        foreingKey:KeyPath<Z, Int>,
+        morphableKey:KeyPath<Z, Int>,
+        morphableType:KeyPath<Z, String>
+    ) throws -> [T] {
+     
+        let typeString  = String(describing: Self.self).components(separatedBy: ".").last!
+        let morphableKeyString       = String(describing: morphableKey).components(separatedBy: ".").last!
+        let morphableTypeString    = String(describing: morphableType).components(separatedBy: ".").last!
+        
+        let pivots = try pivotType.query
+            .whereKey(morphableKeyString, self.id)
+            .whereKey(morphableTypeString, typeString)
+            .get()
+
+        return try T.find(
+            pivots.map { $0[keyPath: foreingKey] }
+        )
+        
     }
     
 }
