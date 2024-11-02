@@ -8,6 +8,24 @@ public class Tag : DaikiriObject, Codable, DaikiriId {
         self.id = id
         self.name = name
     }
+    
+    public func villains() throws -> [Villain] {
+        try morphedByMany(
+            Taggable.self,
+            foreingKey: \.tag_id,
+            relatedKey: \.taggable_id,
+            relatedType: \.taggable_type
+        )
+    }
+    
+    public func villainFriends() throws -> [VillainFriend] {
+        try morphedByMany(
+            Taggable.self,
+            foreingKey: \.tag_id,
+            relatedKey: \.taggable_id,
+            relatedType: \.taggable_type
+        )
+    }
 }
 
 public class Taggable : DaikiriObject, Codable, DaikiriId {

@@ -6,6 +6,7 @@ import CoreData
  [] Treure els throws del query builder?
  [] Add the sort key on relationships
  [] Should relationships return an object so it can have things done on it?
+ [] Add convenience keys for relationhsips
  
  */
 
@@ -195,26 +196,45 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
                           .get()
     }
     
-    func morphToMany<T:Codable & DaikiriObject & DaikiriId, Z:Codable & DaikiriObject & DaikiriId>(
-        _ pivotType:Z.Type,
-        foreingKey:KeyPath<Z, Int>,
-        morphableKey:KeyPath<Z, Int>,
-        morphableType:KeyPath<Z, String>
+    func morphToMany<T:Codable & DaikiriObject & DaikiriId, PIVOT:Codable & DaikiriObject & DaikiriId>(
+        _ pivotType:PIVOT.Type,
+        foreingKey:KeyPath<PIVOT, Int>,
+        relatedKey:KeyPath<PIVOT, Int>,
+        relatedType:KeyPath<PIVOT, String>
     ) throws -> [T] {
      
-        let typeString  = String(describing: Self.self).components(separatedBy: ".").last!
-        let morphableKeyString       = String(describing: morphableKey).components(separatedBy: ".").last!
-        let morphableTypeString    = String(describing: morphableType).components(separatedBy: ".").last!
+        let typeString        = String(describing: Self.self).components(separatedBy: ".").last!
+        let relatedKeyString  = String(describing: relatedKey).components(separatedBy: ".").last!
+        let relatedTypeString = String(describing: relatedType).components(separatedBy: ".").last!
         
         let pivots = try pivotType.query
-            .whereKey(morphableKeyString, self.id)
-            .whereKey(morphableTypeString, typeString)
+            .whereKey(relatedKeyString, self.id)
+            .whereKey(relatedTypeString, typeString)
             .get()
 
         return try T.find(
             pivots.map { $0[keyPath: foreingKey] }
         )
+    }
+    
+    func morphedByMany<T:Codable & DaikiriObject & DaikiriId, PIVOT:Codable & DaikiriObject & DaikiriId>(
+        _ pivotType:PIVOT.Type,
+        foreingKey:KeyPath<PIVOT, Int>,
+        relatedKey:KeyPath<PIVOT, Int>,
+        relatedType:KeyPath<PIVOT, String>
+    ) throws -> [T] {
+        let typeString  = String(describing: T.self).components(separatedBy: ".").last!
+        let foreingKeyString       = String(describing: foreingKey).components(separatedBy: ".").last!
+        let relatedTypeString    = String(describing: relatedType).components(separatedBy: ".").last!
         
+        let pivots = try pivotType.query
+            .whereKey(foreingKeyString, self.id)
+            .whereKey(relatedTypeString, typeString)
+            .get()
+
+        return try T.find(
+            pivots.map { $0[keyPath: relatedKey] }
+        )
     }
     
 }

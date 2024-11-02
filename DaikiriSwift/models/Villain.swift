@@ -39,8 +39,8 @@ public class Villain : DaikiriObject, DaikiriId, Codable   {
         try morphToMany(
             Taggable.self,
             foreingKey: \.tag_id,
-            morphableKey: \.taggable_id,
-            morphableType: \.taggable_type
+            relatedKey: \.taggable_id,
+            relatedType: \.taggable_type
         )
     }
 }
@@ -64,8 +64,8 @@ public class VillainFriend : DaikiriObject, DaikiriId, Codable {
         try morphToMany(
             Taggable.self,
             foreingKey: \.tag_id,
-            morphableKey: \.taggable_id,
-            morphableType: \.taggable_type
+            relatedKey: \.taggable_id,
+            relatedType: \.taggable_type
         )
     }
     

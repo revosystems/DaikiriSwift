@@ -265,7 +265,7 @@ class DaikiriSwiftTestsV2: XCTestCase {
     
     func test_can_morph_to_many_with_pivot() throws {
         let batman = Villain(id:1, name:"Batman",    age:16).create()
-        let robin = VillainFriend(id: 1, name: "Robin", age: 15, villain: batman)
+        let robin = VillainFriend(id: 1, name: "Robin", age: 15, villain: batman).create()
         
         let tag1 = Tag(id: 1, name: "Black").create()
         let tag2 = Tag(id: 2, name: "Cape").create()
@@ -281,9 +281,11 @@ class DaikiriSwiftTestsV2: XCTestCase {
         
         XCTAssertEqual(2, batmanTags.count)
         XCTAssertEqual(2, robinTags.count)
-        XCTAssertEqual(["Black", "Cape"], batmanTags.map {$0.name} )
-        XCTAssertEqual(["Black", "Batmobile"], robinTags.map {$0.name} )
+        XCTAssertEqual(["Black", "Cape"], batmanTags.sorted { $0.id < $1.id }.map { $0.name } )
+        XCTAssertEqual(["Black", "Batmobile"], robinTags.sorted { $0.id < $1.id }.map {$0.name} )
         
-        
+        XCTAssertEqual(["Batman"], try tag1.villains().map { $0.name })
+        XCTAssertEqual(["Robin"], try tag1.villainFriends().map { $0.name })
+
     }
 }
