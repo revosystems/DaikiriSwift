@@ -7,6 +7,7 @@ import CoreData
  [] Add the sort key on relationships
  [] Should relationships return an object so it can have things done on it?
  [] Add convenience keys for relationhsips
+ [] Query -> min, max, wherekey.. fer-los amb keypaths?
  
  */
 

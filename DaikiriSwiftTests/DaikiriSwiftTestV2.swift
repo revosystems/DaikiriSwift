@@ -187,6 +187,17 @@ class DaikiriSwiftTestsV2: XCTestCase {
         XCTAssertEqual(1, result!.id)
     }
     
+    func test_can_use_other_query_operators() throws {
+        let _ = Villain(id:1, name:"Spiderman", age:16).create()
+        let _ = Villain(id:2, name:"Batman",    age:54).create()
+        let _ = Villain(id:3, name:"Ironman",   age:44).create()
+        let _ = Villain(id:4, name:"Hulk",      age:49).create()
+        
+        let results = try Villain.query.whereKey("id", ">", 2).get()
+        
+        XCTAssertEqual([3, 4], results.sorted { $0.id < $1.id }.map { $0.id })
+    }
+    
     func test_has_many_relationship_works(){
         let spiderman = Villain(id:1, name:"Spiderman", age:16).create()
         let batman    = Villain(id:2, name:"Batman",    age:54).create()

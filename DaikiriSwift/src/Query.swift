@@ -41,6 +41,16 @@ public class Query<T:Daikiri & Codable> {
     }
     
     @discardableResult
+    public func whereKey<Z:CVarArg>(_ key:String, _ theOperator:String, _ value:Z) -> Self{
+        if value is Int || value is Int32 || value is Int16 {
+            andPredicates.append(NSPredicate(format:"%K \(theOperator) %d", key, value))
+        } else {
+            andPredicates.append(NSPredicate(format:"%K \(theOperator) %@", key, value))
+        }
+        return self
+    }
+    
+    @discardableResult
     public func whereIn<Z>(_ key:String, _ values:[Z]) -> Self{
         andPredicates.append(NSPredicate(format:"%K IN %@", key, values))
         return self
