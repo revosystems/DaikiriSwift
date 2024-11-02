@@ -26,6 +26,10 @@ public class Villain : DaikiriObject, DaikiriId, Codable   {
     public func hideout() throws -> Hideout? {
         try belongsTo(Hideout.self, \.hideout_id)
     }
+    
+    public func image() throws -> Image? {
+        try morphBy(\.imageable_type, \.imageable_id)        
+    }
 }
 
 public class VillainFriend : DaikiriObject, DaikiriId, Codable {

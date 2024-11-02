@@ -133,9 +133,6 @@ public extension Daikiriable where Self: Codable & DaikiriObject {
 
 // MARK: Relationships
 public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
-    /*func hasMany<T:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, _ foreignKey:String) throws -> [T]{
-        try type.query.whereKey(foreignKey, id).get()
-    }*/
 
     func hasMany<T:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, _ foreignKey:KeyPath<T, Int?>) throws -> [T] {
         let foreignKeyName = String(describing: foreignKey).components(separatedBy: ".").last!
@@ -173,6 +170,14 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
         }
 
         return try type.find(id)
+    }
+    
+    func morphBy<T:Codable & DaikiriObject & DaikiriId>(_ typeKey:KeyPath<T,String>, _ foreingKey:KeyPath<T,Int>) throws -> T? {
+        let typeString          = String(describing: Self.self).components(separatedBy: ".").last!
+        let typeKeyString       = String(describing: typeKey).components(separatedBy: ".").last!
+        let foreingKeyString    = String(describing: foreingKey).components(separatedBy: ".").last!
+        return try T.query.whereKey(typeKeyString, typeString)
+                          .whereKey(foreingKeyString, self.id).first()
     }
     
     

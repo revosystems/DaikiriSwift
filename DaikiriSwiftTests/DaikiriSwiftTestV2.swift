@@ -238,11 +238,14 @@ class DaikiriSwiftTestsV2: XCTestCase {
     }
     
     func test_can_morph_to() throws {
-        let batman      = Villain(id:1, name:"Batman",    age:16).create()
-        let image = Image(id: 1, url: "http://image.com", imageable_id: 1, imageable_type: "Villain")
+        let batman = Villain(id:1, name:"Batman",    age:16).create()
+        let image  = Image(id: 1, url: "http://image.com", imageable_id: 1, imageable_type: "Villain").create()
         
         let imageable = try image.imageable()
         
         XCTAssertEqual("Batman", (imageable as! Villain).name)
+        
+        let fetchedImage = try batman.image()
+        XCTAssertEqual("http://image.com", fetchedImage!.url)
     }
 }
