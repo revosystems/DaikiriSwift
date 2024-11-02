@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-public class Headquarter: Daikiri, Codable, DaikiriId{
+public class Headquarter: Daikiri, DaikiriId, Codable {
     public var id: Int
     public var name: String
         

@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-public class Friend: Daikiri, Codable, DaikiriId, Factoriable {
+public class Friend: Daikiri, DaikiriId, Codable, Factoriable {
     public var id: Int
     public var hero_id: Int
     public var name: String

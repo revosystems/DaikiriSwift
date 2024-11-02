@@ -1,8 +1,7 @@
 import Foundation
 import CoreData
 
-public class HeroHeadquarterPivot: Daikiri, Codable, DaikiriId {
-    
+public class HeroHeadquarterPivot: Daikiri, DaikiriId, Codable {    
     public var id: Int
     public var hero_id:   Int
     public var headquarter_id: Int

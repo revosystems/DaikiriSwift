@@ -125,11 +125,11 @@
 			isa = PBXGroup;
 			children = (
 				BBFA645E23CC8D3C00084620 /* DaikiriSwift.xcdatamodeld */,
-				EA05D4352CD56E1600B52C88 /* Image.swift */,
-				EAD791D62CD6142000C2FA96 /* Tag.swift */,
 				BBFA647D23CC8D5F00084620 /* Hero.swift */,
 				BB34429D2CD2A28600040BA0 /* Villain.swift */,
 				8D9AC87A23CE207200B61952 /* Friend.swift */,
+				EA05D4352CD56E1600B52C88 /* Image.swift */,
+				EAD791D62CD6142000C2FA96 /* Tag.swift */,
 				8D9AC87C23CE207200B61952 /* Headquarter.swift */,
 				BB03E48B240D20C5003BBB59 /* Pivot.swift */,
 			);

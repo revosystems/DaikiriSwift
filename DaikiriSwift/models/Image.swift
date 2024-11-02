@@ -1,6 +1,6 @@
 import Foundation
 
-public class Image : Daikiri, Codable, DaikiriId {
+public class Image : Daikiri, DaikiriId, Codable {
     public let id: Int
     public let url:String
     public let imageable_id:Int

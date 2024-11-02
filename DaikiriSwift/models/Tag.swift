@@ -1,6 +1,6 @@
 import Foundation
 
-public class Tag : Daikiri, Codable, DaikiriId {
+public class Tag : Daikiri, DaikiriId, Codable {
     public let id: Int
     public let name:String
     
