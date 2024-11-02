@@ -1,6 +1,6 @@
 import CoreData
 
-public class Query<T:DaikiriObject & Codable> {
+public class Query<T:Daikiri & Codable> {
     
     let fetchRequest:NSFetchRequest<NSManagedObject>
     let context:NSManagedObjectContext

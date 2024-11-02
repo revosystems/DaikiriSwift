@@ -1,6 +1,6 @@
 import Foundation
 
-public class Image : DaikiriObject, Codable, DaikiriId {
+public class Image : Daikiri, Codable, DaikiriId {
     public let id: Int
     public let url:String
     public let imageable_id:Int
@@ -22,7 +22,7 @@ public class Image : DaikiriObject, Codable, DaikiriId {
         )
     }
     
-    public func imageable() throws -> (Codable & DaikiriObject & DaikiriId)? {
+    public func imageable() throws -> (Codable & Daikiri & DaikiriId)? {
         try morphTo(id: imageable_id, type: imageable_type)        
     }
 }

@@ -1,6 +1,6 @@
 import CoreData
 
-public class Villain : DaikiriObject, DaikiriId, Codable   {
+public class Villain : Daikiri, DaikiriId, Codable   {
     
     public var id:Int
     public var name:String
@@ -45,7 +45,7 @@ public class Villain : DaikiriObject, DaikiriId, Codable   {
     }
 }
 
-public class VillainFriend : DaikiriObject, DaikiriId, Codable {
+public class VillainFriend : Daikiri, DaikiriId, Codable {
     public var id:Int
     public var name:String
     public var villain_id:Int
@@ -71,7 +71,7 @@ public class VillainFriend : DaikiriObject, DaikiriId, Codable {
     
 }
 
-public class Hideout : DaikiriObject, DaikiriId, Codable {
+public class Hideout : Daikiri, DaikiriId, Codable {
     public var id:Int
     public var name:String
     
@@ -90,7 +90,7 @@ public class Hideout : DaikiriObject, DaikiriId, Codable {
 }
 
 
-class HideoutVillain : DaikiriObject, DaikiriId, Codable {
+class HideoutVillain : Daikiri, DaikiriId, Codable {
     public var id:Int
     public var hideout_id:Int
     public var villain_id:Int

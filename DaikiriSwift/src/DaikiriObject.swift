@@ -14,7 +14,7 @@ public protocol DaikiriId {
     var id:Int { get }
 }
 
-public class DaikiriObject: Daikiriable {
+public class Daikiri: Daikiriable {
     @NonCodable
     public var managed:NSManagedObject?
     
@@ -64,7 +64,7 @@ public extension Daikiriable where Self: Codable {
     
 }
 
-public extension Daikiriable where Self: Codable & DaikiriObject {
+public extension Daikiriable where Self: Codable & Daikiri {
     //MARK: - CRUD
     @discardableResult
     func create() -> Self {
@@ -136,25 +136,25 @@ public extension Daikiriable where Self: Codable & DaikiriObject {
 }
 
 // MARK: Relationships
-public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
+public extension Daikiriable where Self: Codable & Daikiri & DaikiriId {
 
-    func hasMany<T:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, _ foreignKey:KeyPath<T, Int?>) throws -> [T] {
+    func hasMany<T:Codable & Daikiri & DaikiriId>(_ type:T.Type, _ foreignKey:KeyPath<T, Int?>) throws -> [T] {
         let foreignKeyName = String(describing: foreignKey).components(separatedBy: ".").last!
         return try type.query.whereKey(foreignKeyName, id).get()
     }
     
-    func hasMany<T:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, _ foreignKey:KeyPath<T, Int>) throws -> [T] {
+    func hasMany<T:Codable & Daikiri & DaikiriId>(_ type:T.Type, _ foreignKey:KeyPath<T, Int>) throws -> [T] {
         let foreignKeyName = String(describing: foreignKey).components(separatedBy: ".").last!
         return try type.query.whereKey(foreignKeyName, id).get()
     }
     
-    func belongsTo<T:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, _ foreignKey:KeyPath<Self, Int?>) throws -> T?{
+    func belongsTo<T:Codable & Daikiri & DaikiriId>(_ type:T.Type, _ foreignKey:KeyPath<Self, Int?>) throws -> T?{
         guard let foreingId = self[keyPath: foreignKey] else { return nil }
         return try type.find(foreingId)
     }
     
     
-    func belongsToMany<T:Codable & DaikiriObject & DaikiriId, Z:Codable & DaikiriObject & DaikiriId>(_ type:T.Type, pivot:Z.Type, _ localKey:KeyPath<Z,Int>, _ foreignKey:KeyPath<Z, Int>, order:String? = nil) throws -> [T] {
+    func belongsToMany<T:Codable & Daikiri & DaikiriId, Z:Codable & Daikiri & DaikiriId>(_ type:T.Type, pivot:Z.Type, _ localKey:KeyPath<Z,Int>, _ foreignKey:KeyPath<Z, Int>, order:String? = nil) throws -> [T] {
         let localKeyName = String(describing: localKey).components(separatedBy: ".").last!
         let pivots       = try pivot.query.whereKey(localKeyName, self.id).orderBy(order).get()
         
@@ -166,17 +166,17 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
     }
     
     //https://laravel.com/docs/11.x/eloquent-relationships#polymorphic-relationships
-    func morphTo(id:Int, type:String) throws -> (Codable & DaikiriObject & DaikiriId)? {
+    func morphTo(id:Int, type:String) throws -> (Codable & Daikiri & DaikiriId)? {
         let moduleName = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? ""
         let className = "\(moduleName).\(type)"
-        guard let type = Bundle.main.classNamed(className) as? (Codable & DaikiriObject & DaikiriId).Type else {
+        guard let type = Bundle.main.classNamed(className) as? (Codable & Daikiri & DaikiriId).Type else {
             throw DaikiriError.morphClassNotFound(className: className)
         }
 
         return try type.find(id)
     }
     
-    func morphOne<T:Codable & DaikiriObject & DaikiriId>(_ typeKey:KeyPath<T,String>, _ foreingKey:KeyPath<T,Int>) throws -> T? {
+    func morphOne<T:Codable & Daikiri & DaikiriId>(_ typeKey:KeyPath<T,String>, _ foreingKey:KeyPath<T,Int>) throws -> T? {
         let typeString          = String(describing: Self.self).components(separatedBy: ".").last!
         let typeKeyString       = String(describing: typeKey).components(separatedBy: ".").last!
         let foreingKeyString    = String(describing: foreingKey).components(separatedBy: ".").last!
@@ -186,7 +186,7 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
                           .first()
     }
     
-    func morphMany<T:Codable & DaikiriObject & DaikiriId>(_ typeKey:KeyPath<T,String>, _ foreingKey:KeyPath<T,Int>) throws -> [T] {
+    func morphMany<T:Codable & Daikiri & DaikiriId>(_ typeKey:KeyPath<T,String>, _ foreingKey:KeyPath<T,Int>) throws -> [T] {
         let typeString          = String(describing: Self.self).components(separatedBy: ".").last!
         let typeKeyString       = String(describing: typeKey).components(separatedBy: ".").last!
         let foreingKeyString    = String(describing: foreingKey).components(separatedBy: ".").last!
@@ -196,7 +196,7 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
                           .get()
     }
     
-    func morphToMany<T:Codable & DaikiriObject & DaikiriId, PIVOT:Codable & DaikiriObject & DaikiriId>(
+    func morphToMany<T:Codable & Daikiri & DaikiriId, PIVOT:Codable & Daikiri & DaikiriId>(
         _ pivotType:PIVOT.Type,
         foreingKey:KeyPath<PIVOT, Int>,
         relatedKey:KeyPath<PIVOT, Int>,
@@ -219,7 +219,7 @@ public extension Daikiriable where Self: Codable & DaikiriObject & DaikiriId {
         }
     }
     
-    func morphedByMany<T:Codable & DaikiriObject & DaikiriId, PIVOT:Codable & DaikiriObject & DaikiriId>(
+    func morphedByMany<T:Codable & Daikiri & DaikiriId, PIVOT:Codable & Daikiri & DaikiriId>(
         _ pivotType:PIVOT.Type,
         foreingKey:KeyPath<PIVOT, Int>,
         relatedKey:KeyPath<PIVOT, Int>,
