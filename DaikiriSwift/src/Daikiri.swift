@@ -72,15 +72,14 @@ public extension Daikiriable where Self: Codable {
 }
 
 public extension Daikiriable where Self: Codable & Daikiri {
+    
     //MARK: - CRUD
     @discardableResult
-    func create() -> Self {
+    func create() throws -> Self {
+        if let identifiable = self as? DaikiriId, try Self.find(identifiable.id) != nil {
+                throw DaikiriError.objectAlreadyInDatabase
+        }
         context.performAndWait {
-            if let identifiable = self as? DaikiriId {
-                let old = try? Self.find(identifiable.id)
-                try? old?.delete()
-            }
-        
             toManaged()
             try? context.save()
         }

@@ -17,10 +17,9 @@ class ViewController: UIViewController {
         
         Villain.truncate()
         
-        let villain = Villain(id: 1, name:"Joker", age:45)
-        villain.create()
-        
         do {
+            let villain = Villain(id: 1, name:"Joker", age:45)
+            try villain.create()
             let fetched = try Villain.first()!
             print(fetched)
         } catch {

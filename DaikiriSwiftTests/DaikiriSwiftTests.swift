@@ -228,7 +228,7 @@ class DaikiriSwiftTests: XCTestCase {
     
     func test_villain_works() throws {
         
-        let _ = Villain(id:1, name:"Joker", age:16).create()
+        let _ = try Villain(id:1, name:"Joker", age:16).create()
         
         let fetched = try Villain.first()!
         
