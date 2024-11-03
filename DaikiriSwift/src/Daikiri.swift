@@ -9,6 +9,8 @@ import CoreData
  [] Add convenience keys for relationhsips
  [] Query -> min, max, wherekey.. fer-los amb keypaths?
  
+ [] Update
+ []
  */
 
 enum DaikiriError: Error {
@@ -34,7 +36,6 @@ public class Daikiri: Daikiriable {
     public static var entityName:String {
         String(describing: Self.self)
     }
-
     
     @discardableResult
     public func toManaged() -> NSManagedObject {
@@ -74,6 +75,20 @@ public extension Daikiriable where Self: Codable & Daikiri {
     //MARK: - CRUD
     @discardableResult
     func create() -> Self {
+        context.performAndWait {
+            if let identifiable = self as? DaikiriId {
+                let old = try? Self.find(identifiable.id)
+                try? old?.delete()
+            }
+        
+            toManaged()
+            try? context.save()
+        }
+        return self
+    }
+    
+    @discardableResult
+    func save() -> Self {
         context.performAndWait {
             if let identifiable = self as? DaikiriId {
                 let old = try? Self.find(identifiable.id)
@@ -144,6 +159,10 @@ public extension Daikiriable where Self: Codable & Daikiri {
 // MARK: Relationships
 public extension Daikiriable where Self: Codable & Daikiri & DaikiriId {
 
+    func fresh() throws -> Self {
+        try Self.find(id)!
+    }
+    
     func hasMany<T:Codable & Daikiri & DaikiriId>(_ foreignKey:KeyPath<T, Int?>) throws -> [T] {
         let foreignKeyName = String(describing: foreignKey).components(separatedBy: ".").last!
         return try T.query.whereKey(foreignKeyName, id).get()

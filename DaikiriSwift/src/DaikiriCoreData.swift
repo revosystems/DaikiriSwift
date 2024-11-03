@@ -4,13 +4,19 @@ import CoreData
 
 // https://github.com/3lvis/Sync/blob/6723c1f9a07014024e0f8f2923d1930789cabb72/Source/DataStack/DataStack.swift#L77-L196
 public class DaikiriCoreData {
+    
     public static var manager:DaikiriCoreData = DaikiriCoreData()
     
     /** See DaikiriCoreData+Test*/
     var testContext:NSManagedObjectContext? = nil
     
+    let name:String?
+    
+    init(name:String? = nil){
+        self.name = name
+    }
+    
     public var context:NSManagedObjectContext {
-        //persistentContainer.viewContext
         testContext ?? persistentContainer.viewContext
     }
     
@@ -21,19 +27,19 @@ public class DaikiriCoreData {
         return context.undoManager!
     }
     
-    var containerName:String{
-        Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
+    var containerName: String{
+        name ?? Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
     }
     
     public lazy var persistentContainer: NSPersistentContainer = {
-       let container = NSPersistentContainer(name: containerName)
-       container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        let container = NSPersistentContainer(name: containerName)
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
            storeDescription.shouldMigrateStoreAutomatically      = true
            //storeDescription.shouldInferMappingModelAutomatically = true
            if let error = error as NSError? {
                fatalError("Unresolved error \(error), \(error.userInfo)")
            }
-       })
+        })
         return container
     }()
     

@@ -299,4 +299,33 @@ class DaikiriSwiftTestsV2: XCTestCase {
         XCTAssertEqual(["Robin"], try tag1.villainFriends().map { $0.name })
 
     }
+    
+    func test_can_get_a_fresh_instance() throws {
+        let batman = Villain(id:1, name:"Batman",    age:16).create()
+        batman.name = "Patata"
+        
+        XCTAssertEqual("Patata", batman.name)
+        XCTAssertEqual("Batman", try batman.fresh().name)
+    }
+    
+    func test_can_update_an_instance() throws {
+        
+        let batman = Villain(id:1, name:"Batman",    age:16).create()
+        batman.name = "Patata"
+        batman.save()
+        
+        XCTAssertEqual(1, try Villain.count())
+        XCTAssertEqual("Patata", batman.name)
+        XCTAssertEqual("Patata", try batman.fresh().name)
+    }
+    
+    func test_can_delete_an_instance() throws {
+        let batman = Villain(id:1, name:"Batman",    age:16).create()
+        
+        XCTAssertEqual(1, try Villain.count())
+        try batman.delete()
+        
+        XCTAssertEqual(0, try Villain.count())
+    }
+    
 }
