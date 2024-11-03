@@ -127,6 +127,8 @@ class DaikiriSwiftTestsV2: XCTestCase {
         XCTFail("Exception should have been throw")
     }
     
+
+    
     func test_can_delete_object() throws {
         
         let villain    = try Villain(id:1, name:"Spiderman", age:16).create()
@@ -309,11 +311,32 @@ class DaikiriSwiftTestsV2: XCTestCase {
         
         let batman = try Villain(id:1, name:"Batman",    age:16).create()
         batman.name = "Patata"
-        batman.save()
+        try batman.save()
         
         XCTAssertEqual(1, try Villain.count())
         XCTAssertEqual("Patata", batman.name)
         XCTAssertEqual("Patata", try batman.fresh().name)
+    }
+    
+    func test_can_not_update_a_non_existing_instance() throws {
+        let batman = Villain(id:1, name:"Batman",    age:16)
+        batman.name = "Patata"
+        do {
+            try batman.save()
+        } catch {
+            XCTAssertTrue(true)
+            return
+        }
+        XCTFail("Exception should have been thrown")
+    }
+    
+    func test_can_update_or_create() throws {
+        let batman = Villain(id:1, name:"Batman", age:16)
+        try batman.updateOrCreate()
+        
+        XCTAssertEqual(1, try Villain.count())
+        XCTAssertEqual("Batman", try Villain.first()!.name)
+        
     }
     
     func test_can_delete_an_instance() throws {

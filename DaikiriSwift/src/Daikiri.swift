@@ -15,6 +15,7 @@ import CoreData
 
 enum DaikiriError: Error {
     case objectAlreadyInDatabase
+    case objectNotInTheDatabase
     case morphClassNotFound(className:String)
 }
 
@@ -77,7 +78,7 @@ public extension Daikiriable where Self: Codable & Daikiri {
     @discardableResult
     func create() throws -> Self {
         if let identifiable = self as? DaikiriId, try Self.find(identifiable.id) != nil {
-                throw DaikiriError.objectAlreadyInDatabase
+            throw DaikiriError.objectAlreadyInDatabase
         }
         context.performAndWait {
             toManaged()
@@ -87,13 +88,26 @@ public extension Daikiriable where Self: Codable & Daikiri {
     }
     
     @discardableResult
-    func save() -> Self {
+    func save() throws -> Self {
+        guard let identifiable = self as? DaikiriId, let old = try? Self.find(identifiable.id) else {
+            throw DaikiriError.objectNotInTheDatabase
+        }
         context.performAndWait {
-            if let identifiable = self as? DaikiriId {
-                let old = try? Self.find(identifiable.id)
-                try? old?.delete()
+            try? old.delete()
+            toManaged()
+            try? context.save()
+        }
+        return self
+    }
+    
+    @discardableResult
+    func updateOrCreate() throws -> Self {
+        context.performAndWait {
+            if let identifiable = self as? DaikiriId{
+                if let old = try? Self.find(identifiable.id) {
+                    try? old.delete()
+                }
             }
-        
             toManaged()
             try? context.save()
         }

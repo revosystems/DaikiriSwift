@@ -22,8 +22,8 @@ class DaikiriSwiftTests: XCTestCase {
     }
 
     func test_create_and_retrieve() throws {
-        let _ = Hero(id:1, name:"Spiderman", age:16)
-        let _ = Hero(id:2, name:"Batman",    age:54)
+        let _ = try Hero(id:1, name:"Spiderman", age:16).create()
+        let _ = try Hero(id:2, name:"Batman",    age:54).create()
         
         let results = try Hero.all().sorted { (a, b) -> Bool in
             return a.id < b.id
@@ -42,8 +42,8 @@ class DaikiriSwiftTests: XCTestCase {
     
     func test_can_find_by_id() throws {
         
-        let _ = Hero(id:1, name:"Spiderman", age:16)
-        let _ = Hero(id:2, name:"Batman",    age:54)
+        let _ = try Hero(id:1, name:"Spiderman", age:16).create()
+        let _ = try Hero(id:2, name:"Batman",    age:54).create()
         
         let recovered = try Hero.find(1)
         
@@ -58,10 +58,10 @@ class DaikiriSwiftTests: XCTestCase {
     
     func test_can_find_with_multiples_ids() throws {
         
-        let _ = Hero(id:1, name:"Spiderman", age:16)
-        let _ = Hero(id:2, name:"Batman",    age:54)
-        let _ = Hero(id:3, name:"Ironman",   age:54)
-        let _ = Hero(id:4, name:"Hulk",      age:54)
+        let _ = try Hero(id:1, name:"Spiderman", age:16).create()
+        let _ = try Hero(id:2, name:"Batman",    age:54).create()
+        let _ = try Hero(id:3, name:"Ironman",   age:54).create()
+        let _ = try Hero(id:4, name:"Hulk",      age:54).create()
         
         let all   = try Hero.all()
         let found = try Hero.find([1, 3, 6])
@@ -79,7 +79,7 @@ class DaikiriSwiftTests: XCTestCase {
                 "age"  : 44
             }
         """.data(using: .utf8)!
-        let _ = try! JSONDecoder().decode(Hero.self, from:jsonData)
+        let _ = try! JSONDecoder().decode(Hero.self, from:jsonData).create()
         
         let results = try Hero.all()
         XCTAssertEqual(1, results.count)
@@ -88,41 +88,9 @@ class DaikiriSwiftTests: XCTestCase {
         XCTAssertEqual(12, results.first!.id)
     }
     
-    func test_create_updates_it_already_exists() throws {
-        
-        let jsonData = """
-               {
-                   "id" : 12,
-                   "name" : "Ironman",
-                   "age"  : 44
-               }
-           """.data(using: .utf8)!
-        
-        let jsonData2 = """
-               {
-                   "id" : 12,
-                   "name" : "Ironman 2",
-                   "age"  : 44
-               }
-           """.data(using: .utf8)!
-        
-        let correct  = try? JSONDecoder().decode(Hero.self, from:jsonData)
-        let updated  = try? JSONDecoder().decode(Hero.self, from:jsonData2)
-        
-        XCTAssertNotNil(correct)
-        XCTAssertNotNil(updated)
-        
-        let results = try Hero.all()
-        XCTAssertEqual(1, results.count)
-        XCTAssertEqual("Ironman 2", results.first!.name)
-        XCTAssertEqual(44, results.first!.age)
-        XCTAssertEqual(12, results.first!.id)
-        XCTAssertEqual(1, results.count)
-    }
-    
     func test_can_delete_object() throws{
         
-        let hero    = Hero(id:1, name:"Spiderman", age:16)
+        let hero    = try Hero(id:1, name:"Spiderman", age:16).create()
         XCTAssertEqual(1, try Hero.count())
         
         try hero.delete()
@@ -130,10 +98,10 @@ class DaikiriSwiftTests: XCTestCase {
     }
     
     func test_can_append_custom_predicate() throws {
-        let a = Hero(id:1, name:"Spiderman", age:16)
-        let _ = Hero(id:2, name:"Batman",    age:54)
-        let _ = Hero(id:3, name:"Ironman",   age:44)
-        let _ = Hero(id:4, name:"Hulk",      age:49)
+        let a = try Hero(id:1, name:"Spiderman", age:16).create()
+        let _ = try Hero(id:2, name:"Batman",    age:54).create()
+        let _ = try Hero(id:3, name:"Ironman",   age:44).create()
+        let _ = try Hero(id:4, name:"Hulk",      age:49).create()
         
         let predicate = NSPredicate(format:"name = %@", "Spiderman")
         let results = try Hero.query.addAndPredicate(predicate).get()
@@ -142,10 +110,10 @@ class DaikiriSwiftTests: XCTestCase {
     }
     
     func test_can_sort() throws {
-        let _ = Hero(id:1, name:"Spiderman", age:16)
-        let _ = Hero(id:2, name:"Batman",    age:54)
-        let _ = Hero(id:3, name:"Ironman",   age:44)
-        let _ = Hero(id:4, name:"Hulk",      age:49)
+        let _ = try Hero(id:1, name:"Spiderman", age:16).create()
+        let _ = try Hero(id:2, name:"Batman",    age:54).create()
+        let _ = try Hero(id:3, name:"Ironman",   age:44).create()
+        let _ = try Hero(id:4, name:"Hulk",      age:49).create()
         
         let results = try Hero.query.orderBy("age").get()
         XCTAssertEqual(1, results[0].id)
@@ -155,10 +123,10 @@ class DaikiriSwiftTests: XCTestCase {
     }
     
     func test_can_get_max() throws {
-        let _ = Hero(id:1, name:"Spiderman", age:16)
-        let _ = Hero(id:2, name:"Batman",    age:54)
-        let _ = Hero(id:3, name:"Ironman",   age:44)
-        let _ = Hero(id:4, name:"Hulk",      age:49)
+        let _ = try Hero(id:1, name:"Spiderman", age:16).create()
+        let _ = try Hero(id:2, name:"Batman",    age:54).create()
+        let _ = try Hero(id:3, name:"Ironman",   age:44).create()
+        let _ = try Hero(id:4, name:"Hulk",      age:49).create()
         
         let result = try Hero.query.max("age")
         
@@ -166,10 +134,10 @@ class DaikiriSwiftTests: XCTestCase {
     }
     
     func test_can_get_min() throws {
-        let _ = Hero(id:1, name:"Spiderman", age:16)
-        let _ = Hero(id:2, name:"Batman",    age:54)
-        let _ = Hero(id:3, name:"Ironman",   age:44)
-        let _ = Hero(id:4, name:"Hulk",      age:49)
+        let _ = try Hero(id:1, name:"Spiderman", age:16).create()
+        let _ = try Hero(id:2, name:"Batman",    age:54).create()
+        let _ = try Hero(id:3, name:"Ironman",   age:44).create()
+        let _ = try Hero(id:4, name:"Hulk",      age:49).create()
         
         let result = try Hero.query.min("age")
         
@@ -177,15 +145,15 @@ class DaikiriSwiftTests: XCTestCase {
     }
     
     func test_has_many_relationship_works() throws {
-        let spiderman = Hero(id:1, name:"Spiderman", age:16)
-        let batman    = Hero(id:2, name:"Batman",    age:54)
+        let spiderman = try Hero(id:1, name:"Spiderman", age:16).create()
+        let batman    = try Hero(id:2, name:"Batman",    age:54).create()
         
-        let _ = Friend(id:1, name:"Flash",      hero:spiderman)
-        let _ = Friend(id:2, name:"Mj",         hero:spiderman)
+        let _ = try Friend(id:1, name:"Flash",      hero:spiderman).create()
+        let _ = try Friend(id:2, name:"Mj",         hero:spiderman).create()
         
-        let _ = Friend(id:3, name:"Robin",      hero:batman)
-        let _ = Friend(id:4, name:"Nightwing",  hero:batman)
-        let _ = Friend(id:5, name:"Batgirl",    hero:batman)
+        let _ = try Friend(id:3, name:"Robin",      hero:batman).create()
+        let _ = try Friend(id:4, name:"Nightwing",  hero:batman).create()
+        let _ = try Friend(id:5, name:"Batgirl",    hero:batman).create()
         
         XCTAssertEqual(2, try spiderman.friends().count)
         XCTAssertEqual(3, try batman.friends().count)
@@ -193,12 +161,12 @@ class DaikiriSwiftTests: XCTestCase {
     
     func test_belongs_to_relationship_works() throws {
         
-        let batcave     = Headquarter(id: 1, name: "Batcave")
-        let starkTower  = Headquarter(id: 2, name: "Stark Tower")
+        let batcave     = try Headquarter(id: 1, name: "Batcave").create()
+        let starkTower  = try Headquarter(id: 2, name: "Stark Tower").create()
         
-        let spiderman = Hero(id:1, name:"Spiderman", age:16)
-        let batman    = Hero(id:2, name:"Batman",    age:54, headquarter: batcave)
-        let ironman   = Hero(id:2, name:"Ironman",   age:54, headquarter: starkTower)
+        let spiderman = try Hero(id:1, name:"Spiderman", age:16).create()
+        let batman    = try Hero(id:2, name:"Batman",    age:54, headquarter: batcave).create()
+        let ironman   = try Hero(id:3, name:"Ironman",   age:54, headquarter: starkTower).create()
         
         XCTAssertNil(try spiderman.headquarter())
         XCTAssertEqual("Batcave",     try batman.headquarter()?.name)
@@ -209,15 +177,15 @@ class DaikiriSwiftTests: XCTestCase {
     
     func test_belongs_to_many_relationship_works() throws {
         
-        let batcave     = Headquarter(id: 1, name: "Batcave")
+        let batcave     = try Headquarter(id: 1, name: "Batcave").create()
         
-        let batman      = Hero(id:1, name:"Batman",    age:16)
-        let robin       = Hero(id:2, name:"Robin",     age:16)
-        let nightWing   = Hero(id:3, name:"NightWing", age:16)
+        let batman      = try Hero(id:1, name:"Batman",    age:16).create()
+        let robin       = try Hero(id:2, name:"Robin",     age:16).create()
+        let nightWing   = try Hero(id:3, name:"NightWing", age:16).create()
         
-        let _ = HeroHeadquarterPivot(id:1, hero:batman,    headquarter:batcave, level:100)
-        let _ = HeroHeadquarterPivot(id:2, hero:robin,     headquarter:batcave, level:45)
-        let _ = HeroHeadquarterPivot(id:3, hero:nightWing, headquarter:batcave, level:56)
+        let _ = try HeroHeadquarterPivot(id:1, hero:batman,    headquarter:batcave, level:100).create()
+        let _ = try HeroHeadquarterPivot(id:2, hero:robin,     headquarter:batcave, level:45).create()
+        let _ = try HeroHeadquarterPivot(id:3, hero:nightWing, headquarter:batcave, level:56).create()
                 
         let heroes = try batcave.heroesWithPivot()
         
