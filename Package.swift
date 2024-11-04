@@ -12,7 +12,7 @@ let package = Package(
             targets: ["DaikiriSwift"]),
     ],
     dependencies:[
-         .package(url: "https://github.com/vadymmarkov/Fakery", from: "5.0.0")
+         .package(name:"Fakery", url: "https://github.com/vadymmarkov/Fakery", from: "5.0.0")
     ],
 
     targets: [
@@ -20,7 +20,7 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "DaikiriSwift",
-            dependencies: ["fakery"]
+            dependencies: ["Fakery"]
             path: "DaikiriSwift/src"
         )
         .testTarget(
