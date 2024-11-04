@@ -11,11 +11,16 @@ let package = Package(
             name: "DaikiriSwift",
             targets: ["DaikiriSwift"]),
     ],
+    dependencies:[
+         .package(url: "https://github.com/vadymmarkov/Fakery", from: "5.0.0")
+    ],
+
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "DaikiriSwift",
+            dependencies: ["fakery"]
             path: "DaikiriSwift/src"
         )
         .testTarget(
