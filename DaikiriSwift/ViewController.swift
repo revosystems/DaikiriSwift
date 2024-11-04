@@ -12,7 +12,19 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+                
+        //let _ = Hero(name:"Joker", age:16, id:1)
+        
+        Villain.truncate()
+        
+        do {
+            let villain = Villain(id: 1, name:"Joker", age:45)
+            try villain.create()
+            let fetched = try Villain.first()!
+            print(fetched)
+        } catch {
+            print(error)
+        }
     }
 
 

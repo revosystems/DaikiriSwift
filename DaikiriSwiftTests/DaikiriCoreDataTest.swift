@@ -19,28 +19,28 @@ class DaikiriCoreDataTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func test_transaction_works(){
+    func test_transaction_works() throws {
         
         DaikiriCoreData.manager.beginTransaction()
-        let _ = Hero(name:"Spiderman", age:16, id:1)
-        var results = Hero.all()
+        let _ = Hero(id:1, name:"Spiderman", age:16)
+        var results = try Hero.all()
         XCTAssertEqual(1, results.count)
         DaikiriCoreData.manager.rollback()
         
-        results = Hero.all()
+        results = try Hero.all()
         XCTAssertEqual(0, results.count)
     }
     
-    func test_tast_test_databaseWorks(){
+    func test_tast_test_databaseWorks() throws {
         
         DaikiriCoreData.manager.useTestDatabase()
         DaikiriCoreData.manager.beginTransaction()
-        let _ = Hero(name:"Spiderman", age:16, id:1)
-        var results = Hero.all()
+        let _ = Hero(id:1, name:"Spiderman", age:16)
+        var results = try Hero.all()
         XCTAssertEqual(1, results.count)
         DaikiriCoreData.manager.rollback()
         
-        results = Hero.all()
+        results = try Hero.all()
         XCTAssertEqual(0, results.count)
     }
 

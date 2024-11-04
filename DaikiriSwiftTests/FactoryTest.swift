@@ -12,85 +12,66 @@ class FactoryTest: XCTestCase {
     override func tearDown() {
         DaikiriCoreData.manager.rollback()
     }
+    
+    
+    func test_model_can_provide_factory() {
+        let factory = Hero.factory()
+        
+        XCTAssertNotNil(factory)
+        XCTAssertEqual("DaikiriSwiftTests.HeroFactory", "\(factory)")
+    }
+    
+    func test_can_make_a_model_with_automatic_id() throws {
+        let hero = try Hero.factory().make()
+        XCTAssertNotNil(hero)
+        XCTAssertEqual("Ironman", hero.name)
+        XCTAssertEqual(44, hero.age)
+        XCTAssertNotNil(hero.id)
+    }
+    
+    func test_can_make_a_model_with_overrides() throws{
+        let hero = try Hero.factory().make([
+            "id" : 44,
+            "name" : "Spiderman"
+        ])
+        XCTAssertNotNil(hero)
+        XCTAssertEqual("Spiderman", hero.name)
+        XCTAssertEqual(44, hero.age)
+        XCTAssertEqual(44, hero.id)
+    }
+    
+    func test_factory_can_have_states() throws{
+        let hero = try Hero.factory().young().make()
+        XCTAssertNotNil(hero)
+        XCTAssertEqual("Ironman", hero.name)
+        XCTAssertEqual(12, hero.age)
+        XCTAssertNotNil(hero.id)
+    }
+    
+    func test_states_can_be_overrided() throws {
+        let hero = try Hero.factory().young([
+            "age" : 14
+        ]).make()
+        XCTAssertNotNil(hero)
+        XCTAssertEqual("Ironman", hero.name)
+        XCTAssertEqual(14, hero.age)
+        XCTAssertNotNil(hero.id)
+    }
+    
+    func test_can_create_more_than_one() throws {
+        let heroes = try Hero.factory()!.make(count:4)
+        XCTAssertEqual(4, heroes.count)
+    }
+    
+    func test_configure_is_called_for_the_model() throws {
+        let hero = try Hero.factory()!.make()
+        XCTAssertEqual(666, hero.headquarter_id)
+    }
+    
+    func test_can_create_relationships_with() throws {
+        let friend = try Friend.factory()!.make()
+        XCTAssertNotNil(friend)
+        XCTAssertNotNil(try friend.hero())
+    }
 
-    func test_simple_factory_works() {
-        Factory.register(Hero.self) {[
-            "id"   : 12,
-            "name" : "Ironman",
-            "age"  : 44
-        ]}
-        
-        let hero = Factory.make(Hero.self)!
-        
-        XCTAssertEqual(12,        hero.id)
-        XCTAssertEqual("Ironman", hero.name)
-        XCTAssertEqual(44,        hero.age)
-    }
-    
-    func test_factory_automatically_puts_id() {
-        Factory.register(Hero.self) {[
-            "name" : "Ironman",
-            "age"  : 44
-        ]}
-        
-        let hero  = Factory.make(Hero.self)!
-        let hero2 = Factory.make(Hero.self)!
-        
-        XCTAssertTrue(hero.id > 1)
-        XCTAssertEqual("Ironman", hero.name)
-        XCTAssertEqual(44,        hero.age)
-        
-        XCTAssertTrue(hero2.id > 1)
-        XCTAssertEqual("Ironman", hero2.name)
-        XCTAssertEqual(44,        hero2.age)
-    }
-    
-    func test_factory_can_be_overloaded(){
-        Factory.register(Hero.self) {[
-            "name" : "Ironman",
-            "age"  : 44
-        ]}
-        
-        let hero  = Factory.make(Hero.self, ["name" : "Mr Potatoe"])!
-        
-        XCTAssertTrue(hero.id > 1)
-        XCTAssertEqual("Mr Potatoe", hero.name)
-        XCTAssertEqual(44,        hero.age)
-    }
-    
-    func test_can_use_fakery(){
-        let faker = Faker(locale: "es-ES")
-        Factory.register(Hero.self) {[
-            "name" : faker.name.firstName(),
-            "age"  : 44
-        ]}
-        
-        let hero  = Factory.make(Hero.self)!
-        let hero2 = Factory.make(Hero.self)!
-        
-        XCTAssertNotEqual(hero.name, hero2.name)
-    }
-    
-    
-    func test_can_have_relationships(){
-               
-        let faker = Faker(locale: "es-ES")
-        Factory.register(Hero.self) {[
-            "name" : faker.name.firstName(),
-            "age"  : 44
-        ]}
-        
-        Factory.register(Friend.self) {[
-            "name" : faker.name.firstName(),
-            "hero_id" : {
-                Factory.make(Hero.self)!.id
-            }
-        ]}
-        
-        let friend = Factory.make(Friend.self)!
-        
-        XCTAssertEqual(1, Hero.count())
-        XCTAssertNotNil(friend.hero_id)
-        XCTAssertNotNil(friend.hero())
-    }
 }

@@ -1,25 +1,21 @@
-import Foundation
 import CoreData
 
-public class QueryBuilder<T:NSManagedObject>{
+public class Query<T:Daikiri & Codable> {
     
-    let fetchRequest:NSFetchRequest<T>
+    let fetchRequest:NSFetchRequest<NSManagedObject>
+    let context:NSManagedObjectContext
     
     public var andPredicates   = [NSPredicate]()
     var sortPredicates  = [NSSortDescriptor]()
     
-    public init(_ fetchRequest:NSFetchRequest<T>){
-        self.fetchRequest = fetchRequest
+    init(entityName:String, context:NSManagedObjectContext = DaikiriCoreData.manager.context) {
+        fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        self.context = context
     }
-        
-    func doQuery() -> [T]{
+    
+    public func doQuery() throws -> [NSManagedObject] {
         preparePredicates()
-        do {
-            return try DaikiriCoreData.manager.context.fetch(fetchRequest)
-        } catch let error as NSError {
-            print("Couldn't load \(error), \(error.userInfo)")
-            return []
-        }
+        return try context.fetch(fetchRequest)
     }
     
     @discardableResult
@@ -35,7 +31,7 @@ public class QueryBuilder<T:NSManagedObject>{
     }
         
     @discardableResult
-    public func whereKey<T:CVarArg>(_ key:String, _ value:T) -> Self{
+    public func whereKey<Z:CVarArg>(_ key:String, _ value:Z) -> Self{
         if value is Int || value is Int32 || value is Int16 {
             andPredicates.append(NSPredicate(format:"%K=%d", key, value))
         } else {
@@ -45,7 +41,17 @@ public class QueryBuilder<T:NSManagedObject>{
     }
     
     @discardableResult
-    public func whereIn<T>(_ key:String, _ values:[T]) -> Self{
+    public func whereKey<Z:CVarArg>(_ key:String, _ theOperator:String, _ value:Z) -> Self{
+        if value is Int || value is Int32 || value is Int16 {
+            andPredicates.append(NSPredicate(format:"%K \(theOperator) %d", key, value))
+        } else {
+            andPredicates.append(NSPredicate(format:"%K \(theOperator) %@", key, value))
+        }
+        return self
+    }
+    
+    @discardableResult
+    public func whereIn<Z>(_ key:String, _ values:[Z]) -> Self{
         andPredicates.append(NSPredicate(format:"%K IN %@", key, values))
         return self
     }
@@ -63,13 +69,15 @@ public class QueryBuilder<T:NSManagedObject>{
         return self
     }
     
-    public func get() -> [T]{
-        doQuery()
+    public func get() throws -> [T] {
+        try doQuery().map {
+            try T.from(managed: $0)
+        }
     }
     
-    public func first() -> T? {
+    public func first() throws -> T? {
         take(1)
-        return doQuery().first
+        return try get().first
     }
     
     private func preparePredicates(){
@@ -77,22 +85,17 @@ public class QueryBuilder<T:NSManagedObject>{
         fetchRequest.sortDescriptors = sortPredicates
     }
     
-    func count() -> Int {
+    func count() throws -> Int {
         preparePredicates()
-        do {
-            return try DaikiriCoreData.manager.context.count(for: fetchRequest)
-        } catch let error as NSError {
-            print("Couldn't load \(error), \(error.userInfo)")
-            return 0
-        }
+        return try DaikiriCoreData.manager.context.count(for: fetchRequest)
     }
     
-    public func max(_ key:String) -> T? {
-        orderBy(key, ascendig: false).first()
+    public func max(_ key:String) throws -> T? {
+        try orderBy(key, ascendig: false).first()
     }
     
-    public func min(_ key:String) -> T? {
-        orderBy(key, ascendig: true).first()
+    public func min(_ key:String) throws -> T? {
+        try orderBy(key, ascendig: true).first()
     }
     
 }
