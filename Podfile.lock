@@ -1,5 +1,5 @@
 PODS:
-  - Fakery (4.1.1)
+  - Fakery (5.1.0)
 
 DEPENDENCIES:
   - Fakery
@@ -9,8 +9,8 @@ SPEC REPOS:
     - Fakery
 
 SPEC CHECKSUMS:
-  Fakery: d3380c4aa1efe7631c0831d7e26aa9db4491f014
+  Fakery: a90caff00ca5cacde6c161c3eafc72314a03d34d
 
-PODFILE CHECKSUM: 59ebbafe3976de3f65b0d1685765164aff3f5ae2
+PODFILE CHECKSUM: 8e88f80d063bda7a92cf496e2a649b516cfe0893
 
 COCOAPODS: 1.12.1

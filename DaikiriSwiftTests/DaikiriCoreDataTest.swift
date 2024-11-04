@@ -22,7 +22,7 @@ class DaikiriCoreDataTest: XCTestCase {
     func test_transaction_works() throws {
         
         DaikiriCoreData.manager.beginTransaction()
-        let _ = Hero(id:1, name:"Spiderman", age:16)
+        let _ = try Hero(id:1, name:"Spiderman", age:16).create()
         var results = try Hero.all()
         XCTAssertEqual(1, results.count)
         DaikiriCoreData.manager.rollback()
@@ -35,7 +35,7 @@ class DaikiriCoreDataTest: XCTestCase {
         
         DaikiriCoreData.manager.useTestDatabase()
         DaikiriCoreData.manager.beginTransaction()
-        let _ = Hero(id:1, name:"Spiderman", age:16)
+        let _ = try Hero(id:1, name:"Spiderman", age:16).create()
         var results = try Hero.all()
         XCTAssertEqual(1, results.count)
         DaikiriCoreData.manager.rollback()
