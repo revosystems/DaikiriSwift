@@ -1,31 +1,26 @@
-// swift-tools-version: 6.0
-// The swift-tools-version declares the minimum version of Swift required to build this package.
-
+// swift-tools-version: 5.7
 import PackageDescription
 
 let package = Package(
     name: "DaikiriSwift",
+    platforms: [
+        .iOS(.v13)
+    ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "DaikiriSwift",
-            targets: ["DaikiriSwift"]),
+            targets: ["DaikiriSwift"]
+        )
     ],
-    dependencies:[
-         .package(name:"Fakery", url: "https://github.com/vadymmarkov/Fakery", from: "5.0.0")
+    dependencies: [
+        .package(url: "https://github.com/vadymmarkov/Fakery", .upToNextMinor(from: "5.1.0"))
     ],
-
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "DaikiriSwift",
-            dependencies: ["Fakery"]
+            dependencies: [],
             path: "DaikiriSwift/src"
         )
-        .testTarget(
-            name: "DaikiriSwiftTests",
-            dependencies: ["DaikiriSwift"]
-        ),
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )
