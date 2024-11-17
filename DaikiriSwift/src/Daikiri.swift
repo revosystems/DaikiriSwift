@@ -30,7 +30,7 @@ open class Daikiri: Daikiriable {
     @NonCodable
     var pivot:DaikiriId?
     
-    public init(){
+    public required init(){
         
     }
     
@@ -129,7 +129,7 @@ public extension Daikiriable where Self: Codable & Daikiri {
     
     //MARK: - Query Builder
     static var query:Query<Self> {
-        Query(entityName: Self.entityName)
+        Query(entityName: Self.entityName, context: Self.init().context)
     }
     
     static func first() throws -> Self? {
