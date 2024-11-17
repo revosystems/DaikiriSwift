@@ -34,7 +34,7 @@ open class Daikiri: Daikiriable {
         
     }
     
-    public var context:NSManagedObjectContext {
+    open var context:NSManagedObjectContext {
         DaikiriCoreData.manager.context
     }
     
