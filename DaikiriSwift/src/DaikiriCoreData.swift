@@ -10,9 +10,9 @@ public class DaikiriCoreData {
     /** See DaikiriCoreData+Test*/
     var testContext:NSManagedObjectContext? = nil
     
-    let name:String?
+    public let name:String?
     
-    init(name:String? = nil){
+    public init(name:String? = nil){
         self.name = name
     }
     
