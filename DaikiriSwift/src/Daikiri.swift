@@ -23,7 +23,7 @@ public protocol DaikiriId {
     var id:Int { get }
 }
 
-public class Daikiri: Daikiriable {
+open class Daikiri: Daikiriable {
     @NonCodable
     public var managed:NSManagedObject?
     
