@@ -30,6 +30,10 @@ open class Daikiri: Daikiriable {
     @NonCodable
     var pivot:DaikiriId?
     
+    public init(){
+        
+    }
+    
     var context:NSManagedObjectContext {
         DaikiriCoreData.manager.context
     }
