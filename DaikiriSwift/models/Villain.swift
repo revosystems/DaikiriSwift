@@ -8,7 +8,7 @@ public class Villain : Daikiri, DaikiriId, Codable   {
     
     public var hideout_id:Int?
     
-    init(id:Int, name:String, age:Int, hideout_id:Int? = nil){
+    public required init(id:Int, name:String, age:Int, hideout_id:Int? = nil){
         self.id = id
         self.name = name
         self.age = age

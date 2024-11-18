@@ -5,7 +5,7 @@ public class Friend: Daikiri, DaikiriId, Codable, Factoriable {
     public var hero_id: Int
     public var name: String
     
-    init(id: Int, hero_id: Int, name: String) {
+    public required init(id: Int, hero_id: Int, name: String) {
         self.id = id
         self.hero_id = hero_id
         self.name = name
