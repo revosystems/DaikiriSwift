@@ -30,7 +30,7 @@ open class Daikiri: Daikiriable {
     @NonCodable
     var pivot:DaikiriId?
     
-    public lic init(){
+    public init(){
         
     }
         
