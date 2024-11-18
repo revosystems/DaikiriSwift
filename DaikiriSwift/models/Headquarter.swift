@@ -1,5 +1,4 @@
 import Foundation
-import CoreData
 
 public class Headquarter: Daikiri, DaikiriId, Codable {
     public var id: Int

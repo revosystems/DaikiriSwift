@@ -29,11 +29,7 @@ open class Daikiri: Daikiriable {
     
     @NonCodable
     var pivot:DaikiriId?
-    
-    public required init(){
         
-    }
-    
     open var context:NSManagedObjectContext {
         DaikiriCoreData.manager.context
     }
@@ -129,7 +125,7 @@ public extension Daikiriable where Self: Codable & Daikiri {
     
     //MARK: - Query Builder
     static var query:Query<Self> {
-        Query(entityName: Self.entityName, context: Self.init().context)
+        Query(entityName: Self.entityName)
     }
     
     static func first() throws -> Self? {

@@ -1,5 +1,4 @@
 import Foundation
-import CoreData
 
 public class HeroHeadquarterPivot: Daikiri, DaikiriId, Codable {    
     public var id: Int

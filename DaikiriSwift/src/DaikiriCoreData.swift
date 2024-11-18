@@ -9,11 +9,13 @@ public class DaikiriCoreData {
     
     /** See DaikiriCoreData+Test*/
     var testContext:NSManagedObjectContext? = nil
+    var model:NSManagedObjectModel? = nil
     
     public let name:String?
     
-    public init(name:String? = nil){
+    public init(name:String? = nil, model:NSManagedObjectModel? = nil){
         self.name = name
+        self.model = model
     }
     
     public var context:NSManagedObjectContext {
@@ -32,7 +34,14 @@ public class DaikiriCoreData {
     }
     
     public lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: containerName)
+        var container:NSPersistentContainer!
+        
+        if let model {
+            container = NSPersistentContainer(name: containerName, managedObjectModel: model)
+        } else {
+            container = NSPersistentContainer(name: containerName)
+        }
+        //let container = NSPersistentContainer(name: containerName, managedObjectModel: model)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
            storeDescription.shouldMigrateStoreAutomatically      = true
            //storeDescription.shouldInferMappingModelAutomatically = true

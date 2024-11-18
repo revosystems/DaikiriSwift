@@ -36,6 +36,8 @@
 		EA05D4322CD3844F00B52C88 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4312CD3844800B52C88 /* Query.swift */; };
 		EA05D4342CD3D36700B52C88 /* DaikiriSwiftTestV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4332CD3D36000B52C88 /* DaikiriSwiftTestV2.swift */; };
 		EA05D4362CD56E1800B52C88 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA05D4352CD56E1600B52C88 /* Image.swift */; };
+		EA0B5FC82CEB2EFB00685DCC /* AnotherSQL.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EA0B5FC62CEB2EFB00685DCC /* AnotherSQL.xcdatamodeld */; };
+		EA0B5FCD2CEB2F6B00685DCC /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0B5FCC2CEB2F6B00685DCC /* Vehicle.swift */; };
 		EAD791D72CD6142100C2FA96 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD791D62CD6142000C2FA96 /* Tag.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +89,8 @@
 		EA05D4312CD3844800B52C88 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		EA05D4332CD3D36000B52C88 /* DaikiriSwiftTestV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaikiriSwiftTestV2.swift; sourceTree = "<group>"; };
 		EA05D4352CD56E1600B52C88 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		EA0B5FC72CEB2EFB00685DCC /* DaikiriSwift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DaikiriSwift.xcdatamodel; sourceTree = "<group>"; };
+		EA0B5FCC2CEB2F6B00685DCC /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		EAD791D62CD6142000C2FA96 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,11 +128,13 @@
 		8D9AC87523CE06C400B61952 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				EA0B5FC62CEB2EFB00685DCC /* AnotherSQL.xcdatamodeld */,
 				BBFA645E23CC8D3C00084620 /* DaikiriSwift.xcdatamodeld */,
 				BBFA647D23CC8D5F00084620 /* Hero.swift */,
 				BB34429D2CD2A28600040BA0 /* Villain.swift */,
 				8D9AC87A23CE207200B61952 /* Friend.swift */,
 				EA05D4352CD56E1600B52C88 /* Image.swift */,
+				EA0B5FCC2CEB2F6B00685DCC /* Vehicle.swift */,
 				EAD791D62CD6142000C2FA96 /* Tag.swift */,
 				8D9AC87C23CE207200B61952 /* Headquarter.swift */,
 				BB03E48B240D20C5003BBB59 /* Pivot.swift */,
@@ -411,6 +417,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA0B5FC82CEB2EFB00685DCC /* AnotherSQL.xcdatamodeld in Sources */,
 				BBFA645A23CC8D3C00084620 /* ViewController.swift in Sources */,
 				BB03E48C240D20C5003BBB59 /* Pivot.swift in Sources */,
 				EA05D42E2CD3776200B52C88 /* NonCodable.swift in Sources */,
@@ -418,6 +425,7 @@
 				8D9AC87E23CE207200B61952 /* Friend.swift in Sources */,
 				BBFA648023CC920600084620 /* DaikiriCoreData.swift in Sources */,
 				BBFA645623CC8D3C00084620 /* AppDelegate.swift in Sources */,
+				EA0B5FCD2CEB2F6B00685DCC /* Vehicle.swift in Sources */,
 				EA05D4322CD3844F00B52C88 /* Query.swift in Sources */,
 				EAD791D72CD6142100C2FA96 /* Tag.swift in Sources */,
 				EA05D4362CD56E1800B52C88 /* Image.swift in Sources */,
@@ -718,6 +726,16 @@
 			);
 			currentVersion = BBFA645F23CC8D3C00084620 /* DaikiriSwift.xcdatamodel */;
 			path = DaikiriSwift.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		EA0B5FC62CEB2EFB00685DCC /* AnotherSQL.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EA0B5FC72CEB2EFB00685DCC /* DaikiriSwift.xcdatamodel */,
+			);
+			currentVersion = EA0B5FC72CEB2EFB00685DCC /* DaikiriSwift.xcdatamodel */;
+			path = AnotherSQL.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import CoreData
 
 @testable import DaikiriSwift
 
@@ -346,6 +347,19 @@ class DaikiriSwiftTestsV2: XCTestCase {
         try batman.delete()
         
         XCTAssertEqual(0, try Villain.count())
+    }
+    
+    func test_can_user_another_core_model() throws {
+        let modelURL = Bundle.main.url(forResource: "AnotherSQL", withExtension: "momd")!
+        let customModel = NSManagedObjectModel(contentsOf: modelURL)!
+        
+        DaikiriCoreData.manager = DaikiriCoreData(name: "DaikiriSwift", model:customModel)
+        
+        //DaikiriCoreData.manager.useTestDatabase()
+        DaikiriCoreData.manager.beginTransaction()
+        
+        let vehicle = try Vehicle(id:1, name:"Batmobile").create()
+                
     }
     
 }

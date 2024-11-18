@@ -1,5 +1,4 @@
 import Foundation
-import CoreData
 
 public class Friend: Daikiri, DaikiriId, Codable, Factoriable {
     public var id: Int
