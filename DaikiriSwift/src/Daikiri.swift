@@ -136,9 +136,11 @@ public extension Daikiriable where Self: Codable & Daikiri {
     
     //MARK: - Query Builder
     static var query:Query<Self> {
-        var context = DaikiriCoreData.manager.context
+        var context:NSManagedObjectContext!
         if let contextProvider = self as? ProvidesContext {
             context = type(of:contextProvider).getContext()
+        }else{
+            context = DaikiriCoreData.manager.context
         }
         return Query(entityName: Self.entityName, context: context)
     }
