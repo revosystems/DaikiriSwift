@@ -13,6 +13,10 @@ import CoreData
  []
  */
 
+public protocol ProvidesContext {
+    static func getContext() -> NSManagedObjectContext
+}
+
 enum DaikiriError: Error {
     case objectAlreadyInDatabase
     case objectNotInTheDatabase
@@ -35,7 +39,10 @@ open class Daikiri: Daikiriable {
     }
         
     open var context:NSManagedObjectContext {
-        DaikiriCoreData.manager.context
+        if let contextProvider = self as? ProvidesContext {
+            return type(of:contextProvider).getContext()
+        }
+        return DaikiriCoreData.manager.context
     }
     
     public static var entityName:String {
@@ -129,7 +136,11 @@ public extension Daikiriable where Self: Codable & Daikiri {
     
     //MARK: - Query Builder
     static var query:Query<Self> {
-        Query(entityName: Self.entityName)
+        var context = DaikiriCoreData.manager.context
+        if let contextProvider = self as? ProvidesContext {
+            context = type(of:contextProvider).getContext()
+        }
+        return Query(entityName: Self.entityName, context: context)
     }
     
     static func first() throws -> Self? {
@@ -198,7 +209,7 @@ public extension Daikiriable where Self: Codable & Daikiri & DaikiriId {
     func belongsTo<T:Codable & Daikiri & DaikiriId>(_ foreignKey:KeyPath<Self, Int>) throws -> T?{
         let foreingId = self[keyPath: foreignKey]
         return try T.find(foreingId)
-    }    
+    }
     
     func belongsToMany<T:Codable & Daikiri & DaikiriId, Z:Codable & Daikiri & DaikiriId>(pivot:Z.Type, _ localKey:KeyPath<Z,Int>, _ foreignKey:KeyPath<Z, Int>, order:String? = nil) throws -> [T] {
         let localKeyName = String(describing: localKey).components(separatedBy: ".").last!
