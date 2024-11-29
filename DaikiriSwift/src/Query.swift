@@ -87,7 +87,7 @@ public class Query<T:Daikiri & Codable> {
     
     func count() throws -> Int {
         preparePredicates()
-        return try DaikiriCoreData.manager.context.count(for: fetchRequest)
+        return try context.count(for: fetchRequest)
     }
     
     public func max(_ key:String) throws -> T? {

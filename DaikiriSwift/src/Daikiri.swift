@@ -14,7 +14,7 @@ import CoreData
  */
 
 public protocol ProvidesContext {
-    static func getContext() -> NSManagedObjectContext
+    static func getContext() -> NSManagedObjectContext?
 }
 
 enum DaikiriError: Error {
@@ -40,7 +40,7 @@ open class Daikiri: Daikiriable {
         
     open var context:NSManagedObjectContext {
         if let contextProvider = self as? ProvidesContext {
-            return type(of:contextProvider).getContext()
+            return type(of:contextProvider).getContext() ?? DaikiriCoreData.manager.context
         }
         return DaikiriCoreData.manager.context
     }
