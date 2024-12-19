@@ -29,6 +29,16 @@ public class Query<T:Daikiri & Codable> {
         fetchRequest.fetchOffset = howMany
         return self
     }
+    
+    @discardableResult
+    public func whereKeyCaseInsensitive<Z: CVarArg>(_ key: String, _ value: Z) -> Self {
+        if value is String {
+            andPredicates.append(NSPredicate(format: "%K =[cd] %@", key, value))
+        } else {
+            return whereKey(key, value)
+        }
+        return self
+    }
         
     @discardableResult
     public func whereKey<Z:CVarArg>(_ key:String, _ value:Z) -> Self{
