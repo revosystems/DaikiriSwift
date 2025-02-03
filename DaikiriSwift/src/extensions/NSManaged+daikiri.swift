@@ -6,34 +6,30 @@ extension NSManagedObject {
 
         try entity.attributesByName.forEach { (key: String, value: NSAttributeDescription) in
             let fieldValue = self.value(forKey: key)
-            
-            if isCustomEncodable(fieldValue) {
-                let encodableValue = fieldValue as! Encodable
-                let encodedData = try JSONEncoder().encode(AnyEncodable(encodableValue))
-                let encodedJson = try JSONSerialization.jsonObject(with: encodedData, options: [])
-                json[key] = encodedJson
+
+            if let arrayValue = fieldValue as? [Any] {
+                let encodableArray = arrayValue.compactMap { $0 as? Encodable }
+                if encodableArray.count == arrayValue.count {
+                    json[key] = try getEncodedJson(value: encodableArray.map { AnyEncodable($0) })
+                    return
+                }
+            }
+
+            if let encodableValue = fieldValue as? Encodable {
+                json[key] = try getEncodedJson(value: AnyEncodable(encodableValue))
                 return
             }
-            
+
             json[key] = fieldValue
         }
 
         return try JSONSerialization.data(withJSONObject: json, options: [])
     }
-
-    private func isCustomEncodable(_ value: Any) -> Bool {
-        let foundationTypes: [Any.Type] = [
-            String.self, Bool.self, Double.self, Float.self,
-            Int.self, Int8.self, Int16.self, Int32.self, Int64.self,
-            UInt.self, UInt8.self, UInt16.self, UInt32.self, UInt64.self,
-            Array<Any>.self, Dictionary<String, Any>.self,
-            Date.self, Data.self
-        ]
+    
+    private func getEncodedJson(value:Encodable) throws -> Any? {
+        let encodedData = try JSONEncoder().encode(value)
+        let encodedJson = try JSONSerialization.jsonObject(with: encodedData, options: [])
         
-        if foundationTypes.contains { $0 == type(of: value) } {
-            return false
-        }
-
-        return value is Encodable
+        return encodedJson
     }
 }
