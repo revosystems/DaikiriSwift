@@ -24,7 +24,7 @@ enum DaikiriError: Error {
 }
 
 public protocol DaikiriId {
-    var id:Int { get }
+    var id:Int? { get set }
 }
 
 open class Daikiri: Daikiriable {
@@ -88,7 +88,7 @@ public extension Daikiriable where Self: Codable & Daikiri {
     //MARK: - CRUD
     @discardableResult
     func create() throws -> Self {
-        if let identifiable = self as? DaikiriId, try Self.find(identifiable.id) != nil {
+        if let identifiable = self as? DaikiriId, let id = identifiable.id, try Self.find(id) != nil {
             throw DaikiriError.objectAlreadyInDatabase
         }
         context.performAndWait {
@@ -100,7 +100,7 @@ public extension Daikiriable where Self: Codable & Daikiri {
     
     @discardableResult
     func save() throws -> Self {
-        guard let identifiable = self as? DaikiriId, let old = try? Self.find(identifiable.id) else {
+        guard let identifiable = self as? DaikiriId, let id = identifiable.id, let old = try? Self.find(id) else {
             throw DaikiriError.objectNotInTheDatabase
         }
         context.performAndWait {
@@ -115,7 +115,7 @@ public extension Daikiriable where Self: Codable & Daikiri {
     func updateOrCreate() throws -> Self {
         context.performAndWait {
             if let identifiable = self as? DaikiriId{
-                if let old = try? Self.find(identifiable.id) {
+                if let id = identifiable.id, let old = try? Self.find(id) {
                     try? old.delete()
                 }
             }
@@ -129,8 +129,8 @@ public extension Daikiriable where Self: Codable & Daikiri {
     func delete() throws {
         if let managed {
             context.delete(managed)
-        } else if let identifiable = self as? DaikiriId {
-            try Self.find(identifiable.id)?.delete()
+        } else if let identifiable = self as? DaikiriId, let id = identifiable.id {
+            try Self.find(id)?.delete()
         }
     }
     
@@ -187,15 +187,23 @@ public extension Daikiriable where Self: Codable & Daikiri {
 public extension Daikiriable where Self: Codable & Daikiri & DaikiriId {
 
     func fresh() throws -> Self {
-        try Self.find(id)!
+        guard let id else {
+            return self
+        }
+        
+        return try Self.find(id)!
     }
     
     func hasMany<T:Codable & Daikiri & DaikiriId>(_ foreignKey:KeyPath<T, Int?>) throws -> [T] {
+        guard let id else { return [] }
+        
         let foreignKeyName = String(describing: foreignKey).components(separatedBy: ".").last!
         return try T.query.whereKey(foreignKeyName, id).get()
     }
     
     func hasMany<T:Codable & Daikiri & DaikiriId>(_ foreignKey:KeyPath<T, Int>) throws -> [T] {
+        guard let id else { return [] }
+        
         let foreignKeyName = String(describing: foreignKey).components(separatedBy: ".").last!
         return try T.query.whereKey(foreignKeyName, id).get()
     }
@@ -211,8 +219,10 @@ public extension Daikiriable where Self: Codable & Daikiri & DaikiriId {
     }
     
     func belongsToMany<T:Codable & Daikiri & DaikiriId, Z:Codable & Daikiri & DaikiriId>(pivot:Z.Type, _ localKey:KeyPath<Z,Int>, _ foreignKey:KeyPath<Z, Int>, order:String? = nil) throws -> [T] {
+        guard let id else { return [] }
+        
         let localKeyName = String(describing: localKey).components(separatedBy: ".").last!
-        let pivots       = try pivot.query.whereKey(localKeyName, self.id).orderBy(order).get()
+        let pivots       = try pivot.query.whereKey(localKeyName, id).orderBy(order).get()
         
         return try pivots.compactMap {
             guard let final:T = try T.find($0[keyPath: foreignKey]) else { return nil }
@@ -233,22 +243,26 @@ public extension Daikiriable where Self: Codable & Daikiri & DaikiriId {
     }
     
     func morphOne<T:Codable & Daikiri & DaikiriId>(_ typeKey:KeyPath<T,String>, _ foreingKey:KeyPath<T,Int>) throws -> T? {
+        guard let id else { return nil }
+        
         let typeString          = String(describing: Self.self).components(separatedBy: ".").last!
         let typeKeyString       = String(describing: typeKey).components(separatedBy: ".").last!
         let foreingKeyString    = String(describing: foreingKey).components(separatedBy: ".").last!
         
         return try T.query.whereKey(typeKeyString, typeString)
-                          .whereKey(foreingKeyString, self.id)
+                          .whereKey(foreingKeyString, id)
                           .first()
     }
     
     func morphMany<T:Codable & Daikiri & DaikiriId>(_ typeKey:KeyPath<T,String>, _ foreingKey:KeyPath<T,Int>) throws -> [T] {
+        guard let id else { return [] }
+        
         let typeString          = String(describing: Self.self).components(separatedBy: ".").last!
         let typeKeyString       = String(describing: typeKey).components(separatedBy: ".").last!
         let foreingKeyString    = String(describing: foreingKey).components(separatedBy: ".").last!
         
         return try T.query.whereKey(typeKeyString, typeString)
-                          .whereKey(foreingKeyString, self.id)
+                          .whereKey(foreingKeyString, id)
                           .get()
     }
     
@@ -258,13 +272,14 @@ public extension Daikiriable where Self: Codable & Daikiri & DaikiriId {
         relatedKey:KeyPath<PIVOT, Int>,
         relatedType:KeyPath<PIVOT, String>
     ) throws -> [T] {
+        guard let id else { return [] }
      
         let typeString        = String(describing: Self.self).components(separatedBy: ".").last!
         let relatedKeyString  = String(describing: relatedKey).components(separatedBy: ".").last!
         let relatedTypeString = String(describing: relatedType).components(separatedBy: ".").last!
         
         let pivots = try pivotType.query
-            .whereKey(relatedKeyString, self.id)
+            .whereKey(relatedKeyString, id)
             .whereKey(relatedTypeString, typeString)
             .get()
 
@@ -281,12 +296,14 @@ public extension Daikiriable where Self: Codable & Daikiri & DaikiriId {
         relatedKey:KeyPath<PIVOT, Int>,
         relatedType:KeyPath<PIVOT, String>
     ) throws -> [T] {
+        guard let id else { return [] }
+        
         let typeString         = String(describing: T.self).components(separatedBy: ".").last!
         let foreingKeyString   = String(describing: foreingKey).components(separatedBy: ".").last!
         let relatedTypeString  = String(describing: relatedType).components(separatedBy: ".").last!
         
         let pivots = try pivotType.query
-            .whereKey(foreingKeyString, self.id)
+            .whereKey(foreingKeyString, id)
             .whereKey(relatedTypeString, typeString)
             .get()
 
