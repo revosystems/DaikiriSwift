@@ -13,7 +13,7 @@ import XCTest
 class DaikiriSwiftTests: XCTestCase {
 
     override func setUp() {
-        DaikiriCoreData.manager.useTestDatabase()
+        DaikiriCoreData.manager.useTestDatabase(bundle: Bundle.main)
         DaikiriCoreData.manager.beginTransaction()
     }
 
@@ -26,7 +26,7 @@ class DaikiriSwiftTests: XCTestCase {
         let _ = try Hero(id:2, name:"Batman",    age:54).create()
         
         let results = try Hero.all().sorted { (a, b) -> Bool in
-            return a.id < b.id
+            return a.id! < b.id!
         }
         
         XCTAssertEqual(2, results.count)

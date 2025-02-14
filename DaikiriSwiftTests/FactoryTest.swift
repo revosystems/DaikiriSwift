@@ -5,7 +5,7 @@ import Fakery
 class FactoryTest: XCTestCase {
 
     override func setUp() {
-        DaikiriCoreData.manager.useTestDatabase()
+        DaikiriCoreData.manager.useTestDatabase(bundle: Bundle.main)
         DaikiriCoreData.manager.beginTransaction()
     }
 

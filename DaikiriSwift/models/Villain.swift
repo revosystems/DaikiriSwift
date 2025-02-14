@@ -2,7 +2,7 @@ import CoreData
 
 public class Villain : Daikiri, DaikiriId, Codable   {
     
-    public var id:Int
+    public var id:Int?
     public var name:String
     public var age:Int
     
@@ -46,7 +46,7 @@ public class Villain : Daikiri, DaikiriId, Codable   {
 }
 
 public class VillainFriend : Daikiri, DaikiriId, Codable {
-    public var id:Int
+    public var id:Int?
     public var name:String
     public var villain_id:Int
     
@@ -57,7 +57,7 @@ public class VillainFriend : Daikiri, DaikiriId, Codable {
     }
     
     convenience init(id:Int, name:String, age:Int, villain:Villain){
-        self.init(id: id, name: name, age: age, villain_id: villain.id)
+        self.init(id: id, name: name, age: age, villain_id: villain.id!)
     }
     
     public func tags() throws -> [Tag] {
@@ -72,7 +72,7 @@ public class VillainFriend : Daikiri, DaikiriId, Codable {
 }
 
 public class Hideout : Daikiri, DaikiriId, Codable {
-    public var id:Int
+    public var id:Int?
     public var name:String
     
     init(id: Int, name: String) {
@@ -91,7 +91,7 @@ public class Hideout : Daikiri, DaikiriId, Codable {
 
 
 class HideoutVillain : Daikiri, DaikiriId, Codable {
-    public var id:Int
+    public var id:Int?
     public var hideout_id:Int
     public var villain_id:Int
     public var level:Int
@@ -104,6 +104,6 @@ class HideoutVillain : Daikiri, DaikiriId, Codable {
     }
     
     convenience init(id:Int, hideout:Hideout, villain:Villain, level:Int){
-        self.init(id: id, hideout_id: hideout.id, villain_id: villain.id, level: level)
+        self.init(id: id, hideout_id: hideout.id!, villain_id: villain.id!, level: level)
     }
 }

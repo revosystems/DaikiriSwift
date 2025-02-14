@@ -33,7 +33,7 @@ class DaikiriCoreDataTest: XCTestCase {
     
     func test_tast_test_databaseWorks() throws {
         
-        DaikiriCoreData.manager.useTestDatabase()
+        DaikiriCoreData.manager.useTestDatabase(bundle: Bundle.main)
         DaikiriCoreData.manager.beginTransaction()
         let _ = try Hero(id:1, name:"Spiderman", age:16).create()
         var results = try Hero.all()

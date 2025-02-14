@@ -4,7 +4,7 @@ import Foundation
  This one goes to AnotherSQL
  */
 public class Vehicle : Daikiri, DaikiriId, Codable {
-    public let id: Int
+    public var id: Int?
     public let name:String
     
     public init(id: Int, name: String) {

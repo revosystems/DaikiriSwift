@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55C476092D5F39FF00CC2D3D /* AnyEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C476072D5F39FF00CC2D3D /* AnyEncodable.swift */; };
 		8D9AC87E23CE207200B61952 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9AC87A23CE207200B61952 /* Friend.swift */; };
 		8D9AC88023CE207200B61952 /* Headquarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9AC87C23CE207200B61952 /* Headquarter.swift */; };
 		A9D221BCBCFBF35CE605294F /* Pods_DaikiriSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443358BE5CE54DEA9EF2CE50 /* Pods_DaikiriSwift.framework */; };
@@ -55,6 +56,7 @@
 		3355B2D62804CC3546C7DE9A /* Pods-DaikiriSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaikiriSwift.release.xcconfig"; path = "Target Support Files/Pods-DaikiriSwift/Pods-DaikiriSwift.release.xcconfig"; sourceTree = "<group>"; };
 		3DA051FBBE3C4E769C5A1EB9 /* Pods-DaikiriSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaikiriSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-DaikiriSwiftTests/Pods-DaikiriSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		443358BE5CE54DEA9EF2CE50 /* Pods_DaikiriSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DaikiriSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		55C476072D5F39FF00CC2D3D /* AnyEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEncodable.swift; sourceTree = "<group>"; };
 		8D9AC87A23CE207200B61952 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		8D9AC87C23CE207200B61952 /* Headquarter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headquarter.swift; sourceTree = "<group>"; };
 		A76A49C4B12031C8F2113193 /* Pods-DaikiriSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaikiriSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-DaikiriSwiftTests/Pods-DaikiriSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +116,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55C476082D5F39FF00CC2D3D /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				55C476072D5F39FF00CC2D3D /* AnyEncodable.swift */,
+			);
+			path = helpers;
+			sourceTree = "<group>";
+		};
 		72983BD5AF4F1063AE062E31 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +222,7 @@
 		BBFA647A23CC8D4400084620 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				55C476082D5F39FF00CC2D3D /* helpers */,
 				EA05D42D2CD3776200B52C88 /* propertyWrappers */,
 				EA05D4282CD3768D00B52C88 /* extensions */,
 				BB103B5323D1A8E400066EE8 /* factories */,
@@ -423,6 +434,7 @@
 				EA05D42E2CD3776200B52C88 /* NonCodable.swift in Sources */,
 				EA05D42A2CD3769A00B52C88 /* NSManaged+daikiri.swift in Sources */,
 				8D9AC87E23CE207200B61952 /* Friend.swift in Sources */,
+				55C476092D5F39FF00CC2D3D /* AnyEncodable.swift in Sources */,
 				BBFA648023CC920600084620 /* DaikiriCoreData.swift in Sources */,
 				BBFA645623CC8D3C00084620 /* AppDelegate.swift in Sources */,
 				EA0B5FCD2CEB2F6B00685DCC /* Vehicle.swift in Sources */,

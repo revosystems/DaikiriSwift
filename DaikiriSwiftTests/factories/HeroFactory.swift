@@ -17,7 +17,7 @@ public class HeroFactory : Factory<Hero> {
     }
     
     override public func afterMaking(_ model:Hero){
-        if model.headquarter_id == 0 {
+        if model.headquarter_id == nil {
             model.headquarter_id = 666
         }
     }

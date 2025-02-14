@@ -3,7 +3,7 @@ import CoreData
 
 public class Hero: Daikiri, Codable, DaikiriId, Factoriable {
     
-    public var id:   Int
+    public var id:   Int?
     public var name: String
     public var age:  Int
     public var headquarter_id:  Int?

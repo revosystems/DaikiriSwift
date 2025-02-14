@@ -1,7 +1,7 @@
 import Foundation
 
 public class Headquarter: Daikiri, DaikiriId, Codable {
-    public var id: Int
+    public var id: Int?
     public var name: String
         
     init(id: Int, name: String) {

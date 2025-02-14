@@ -14,7 +14,7 @@ import CoreData
 class DaikiriSwiftTestsV2: XCTestCase {
 
     override func setUp() {
-        DaikiriCoreData.manager.useTestDatabase()
+        DaikiriCoreData.manager.useTestDatabase(bundle: Bundle.main)
         DaikiriCoreData.manager.beginTransaction()
     }
 
@@ -52,7 +52,7 @@ class DaikiriSwiftTestsV2: XCTestCase {
         XCTAssertEqual(2, try Villain.count())
         
         let results = try Villain.all().sorted { (a, b) -> Bool in
-            a.id < b.id
+            a.id! < b.id!
         }
         
         XCTAssertEqual(2, results.count)
@@ -195,7 +195,7 @@ class DaikiriSwiftTestsV2: XCTestCase {
         
         let results = try Villain.query.whereKey("id", ">", 2).get()
         
-        XCTAssertEqual([3, 4], results.sorted { $0.id < $1.id }.map { $0.id })
+        XCTAssertEqual([3, 4], results.sorted { $0.id! < $1.id! }.map { $0.id })
     }
     
     func test_has_many_relationship_works() throws {
@@ -267,7 +267,7 @@ class DaikiriSwiftTestsV2: XCTestCase {
         let _ = try Image(id: 3, url: "http://image3.com", imageable: batman).create()
         
                 
-        let fetchedImages = try batman.images().sorted { $0.id < $1.id }
+        let fetchedImages = try batman.images().sorted { $0.id! < $1.id! }
         XCTAssertEqual(3, fetchedImages.count)
         XCTAssertEqual("http://image1.com", fetchedImages[0].url)
         XCTAssertEqual("http://image2.com", fetchedImages[1].url)
@@ -292,8 +292,8 @@ class DaikiriSwiftTestsV2: XCTestCase {
         
         XCTAssertEqual(2, batmanTags.count)
         XCTAssertEqual(2, robinTags.count)
-        XCTAssertEqual(["Black", "Cape"], batmanTags.sorted { $0.id < $1.id }.map { $0.name } )
-        XCTAssertEqual(["Black", "Batmobile"], robinTags.sorted { $0.id < $1.id }.map {$0.name} )
+        XCTAssertEqual(["Black", "Cape"], batmanTags.sorted { $0.id! < $1.id! }.map { $0.name } )
+        XCTAssertEqual(["Black", "Batmobile"], robinTags.sorted { $0.id! < $1.id! }.map {$0.name} )
         
         XCTAssertEqual(["Batman"], try tag1.villains().map { $0.name })
         XCTAssertEqual(["Robin"], try tag1.villainFriends().map { $0.name })

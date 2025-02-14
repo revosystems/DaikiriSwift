@@ -1,7 +1,7 @@
 import Foundation
 
 public class HeroHeadquarterPivot: Daikiri, DaikiriId, Codable {    
-    public var id: Int
+    public var id: Int?
     public var hero_id:   Int
     public var headquarter_id: Int
     public var level:   Int
@@ -14,6 +14,6 @@ public class HeroHeadquarterPivot: Daikiri, DaikiriId, Codable {
     }
     
     convenience init(id: Int, hero: Hero, headquarter: Headquarter, level: Int) {
-        self.init(id: id, hero_id: hero.id, headquarter_id: headquarter.id, level: level)
+        self.init(id: id, hero_id: hero.id!, headquarter_id: headquarter.id!, level: level)
     }
 }
