@@ -1,7 +1,7 @@
 import Foundation
 
 public class Image : Daikiri, DaikiriId, Codable {
-    public let id: Int
+    public var id: Int?
     public let url:String
     public let imageable_id:Int
     public let imageable_type:String
@@ -17,7 +17,7 @@ public class Image : Daikiri, DaikiriId, Codable {
     convenience public init(id:Int, url:String, imageable:DaikiriId){
         self.init(
             id: id, url: url,
-            imageable_id: imageable.id,
+            imageable_id: imageable.id!,
             imageable_type: String(describing: imageable).components(separatedBy: ".").last!
         )
     }

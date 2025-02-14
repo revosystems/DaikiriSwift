@@ -1,7 +1,7 @@
 import Foundation
 
 public class Tag : Daikiri, DaikiriId, Codable {
-    public let id: Int
+    public var id: Int?
     public let name:String
     
     public init(id: Int, name: String) {
@@ -29,7 +29,7 @@ public class Tag : Daikiri, DaikiriId, Codable {
 }
 
 public class Taggable : Daikiri, Codable, DaikiriId {
-    public let id: Int
+    public var id: Int?
     public let tag_id:Int
     public let taggable_id:Int
     public let taggable_type:String
@@ -44,8 +44,8 @@ public class Taggable : Daikiri, Codable, DaikiriId {
     convenience public init(id:Int, tag:Tag, taggable:DaikiriId){
         self.init(
             id: id,
-            tag_id: tag.id,
-            taggable_id: taggable.id,
+            tag_id: tag.id!,
+            taggable_id: taggable.id!,
             taggable_type: String(describing: taggable).components(separatedBy: ".").last!
         )
     }

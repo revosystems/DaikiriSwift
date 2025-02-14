@@ -33,6 +33,13 @@ open class Factory<T:Daikiri & Codable & DaikiriId> {
         overrides.forEach { states[$0] = $1 }
         return self
     }
+    
+    /**
+     * Generates the instance with all the previous states and saves it to database.
+     */
+    public func create(_ overrides:NSDictionary = [:]) throws -> T {
+        try make(overrides).create()
+    }
         
     /**
      * Generates the instance with all the previous states
@@ -61,7 +68,7 @@ open class Factory<T:Daikiri & Codable & DaikiriId> {
         
         finalDict.allKeys.forEach { key in
             let value = finalDict[key]
-            if let clousure = value as? (()->Int32) {
+            if let clousure = value as? (()->Int?) {
                 finalDict[key] = clousure()
             }
         }
