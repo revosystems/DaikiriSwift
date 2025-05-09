@@ -218,9 +218,9 @@ class DaikiriSwiftTestsV2: XCTestCase {
         let batcave     = try Hideout(id: 1, name: "Batcave").create()
         let starkTower  = try Hideout(id: 2, name: "Stark Tower").create()
         
-        let spiderman = try Villain(id:1, name:"Spiderman", age:16, hideout: nil).create()
-        let batman    = try Villain(id:2, name:"Batman",    age:54, hideout: batcave).create()
-        let ironman   = try Villain(id:3, name:"Ironman",   age:54, hideout: starkTower).create()
+        let spiderman = try Villain(id:1, name:"Spiderman", age:16, phone:nil, hideout: nil).create()
+        let batman    = try Villain(id:2, name:"Batman",    age:54, phone:nil, hideout: batcave).create()
+        let ironman   = try Villain(id:3, name:"Ironman",   age:54, phone:nil, hideout: starkTower).create()
         
         XCTAssertNil(try spiderman.hideout())
         XCTAssertEqual("Batcave",     try batman.hideout()?.name)
@@ -360,6 +360,31 @@ class DaikiriSwiftTestsV2: XCTestCase {
         
         let vehicle = try Vehicle(id:1, name:"Batmobile").create()
                 
+    }
+    
+    func test_can_query_for_nil_value() throws {
+        let batcave     = try Hideout(id: 1, name: "Batcave").create()
+        
+        let batman      = try Villain(id:1, name:"Batman",    age:16, hideout_id: batcave.id).create()
+        let robin       = try Villain(id:2, name:"Robin",     age:16, hideout_id: batcave.id).create()
+        let nightWing   = try Villain(id:3, name:"NightWing", age:16).create()
+        
+        let villainsWithoutHideout = try Villain.query.whereKey("hideout_id", nil as Int?).get()
+        
+        XCTAssertEqual(1, villainsWithoutHideout.count)
+        XCTAssertEqual("NightWing", villainsWithoutHideout.first?.name)
+    }
+    
+    func test_can_query_for_multiple_fields() throws {
+        let batman      = try Villain(id:1, name:"Batman",    age:16, phone: "123456789").create()
+        let robin       = try Villain(id:2, name:"Robin",     age:16, phone: "Bat56").create()
+        let nightWing   = try Villain(id:3, name:"NightWing", age:16).create()
+        
+        let batVillains = try Villain.query.whereAny(["name", "phone"], like: "Bat").get()
+        
+        XCTAssertEqual(2, batVillains.count)
+        XCTAssertEqual("Robin", batVillains[0].name)
+        XCTAssertEqual("Batman", batVillains[1].name)
     }
     
 }

@@ -4,18 +4,20 @@ public class Villain : Daikiri, DaikiriId, Codable   {
     
     public var id:Int?
     public var name:String
+    public var phone:String?
     public var age:Int
     
     public var hideout_id:Int?
     
-    public required init(id:Int, name:String, age:Int, hideout_id:Int? = nil){
+    public required init(id:Int, name:String, age:Int, phone:String? = nil, hideout_id:Int? = nil){
         self.id = id
         self.name = name
         self.age = age
+        self.phone = phone
         self.hideout_id = hideout_id
     }
     
-    convenience init(id:Int, name:String, age:Int, hideout:Hideout?){
+    convenience init(id:Int, name:String, age:Int, phone:String?, hideout:Hideout?){
         self.init(id: id, name: name, age: age, hideout_id: hideout?.id)
     }
     
