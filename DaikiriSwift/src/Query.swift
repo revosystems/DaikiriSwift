@@ -31,32 +31,46 @@ public class Query<T:Daikiri & Codable> {
     }
     
     @discardableResult
-    public func whereKeyCaseInsensitive<Z: CVarArg>(_ key: String, _ value: Z) -> Self {
-        if value is String {
-            andPredicates.append(NSPredicate(format: "%K =[cd] %@", key, value))
+    public func whereKeyCaseInsensitive<Z: CVarArg>(_ key: String, _ value: Z?) -> Self {
+        if let value {
+            if value is String {
+                andPredicates.append(NSPredicate(format: "%K =[cd] %@", key, value))
+            } else {
+                return whereKey(key, value)
+            }
         } else {
-            return whereKey(key, value)
+            andPredicates.append(NSPredicate(format: "%K == nil", key))
         }
+        
         return self
     }
         
     @discardableResult
-    public func whereKey<Z:CVarArg>(_ key:String, _ value:Z) -> Self{
-        if value is Int || value is Int32 || value is Int16 {
-            andPredicates.append(NSPredicate(format:"%K=%d", key, value))
+    public func whereKey<Z: CVarArg>(_ key: String, _ value: Z?) -> Self {
+        if let value {
+            if value is Int || value is Int32 || value is Int16 {
+                andPredicates.append(NSPredicate(format: "%K = %d", key, value))
+            } else {
+                andPredicates.append(NSPredicate(format: "%K = %@", key, value))
+            }
         } else {
-            andPredicates.append(NSPredicate(format:"%K=%@", key, value))
+            andPredicates.append(NSPredicate(format: "%K == nil", key))
         }
         return self
     }
     
     @discardableResult
-    public func whereKey<Z:CVarArg>(_ key:String, _ theOperator:String, _ value:Z) -> Self{
-        if value is Int || value is Int32 || value is Int16 {
-            andPredicates.append(NSPredicate(format:"%K \(theOperator) %d", key, value))
+    public func whereKey<Z:CVarArg>(_ key:String, _ theOperator:String, _ value:Z?) -> Self{
+        if let value {
+            if value is Int || value is Int32 || value is Int16 {
+                andPredicates.append(NSPredicate(format:"%K \(theOperator) %d", key, value))
+            } else {
+                andPredicates.append(NSPredicate(format:"%K \(theOperator) %@", key, value))
+            }
         } else {
-            andPredicates.append(NSPredicate(format:"%K \(theOperator) %@", key, value))
+            andPredicates.append(NSPredicate(format: "%K \(theOperator) nil", key))
         }
+        
         return self
     }
     
@@ -65,6 +79,37 @@ public class Query<T:Daikiri & Codable> {
         andPredicates.append(NSPredicate(format:"%K IN %@", key, values))
         return self
     }
+    
+    @discardableResult
+    public func whereAny<Z:CVarArg>(_ fields:[String], like value:Z) -> Self {
+        var orPredicates: [NSPredicate] = []
+        
+        fields.forEach { field in
+            var andPredicates:[NSPredicate] = []
+
+            let terms:[CVarArg]
+            if let stringValue = value as? String {
+                terms = stringValue.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
+            } else {
+                terms = [value]
+            }
+            
+            terms.forEach { term in
+                andPredicates.append(NSPredicate(format: "%K contains[cd] %@", field, term))
+            }
+
+            if !andPredicates.isEmpty {
+                orPredicates.append(NSCompoundPredicate(andPredicateWithSubpredicates: andPredicates))
+            }
+        }
+
+        if !orPredicates.isEmpty {
+            self.andPredicates.append(NSCompoundPredicate(orPredicateWithSubpredicates: orPredicates))
+        }
+
+        return self
+    }
+
     
     @discardableResult
     public func orderBy(_ key:String?, ascendig:Bool = true) -> Self {
