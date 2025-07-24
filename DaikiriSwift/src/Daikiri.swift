@@ -59,12 +59,29 @@ open class Daikiri: Daikiriable {
         
         let mirror = Mirror(reflecting: self)
         mirror.children.forEach { (label, value) in
-            newManaged.setValue(value, forKey: label!)
+            guard let label else { return }
+            let sanitized = unwrappedAndNoNSNull(value)
+            newManaged.setValue(sanitized, forKey: label)
         }
         self.managed = managed
         
         return newManaged
     }
+    
+    func unwrappedAndNoNSNull(_ value: Any?) -> Any? {
+        guard let value else { return nil }
+        if value is NSNull { return nil }
+        let mirror = Mirror(reflecting: value)
+        if mirror.displayStyle == .optional {
+            if let first = mirror.children.first {
+                return unwrappedAndNoNSNull(first.value)
+            } else {
+                return nil
+            }
+        }
+        return value
+    }
+
     
 }
 
